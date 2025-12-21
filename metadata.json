@@ -1,0 +1,8 @@
+{
+  "name": "科研成果展示门户",
+  "description": "一个高端、响应式的学术科研成果展示网站，集成 Gemini AI 助理，支持论文检索、项目展示及科研数据可视化。",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
