@@ -1,26 +1,39 @@
-
-export interface Publication {
-  id: string;
-  title: string;
-  authors: string[];
-  journal: string;
-  year: number;
-  doi?: string;
-  abstract: string;
-  tags: string[];
+export interface WordItem {
+    word: string;
+    freq: number;
 }
 
-export interface Project {
-  id: string;
-  name: string;
-  description: string;
-  imageUrl: string;
-  link?: string;
-  status: 'Completed' | 'Ongoing' | 'Proposed';
+export interface GDPGroup {
+    id: string; // e.g., "GDP1"
+    label: string;
+    femaleWords: WordItem[];
+    maleWords: WordItem[];
+    color: string;
 }
 
-export interface ResearchMetric {
-  subject: string;
-  value: number;
-  fullMark: number;
+export interface ParsedData {
+    groups: GDPGroup[];
+}
+
+// Internal types for the graph nodes
+export interface NodeData {
+    id: string;
+    type: 'root' | 'word';
+    side?: 'left' | 'right'; // left = female, right = male
+    text: string;
+    size: number;
+    groupIndex: number;
+    color: string;
+    x?: number;
+    y?: number;
+    originalFreq?: number;
+    index?: number; // Added for animation timing
+    rotation?: number; // Added for radial text alignment
+}
+
+export interface LinkData {
+    source: NodeData;
+    target: NodeData;
+    groupIndex: number;
+    color: string;
 }

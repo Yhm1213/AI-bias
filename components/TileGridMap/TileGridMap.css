@@ -1,0 +1,283 @@
+/* Global styles removed to prevent conflicts */
+
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.status {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+/* 加载状态样式 */
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 16px;
+    color: #666;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .title {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    #map {
+        height: 70vh;
+    }
+
+    .debug {
+        bottom: 10px;
+        right: 10px;
+        max-width: 250px;
+        font-size: 11px;
+    }
+}
+
+/* ECharts tooltip 样式增强 */
+.echarts-tooltip {
+    border-radius: 6px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* 确保地图容器正确显示 */
+#map .echarts-container {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* 语言切换按钮样式 */
+.language-switch {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.lang-btn {
+    padding: 8px 16px;
+    border: 2px solid #ddd;
+    background: white;
+    color: #666;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.lang-btn:hover {
+    border-color: #007bff;
+    color: #007bff;
+}
+
+.lang-btn.active {
+    background: #007bff;
+    border-color: #007bff;
+    color: white;
+}
+
+.lang-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* 响应式设计 - 语言切换按钮 */
+@media (max-width: 768px) {
+    .language-switch {
+        margin-bottom: 15px;
+        gap: 8px;
+    }
+
+    .lang-btn {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+}
+
+/* 气泡文本容器样式 */
+.bubble-container {
+    position: absolute;
+    background: rgba(18, 18, 18, 0.95);
+    border: 2px solid #ff4d94;
+    border-radius: 12px;
+    box-shadow: 0 3px 15px rgba(255, 77, 148, 0.2);
+    z-index: 1000;
+    padding: 0;
+    overflow: visible;
+    /* 允许箭头显示在容器外 */
+    pointer-events: auto;
+    /* 允许气泡内部交互 */
+}
+
+/* 新：可拖拽面板样式（替代气泡） */
+.panel-container {
+    position: absolute;
+    background: rgba(18, 18, 18, 0.95);
+    border: 1px solid #3f3f46;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    pointer-events: auto;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.panel-header {
+    height: 32px;
+    background: rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid #3f3f46;
+    color: #e4e4e7;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 6px;
+    cursor: move;
+    /* 拖拽手势 */
+    user-select: none;
+}
+
+.panel-close {
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: #e4e4e7;
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.panel-close:hover {
+    background: rgba(255, 77, 148, 0.5);
+    color: white;
+}
+
+.panel-content {
+    padding: 12px 14px;
+    color: #e4e4e7;
+    font-size: 13px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+.bubble-content {
+    /* 基础样式通过JavaScript内联设置，这里只保留必要的默认值 */
+    pointer-events: auto;
+    /* 确保滚动区域可交互 */
+    cursor: auto;
+    /* 确保正常的文本光标 */
+}
+
+/* 使用系统默认滚动条 - 最可靠的方案 */
+.bubble-content {
+    scrollbar-width: auto;
+    /* Firefox */
+    /* 不设置任何 -webkit-scrollbar 样式，使用系统默认 */
+}
+
+/* 气泡指针样式：左右方向 */
+.bubble-pointer {
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
+/* 左侧箭头（指向右边的目标） */
+.bubble-pointer-left {
+    top: 16px;
+    right: -10px;
+    /* 箭头宽度 */
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid rgba(34, 197, 94, 0.95);
+}
+
+/* 右侧箭头（指向左边的目标） */
+.bubble-pointer-right {
+    top: 16px;
+    left: -10px;
+    /* 箭头宽度 */
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid rgba(34, 197, 94, 0.95);
+}
+
+/* 底部箭头（容器伪元素，保证与卡片无缝衔接） */
+.bubble-container.bubble-pointer-bottom-left::before,
+.bubble-container.bubble-pointer-bottom-left::after,
+.bubble-container.bubble-pointer-bottom-right::before,
+.bubble-container.bubble-pointer-bottom-right::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
+/* 左侧靠近目标的箭头 */
+.bubble-container.bubble-pointer-bottom-left::before {
+    bottom: -12px;
+    left: 14px;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 12px solid #16a34a;
+    /* 边框色 */
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
+}
+
+.bubble-container.bubble-pointer-bottom-left::after {
+    bottom: -10px;
+    left: 16px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid rgba(34, 197, 94, 0.95);
+    /* 填充色 */
+}
+
+/* 右侧靠近目标的箭头 */
+.bubble-container.bubble-pointer-bottom-right::before {
+    bottom: -12px;
+    right: 14px;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 12px solid #16a34a;
+    /* 边框色 */
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
+}
+
+.bubble-container.bubble-pointer-bottom-right::after {
+    bottom: -10px;
+    right: 16px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid rgba(34, 197, 94, 0.95);
+    /* 填充色 */
+}
+
+/* 位置修饰：靠左/靠右（贴近目标一侧） */
+.bubble-pointer-bottom-left {
+    left: 14px;
+}
+
+.bubble-pointer-bottom-right {
+    right: 14px;
+}
