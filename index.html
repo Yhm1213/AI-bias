@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科研成果展示 | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @font-face {
+            font-family: 'Unifont';
+            src: url('/AI-bias/assets/unifont-15.0.06-BnE06dgE.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        html,
+        body,
+        #root {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Unifont', sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .font-mono {
+            font-family: 'Unifont', monospace;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .animate-cursor {
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        /* 隐藏滚动条但保留功能 */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        .pixel-border {
+            border: 2px solid #22c55e;
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.2);
+        }
+    </style>
+  <script type="module" crossorigin src="/AI-bias/assets/index-LVKKQxa3.js"></script>
+  <link rel="stylesheet" crossorigin href="/AI-bias/assets/index-DNgy7RsE.css">
+</head>
+
+<body class="bg-[#121212] text-white">
+    <div id="root"></div>
+</body>
+
+</html>
