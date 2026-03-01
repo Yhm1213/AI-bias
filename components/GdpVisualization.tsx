@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
 // Import local SVGs
-import low from '../pic/Property_1=低.svg';
-import lowMid from '../pic/Property_1=低中.svg';
-import mid from '../pic/Property_1=中.svg';
-import midHigh from '../pic/Property_1=中高.svg';
-import high from '../pic/Property_1=高.svg';
+import low from '../public/pic/Property_1=低.svg';
+import lowMid from '../public/pic/Property_1=低中.svg';
+import mid from '../public/pic/Property_1=中.svg';
+import midHigh from '../public/pic/Property_1=中高.svg';
+import high from '../public/pic/Property_1=高.svg';
 
 export const GdpVisualization: React.FC = () => {
     const [hoveredLayer, setHoveredLayer] = useState<string | null>(null);

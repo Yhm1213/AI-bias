@@ -96,7 +96,7 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack }) => {
           我们将chatgpt对于男性和女性的描述分词，经过清洗和筛选后获得756个英文词汇【3】。<br />
           我们观察这些词，最终发现了如下差异
           <span className="inline-flex items-center ml-2 translate-y-1.5 opacity-80">
-            <img src="/ICON/binoculars_wh.png" alt="binoculars" className="w-10 h-auto object-contain" />
+            <img src={import.meta.env.BASE_URL + (import.meta.env.BASE_URL + "ICON/binoculars_wh.png").slice(1)} alt="binoculars" className="w-10 h-auto object-contain" />
           </span>
         </p>
       </div>
@@ -113,14 +113,14 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack }) => {
       <div className="relative w-full md:w-1/2 max-w-[500px]">
         {/* 框线层 (最底层) */}
         <img
-          src="/pic/kuangxian.png"
+          src={import.meta.env.BASE_URL + (import.meta.env.BASE_URL + "pic/kuangxian.png").slice(1)}
           alt="Chart Frame"
           className="w-full h-auto object-contain object-left-bottom"
         />
         {/* 中文数据层 - Falling Blocks Animation */}
         <div className="absolute bottom-0 left-0 w-full h-full">
           <FallingBlocksChart
-            src="/pic/CN.png"
+            src={import.meta.env.BASE_URL + (import.meta.env.BASE_URL + "pic/CN.png").slice(1)}
             alt="Chinese Data"
             className="w-full h-full object-left-bottom" // alignment is handled by wrapper mostly, but pass visual styles
             rows={12}
@@ -132,7 +132,7 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack }) => {
         {/* 英文数据层 - Falling Blocks Animation */}
         <div className="absolute bottom-0 left-0 w-full h-full">
           <FallingBlocksChart
-            src="/pic/EN.png"
+            src={import.meta.env.BASE_URL + (import.meta.env.BASE_URL + "pic/EN.png").slice(1)}
             alt="English Data"
             className="w-full h-full object-left-bottom"
             rows={12}
@@ -143,7 +143,7 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack }) => {
         {/* 表注 - Adjusted to left side of chart */}
         <div className="absolute top-1/2 -left-12 -translate-y-1/2">
           <img
-            src="/pic/biaozhu.png"
+            src={import.meta.env.BASE_URL + (import.meta.env.BASE_URL + "pic/biaozhu.png").slice(1)}
             alt="Legend"
             className="h-16 w-auto object-contain"
           />
@@ -198,7 +198,7 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack }) => {
             <p className="mb-4 text-justify">
               首先，我们对比中文大模型DeepSeek对男人和女人的描述差异，我们将DeepSeek对于男性和女性的描述分词，经过清洗后获得584个词语【2】。我们分析发现了如下差异
               <span className="inline-flex items-center ml-4 translate-y-2">
-                <img src="/ICON/binoculars_wh.png" alt="binoculars" className="w-12 h-auto object-contain" />
+                <img src={import.meta.env.BASE_URL + (import.meta.env.BASE_URL + "ICON/binoculars_wh.png").slice(1)} alt="binoculars" className="w-12 h-auto object-contain" />
               </span>
             </p>
           </div>
@@ -245,7 +245,7 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack }) => {
             <p className="mb-4 text-justify">
               首先，我们对比中文大模型DeepSeek对男人和女人的描述差异，我们将DeepSeek对于男性和女性的描述分词，经过清洗后获得584个词语【2】。我们分析发现了如下差异
               <span className="inline-flex items-center ml-4 translate-y-2">
-                <img src="/ICON/binoculars_wh.png" alt="binoculars" className="w-12 h-auto object-contain" />
+                <img src={import.meta.env.BASE_URL + (import.meta.env.BASE_URL + "ICON/binoculars_wh.png").slice(1)} alt="binoculars" className="w-12 h-auto object-contain" />
               </span>
             </p>
           </div>

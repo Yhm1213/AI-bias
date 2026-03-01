@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, ReactNode } from 'react';
 import pixelBackground from './PixelBackground'; // We don't need this inside, but we need the image import
-import wangYuanJing from '../pic/wangyuanjing.png';
+import wangYuanJing from '../public/pic/wangyuanjing.png';
 
 interface SlideContent {
     titleLeft: ReactNode;
