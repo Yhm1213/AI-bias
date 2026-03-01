@@ -144,12 +144,12 @@ const App: React.FC = () => {
               {/* 悬停显示的粉色光标 */}
               {/* 悬停显示的粉色光标 */}
               <div className="absolute -top-12 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-hover:-translate-y-2 transition-all duration-300 pointer-events-none z-10">
-                <img src={import.meta.env.BASE_URL + (import.meta.env.BASE_URL + "ICON/cursor_pink.png").slice(1)} alt="cursor" className="w-6 h-auto" />
+                <img src={import.meta.env.BASE_URL + "ICON/cursor_pink.png"} alt="cursor" className="w-6 h-auto" />
               </div>
 
               <div className="w-32 h-32 flex items-center justify-center mb-6 transition-all duration-300">
-                <img src={import.meta.env.BASE_URL + (import.meta.env.BASE_URL + "ICON/buttom01_cn.png").slice(1)} alt="icon" className="w-full h-full object-contain group-hover:hidden transition-all duration-300" />
-                <img src={import.meta.env.BASE_URL + (import.meta.env.BASE_URL + "ICON/buttom01_cn_hover.png").slice(1)} alt="icon hover" className="w-full h-full object-contain hidden group-hover:block transition-all duration-300" />
+                <img src={import.meta.env.BASE_URL + "ICON/buttom01_cn.png"} alt="icon" className="w-full h-full object-contain group-hover:hidden transition-all duration-300" />
+                <img src={import.meta.env.BASE_URL + "ICON/buttom01_cn_hover.png"} alt="icon hover" className="w-full h-full object-contain hidden group-hover:block transition-all duration-300" />
               </div>
 
             </div>
@@ -163,12 +163,12 @@ const App: React.FC = () => {
               {/* 悬停显示的粉色光标 */}
               {/* 悬停显示的粉色光标 */}
               <div className="absolute -top-12 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-hover:-translate-y-2 transition-all duration-300 pointer-events-none z-10">
-                <img src={import.meta.env.BASE_URL + (import.meta.env.BASE_URL + "ICON/cursor_pink.png").slice(1)} alt="cursor" className="w-6 h-auto" />
+                <img src={import.meta.env.BASE_URL + "ICON/cursor_pink.png"} alt="cursor" className="w-6 h-auto" />
               </div>
 
               <div className="w-32 h-32 flex items-center justify-center mb-6 transition-all duration-300">
-                <img src={import.meta.env.BASE_URL + (import.meta.env.BASE_URL + "ICON/buttom02_cn.png").slice(1)} alt="icon" className="w-full h-full object-contain group-hover:hidden transition-all duration-300" />
-                <img src={import.meta.env.BASE_URL + (import.meta.env.BASE_URL + "ICON/buttom02_cn_hover.png").slice(1)} alt="icon hover" className="w-full h-full object-contain hidden group-hover:block transition-all duration-300" />
+                <img src={import.meta.env.BASE_URL + "ICON/buttom02_cn.png"} alt="icon" className="w-full h-full object-contain group-hover:hidden transition-all duration-300" />
+                <img src={import.meta.env.BASE_URL + "ICON/buttom02_cn_hover.png"} alt="icon hover" className="w-full h-full object-contain hidden group-hover:block transition-all duration-300" />
               </div>
             </div>
           </div>
@@ -180,8 +180,8 @@ const App: React.FC = () => {
             onClick={() => handleGoToData()}
             className="w-32 h-10 relative cursor-pointer group"
           >
-            <img src={import.meta.env.BASE_URL + (import.meta.env.BASE_URL + "ICON/data_zh.png").slice(1)} alt="Data Explanation" className="w-full h-full object-contain absolute inset-0 transition-opacity duration-300 opacity-100 group-hover:opacity-0" />
-            <img src={import.meta.env.BASE_URL + (import.meta.env.BASE_URL + "ICON/data_zh_hover.png").slice(1)} alt="Data Explanation Hover" className="w-full h-full object-contain absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
+            <img src={import.meta.env.BASE_URL + "ICON/data_zh.png"} alt="Data Explanation" className="w-full h-full object-contain absolute inset-0 transition-opacity duration-300 opacity-100 group-hover:opacity-0" />
+            <img src={import.meta.env.BASE_URL + "ICON/data_zh_hover.png"} alt="Data Explanation Hover" className="w-full h-full object-contain absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
           </div>
 
           <div
