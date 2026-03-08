@@ -9,6 +9,7 @@ import NetworkScrolly from './NetworkScrolly';
 
 // Data for Scrollytelling
 import cnNetworkData from '../data/cn_network.json';
+import enNetworkData from '../data/en_network.json';
 
 interface DiscoverySlidesProps {
   onBack: () => void;
@@ -79,6 +80,61 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack }) => {
           <p>
             而男性角色则倾向于被描述为 <span className="text-red-800 italic">“冷静”、“分析”、“挺身而出”</span>，似乎天生具备解决麻烦的能力。
           </p>
+        </>
+      )
+    }
+  ];
+
+  // 模拟数据内容 (Page 4: English Gender Bias)
+  const EN_GENDER_BIAS_DATA = [
+    {
+      titleLeft: <>
+        <span className="font-bold text-pink-700 mx-1">优雅</span>
+        <span className="text-xs text-zinc-600">的女性</span>
+      </>,
+      content: (
+        <>
+          <p>
+            The theme of <span className="font-bold text-pink-800">Elegance and Beauty</span> remains highly relevant when ChatGPT describes women.
+          </p>
+          <p>
+            References to terms like 'elegant', 'beautiful', and 'graceful' form the core of describing the 'Elegant Woman' archetype, suggesting persistent aesthetic stereotypes even in modern LLMs.
+          </p>
+          <p className="text-zinc-500 italic mt-2 text-[10px]">* Placeholder text for ChatGPT English Dataset Analysis</p>
+        </>
+      )
+    },
+    {
+      titleLeft: <>
+        <span className="font-bold text-blue-700 mx-1">"Care"</span>
+        <span className="text-xs text-zinc-600">的她</span>
+      </>,
+      content: (
+        <>
+          <p>
+            When discussing women, the concept of <span className="font-bold text-blue-800">Caregiving</span> dominates the narrative significantly.
+          </p>
+          <p>
+            Words associated with nurturing, supporting, and emotional labor co-occur frequently, painting an image of women as primary empathetic providers in both domestic and professional settings.
+          </p>
+          <p className="text-zinc-500 italic mt-2 text-[10px]">* Placeholder text for ChatGPT English Dataset Analysis</p>
+        </>
+      )
+    },
+    {
+      titleLeft: <>
+        <span className="font-bold text-purple-700 mx-1">"Advocacy"</span>
+        <span className="text-xs text-zinc-600">的她</span>
+      </>,
+      content: (
+        <>
+          <p>
+            An interesting dimension in the English dataset is the prominent theme of <span className="bold text-purple-800">Advocacy and Empowerment</span>.
+          </p>
+          <p>
+            This reflects a modern shift in discourse where women are frequently associated with fighting for rights, leading change, and breaking barriers—a narrative distinct from the traditional Chinese corpus.
+          </p>
+          <p className="text-zinc-500 italic mt-2 text-[10px]">* Placeholder text for ChatGPT English Dataset Analysis</p>
         </>
       )
     }
@@ -222,14 +278,12 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack }) => {
 
       <ScrollTelescopeSection
         id="page-4-duplicate"
-        slides={GENDER_BIAS_DATA} // 复用数据，以后改
+        slides={EN_GENDER_BIAS_DATA}
         mode="inverse"
         exitContent={PAGE_4_EXIT_CONTENT_LIGHT}
         renderVisualZone={(subPage, isVisible) => (
-          <div className="w-full h-full relative flex items-center justify-center">
-            <p className="text-black/30 font-mono tracking-widest border border-black/10 px-6 py-3 rounded-full">
-              FUTURE DATA ZONE
-            </p>
+          <div className="w-full h-[80%] my-auto relative">
+            <NetworkScrolly data={enNetworkData as any} activePage={subPage} isVisible={isVisible} />
           </div>
         )}
       />

@@ -81,10 +81,22 @@ const App: React.FC = () => {
       className="h-screen overflow-y-auto snap-y snap-mandatory bg-[#121212] selection:bg-[#ff4d94]/30"
     >
 
-      {/* 第一部分：留白屏 */}
-      <section className="h-screen w-full snap-start flex items-center justify-center relative">
-        <div className="text-zinc-800 font-mono text-[10px] tracking-[0.6em] uppercase opacity-10">
-          VOID // SCROLL_TO_REVEAL
+      {/* 第一部分：首屏视频（留白屏） */}
+      <section className="h-screen w-full snap-start flex items-center justify-center relative bg-black overflow-hidden relative">
+        {/* 背景视频 */}
+        <video
+          className="absolute inset-0 w-full h-full object-cover opacity-80 z-0 pointer-events-none"
+          autoPlay
+          loop
+          muted
+          playsInline
+        >
+          <source src={import.meta.env.BASE_URL + "video.mp4"} type="video/mp4" />
+        </video>
+
+        {/* 提示文字 */}
+        <div className="absolute bottom-12 text-white/50 font-mono text-[10px] tracking-[0.6em] uppercase animate-pulse z-10 pointer-events-none">
+          SCROLL_TO_REVEAL
         </div>
       </section>
 

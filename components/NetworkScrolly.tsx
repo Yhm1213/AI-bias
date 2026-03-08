@@ -21,6 +21,7 @@ interface NetworkNode extends d3.SimulationNodeDatum {
     vy?: number;
     fx?: number | null;
     fy?: number | null;
+    gender?: 'female' | 'male';
 }
 
 interface ProcessedLink {
@@ -79,12 +80,18 @@ const NetworkScrolly: React.FC<NetworkScrollyProps> = ({ data, activePage, isVis
             );
 
             // Process into nodes and links
-            const nodeMap = new Map<string, { id: string; degree: number; totalWeight: number }>();
+            const nodeMap = new Map<string, { id: string; degree: number; totalWeight: number; gender?: 'female' | 'male' }>();
             const processedLinks: ProcessedLink[] = [];
 
             filteredLinks.forEach(l => {
-                if (!nodeMap.has(l.V1)) nodeMap.set(l.V1, { id: l.V1, degree: 0, totalWeight: 0 });
-                if (!nodeMap.has(l.V2)) nodeMap.set(l.V2, { id: l.V2, degree: 0, totalWeight: 0 });
+                if (!nodeMap.has(l.V1)) nodeMap.set(l.V1, { id: l.V1, degree: 0, totalWeight: 0, gender: l.gender });
+                if (!nodeMap.has(l.V2)) nodeMap.set(l.V2, { id: l.V2, degree: 0, totalWeight: 0, gender: l.gender });
+
+                // Update gender if it was somehow missing
+                if (l.gender) {
+                    nodeMap.get(l.V1)!.gender = l.gender;
+                    nodeMap.get(l.V2)!.gender = l.gender;
+                }
 
                 nodeMap.get(l.V1)!.degree += 1;
                 nodeMap.get(l.V1)!.totalWeight += l.Weight;
@@ -106,6 +113,7 @@ const NetworkScrolly: React.FC<NetworkScrollyProps> = ({ data, activePage, isVis
                 id: n.id,
                 radius: radiusScale(n.degree),
                 degree: n.degree,
+                gender: n.gender
             }));
 
             // Preserve positions from existing simulation
@@ -128,12 +136,12 @@ const NetworkScrolly: React.FC<NetworkScrollyProps> = ({ data, activePage, isVis
 
             const canvas = svg.append('g').attr('class', 'MainCanvas');
 
-            // Color mapping
-            const colorPalette = [
-                '#fcd34d', '#9d174d', '#4ade80', '#f5f5dc',
-                '#d4d4d8', '#8b5cf6', '#f472b6',
-            ];
-            const colorScale = d3.scaleOrdinal<string>().range(colorPalette);
+            // Gender Color mapping
+            const colorScale = (gender?: string) => {
+                if (gender === 'female') return '#F68CB2'; // Pink
+                if (gender === 'male') return '#2ABB3A';   // Green
+                return '#d4d4d8'; // Default Greige
+            };
 
             // Simulation layout
             const padding = 50;
@@ -198,10 +206,10 @@ const NetworkScrolly: React.FC<NetworkScrollyProps> = ({ data, activePage, isVis
             // Circle
             nodeGroups.append('circle')
                 .attr('r', d => d.radius)
-                .attr('fill', (d, i) => colorScale(String(i % colorPalette.length)))
+                .attr('fill', d => colorScale(d.gender))
                 .attr('stroke', '#ffffff')
                 .attr('stroke-width', 0.8)
-                .attr('opacity', 0.85);
+                .attr('opacity', 0.2); // Default opacity 20%
 
             // Label
             nodeGroups
@@ -228,8 +236,9 @@ const NetworkScrolly: React.FC<NetworkScrollyProps> = ({ data, activePage, isVis
                     else if (tId === hoveredNode.id) adjacentNodeIds.add(sId);
                 });
 
-                nodeGroups.transition().duration(200).ease(d3.easeQuadOut)
-                    .style('opacity', d => adjacentNodeIds.has(d.id) ? 1 : 0.1);
+                // Dim other nodes, keep hovered and adjacent nodes at 40% (0.4) opacity
+                nodeGroups.selectAll('circle').transition().duration(200).ease(d3.easeQuadOut)
+                    .attr('opacity', (d: any) => adjacentNodeIds.has(d.id) ? 0.4 : 0.05);
 
                 nodeGroups.selectAll('text').transition().duration(200)
                     .style('opacity', (d: any) => adjacentNodeIds.has(d.id) ? 1 : 0);
@@ -248,8 +257,9 @@ const NetworkScrolly: React.FC<NetworkScrollyProps> = ({ data, activePage, isVis
             });
 
             nodeGroups.on('mouseout', function () {
-                nodeGroups.transition().duration(200).ease(d3.easeQuadOut)
-                    .style('opacity', 1);
+                // Restore circle opacity to 20% (0.2)
+                nodeGroups.selectAll('circle').transition().duration(200).ease(d3.easeQuadOut)
+                    .attr('opacity', 0.2);
                 nodeGroups.selectAll('text').transition().duration(200)
                     .style('opacity', (d: any) => d.degree >= 3 ? 1 : 0);
                 linkElements.transition().duration(200).ease(d3.easeQuadOut)
