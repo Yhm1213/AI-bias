@@ -5,13 +5,21 @@ import './TileGridMap.css';
 
 interface TileGridMapProps {
     onBack?: () => void;
+    language: 'CN' | 'EN';
+    toggleLanguage: () => void;
 }
 
-const TileGridMap: React.FC<TileGridMapProps> = ({ onBack }) => {
+const TileGridMap: React.FC<TileGridMapProps> = ({ onBack, language, toggleLanguage }) => {
     const mapRef = useRef<HTMLDivElement>(null);
     const apiRef = useRef<TileGridMapAPI | null>(null);
     const [status, setStatus] = useState('初始化中...');
-    const [language, setLanguage] = useState<'zh' | 'en'>('zh');
+
+    // Synchronize language changes with the map API
+    useEffect(() => {
+        if (apiRef.current) {
+            apiRef.current.switchLanguage(language === 'CN' ? 'zh' : 'en');
+        }
+    }, [language]);
 
     useEffect(() => {
         if (!mapRef.current) return;
@@ -21,7 +29,7 @@ const TileGridMap: React.FC<TileGridMapProps> = ({ onBack }) => {
         mapRef.current.id = containerId;
 
         // Instantiate API
-        const api = new TileGridMapAPI(containerId, { language });
+        const api = new TileGridMapAPI(containerId, { language: language === 'CN' ? 'zh' : 'en' });
         apiRef.current = api;
 
         // Initialize with retry logic for dimensions
@@ -58,13 +66,6 @@ const TileGridMap: React.FC<TileGridMapProps> = ({ onBack }) => {
         };
     }, []);
 
-    const handleLanguageSwitch = (lang: 'zh' | 'en') => {
-        setLanguage(lang);
-        if (apiRef.current) {
-            apiRef.current.switchLanguage(lang);
-        }
-    };
-
     return (
         <div className="tile-grid-map-page flex flex-col w-full h-screen bg-[#121212] selection:bg-[#ff4d94]/30 relative overflow-hidden">
             <PixelBackground />
@@ -82,21 +83,21 @@ const TileGridMap: React.FC<TileGridMapProps> = ({ onBack }) => {
                 </button>
                 <div className="pointer-events-auto flex gap-2 items-center">
                     <button
-                        onClick={() => handleLanguageSwitch('zh')}
+                        onClick={() => { if (language !== 'CN') toggleLanguage(); }}
                         className="transition-transform hover:scale-105 cursor-pointer flex items-center justify-center p-1"
                     >
                         <img 
-                            src={import.meta.env.BASE_URL + (language === 'zh' ? "ICON/form/ZH_press.png" : "ICON/form/ZH_default.png")}
+                            src={import.meta.env.BASE_URL + (language === 'CN' ? "ICON/form/ZH_press.png" : "ICON/form/ZH_default.png")}
                             className="h-10 w-auto object-contain drop-shadow-md"
                             alt="中文"
                         />
                     </button>
                     <button
-                        onClick={() => handleLanguageSwitch('en')}
+                        onClick={() => { if (language !== 'EN') toggleLanguage(); }}
                         className="transition-transform hover:scale-105 cursor-pointer flex items-center justify-center p-1"
                     >
                         <img 
-                            src={import.meta.env.BASE_URL + (language === 'en' ? "ICON/form/EN_press.png" : "ICON/form/EN_default.png")}
+                            src={import.meta.env.BASE_URL + (language === 'EN' ? "ICON/form/EN_press.png" : "ICON/form/EN_default.png")}
                             className="h-10 w-auto object-contain drop-shadow-md"
                             alt="English"
                         />

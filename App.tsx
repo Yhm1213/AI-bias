@@ -72,7 +72,7 @@ const App: React.FC = () => {
   }
 
   if (currentView === 'explore') {
-    return <TileGridMap onBack={handleBackToMain} />;
+    return <TileGridMap onBack={handleBackToMain} language={language} toggleLanguage={toggleLanguage} />;
   }
 
   return (
