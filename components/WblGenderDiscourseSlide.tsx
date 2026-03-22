@@ -15,6 +15,7 @@ interface WblGenderDiscourseSlideProps {
 export const WblGenderDiscourseSlide: React.FC<WblGenderDiscourseSlideProps> = ({ language, toggleLanguage }) => {
     // Default to WBL1 so we always show data
     const [activeGroup, setActiveGroup] = useState<string>('WBL1');
+    const [chartLang, setChartLang] = useState<'CN' | 'EN'>('CN');
     const lang = language;
 
     // Localization Maps
@@ -59,8 +60,8 @@ export const WblGenderDiscourseSlide: React.FC<WblGenderDiscourseSlideProps> = (
 
     // Parse data based on language selection
     const data: ParsedData = useMemo(() => {
-        const rawFemale = lang === 'CN' ? rawFemaleCSV_WBL_CN : rawFemaleCSV_WBL_EN;
-        const rawMale = lang === 'CN' ? rawMaleCSV_WBL_CN : rawMaleCSV_WBL_EN;
+        const rawFemale = chartLang === 'CN' ? rawFemaleCSV_WBL_CN : rawFemaleCSV_WBL_EN;
+        const rawMale = chartLang === 'CN' ? rawMaleCSV_WBL_CN : rawMaleCSV_WBL_EN;
 
         const femaleGroups = parseCSVData(rawFemale, 'Female');
         const maleGroups = parseCSVData(rawMale, 'Male');
@@ -92,21 +93,21 @@ export const WblGenderDiscourseSlide: React.FC<WblGenderDiscourseSlideProps> = (
                     {/* 语言切换按钮 - 展示图的正上方中间 */}
                     <div className="absolute top-8 left-1/2 -translate-x-1/2 z-50 pointer-events-auto flex gap-2 items-center">
                         <button
-                            onClick={() => { if (lang !== 'CN') toggleLanguage(); }}
+                            onClick={() => setChartLang('CN')}
                             className="transition-transform hover:scale-105 cursor-pointer flex items-center justify-center p-1"
                         >
                             <img 
-                                src={import.meta.env.BASE_URL + (lang === 'CN' ? "ICON/form/ZH_press.png" : "ICON/form/ZH_default.png")}
+                                src={import.meta.env.BASE_URL + (chartLang === 'CN' ? "ICON/form/ZH_press.png" : "ICON/form/ZH_default.png")}
                                 className="h-10 w-auto object-contain drop-shadow-md"
                                 alt="中文"
                             />
                         </button>
                         <button
-                            onClick={() => { if (lang !== 'EN') toggleLanguage(); }}
+                            onClick={() => setChartLang('EN')}
                             className="transition-transform hover:scale-105 cursor-pointer flex items-center justify-center p-1"
                         >
                             <img 
-                                src={import.meta.env.BASE_URL + (lang === 'EN' ? "ICON/form/EN_press.png" : "ICON/form/EN_default.png")}
+                                src={import.meta.env.BASE_URL + (chartLang === 'EN' ? "ICON/form/EN_press.png" : "ICON/form/EN_default.png")}
                                 className="h-10 w-auto object-contain drop-shadow-md"
                                 alt="English"
                             />
@@ -117,7 +118,7 @@ export const WblGenderDiscourseSlide: React.FC<WblGenderDiscourseSlideProps> = (
                         data={data}
                         activeGroup={activeGroup}
                         onSelectGroup={setActiveGroup}
-                        lang={lang}
+                        lang={chartLang}
                     />
                 </div>
 
