@@ -13,9 +13,11 @@ import enNetworkData from '../data/en_network.json';
 
 interface DiscoverySlidesProps {
   onBack: () => void;
+  language: 'CN' | 'EN';
+  toggleLanguage: () => void;
 }
 
-const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack }) => {
+const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, language, toggleLanguage }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // 模拟数据内容 (Page 2: Gender Bias)
@@ -255,6 +257,20 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack }) => {
             className="h-10 w-auto object-contain drop-shadow-md" 
           />
         </button>
+      </div>
+
+      {/* 语言切换按钮 - 固定在右下角 */}
+      <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-50 pointer-events-auto">
+        <div
+          onClick={toggleLanguage}
+          className="h-10 cursor-pointer drop-shadow-md"
+        >
+          <img
+            src={language === 'CN' ? (import.meta.env.BASE_URL + "ICON/language_zh.png") : (import.meta.env.BASE_URL + "ICON/language_en.png")}
+            alt="Language Switch"
+            className="h-full w-auto object-contain"
+          />
+        </div>
       </div>
 
       {/* 第一屏：首屏内容 */}

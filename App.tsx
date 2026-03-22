@@ -63,7 +63,7 @@ const App: React.FC = () => {
   }
 
   if (currentView === 'discovery') {
-    return <DiscoverySlides onBack={handleBackToMain} />;
+    return <DiscoverySlides onBack={handleBackToMain} language={language} toggleLanguage={toggleLanguage} />;
   }
 
 
