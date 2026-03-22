@@ -160,8 +160,8 @@ const App: React.FC = () => {
               </div>
 
               <div className="w-32 h-32 flex items-center justify-center mb-6 transition-all duration-300">
-                <img src={import.meta.env.BASE_URL + "ICON/buttom01_cn.png"} alt="icon" className="w-full h-full object-contain group-hover:hidden transition-all duration-300" />
-                <img src={import.meta.env.BASE_URL + "ICON/buttom01_cn_hover.png"} alt="icon hover" className="w-full h-full object-contain hidden group-hover:block transition-all duration-300" />
+                <img src={import.meta.env.BASE_URL + (language === 'CN' ? "ICON/buttom01_cn.png" : "ICON/buttom01_en.png")} alt="icon" className="w-full h-full object-contain group-hover:hidden transition-all duration-300" />
+                <img src={import.meta.env.BASE_URL + (language === 'CN' ? "ICON/buttom01_cn_hover.png" : "ICON/buttom01_en_hover.png")} alt="icon hover" className="w-full h-full object-contain hidden group-hover:block transition-all duration-300" />
               </div>
 
             </div>
@@ -179,8 +179,8 @@ const App: React.FC = () => {
               </div>
 
               <div className="w-32 h-32 flex items-center justify-center mb-6 transition-all duration-300">
-                <img src={import.meta.env.BASE_URL + "ICON/buttom02_cn.png"} alt="icon" className="w-full h-full object-contain group-hover:hidden transition-all duration-300" />
-                <img src={import.meta.env.BASE_URL + "ICON/buttom02_cn_hover.png"} alt="icon hover" className="w-full h-full object-contain hidden group-hover:block transition-all duration-300" />
+                <img src={import.meta.env.BASE_URL + (language === 'CN' ? "ICON/buttom02_cn.png" : "ICON/buttom02_en.png")} alt="icon" className="w-full h-full object-contain group-hover:hidden transition-all duration-300" />
+                <img src={import.meta.env.BASE_URL + (language === 'CN' ? "ICON/buttom02_cn_hover.png" : "ICON/buttom02_en_hover.png")} alt="icon hover" className="w-full h-full object-contain hidden group-hover:block transition-all duration-300" />
               </div>
             </div>
           </div>
@@ -192,8 +192,8 @@ const App: React.FC = () => {
             onClick={() => handleGoToData()}
             className="w-32 h-10 relative cursor-pointer group"
           >
-            <img src={import.meta.env.BASE_URL + "ICON/data_zh.png"} alt="Data Explanation" className="w-full h-full object-contain absolute inset-0 transition-opacity duration-300 opacity-100 group-hover:opacity-0" />
-            <img src={import.meta.env.BASE_URL + "ICON/data_zh_hover.png"} alt="Data Explanation Hover" className="w-full h-full object-contain absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
+            <img src={import.meta.env.BASE_URL + (language === 'CN' ? "ICON/data_zh.png" : "ICON/data_en.png")} alt="Data Explanation" className="w-full h-full object-contain absolute inset-0 transition-opacity duration-300 opacity-100 group-hover:opacity-0" />
+            <img src={import.meta.env.BASE_URL + (language === 'CN' ? "ICON/data_zh_hover.png" : "ICON/data_en_hover.png")} alt="Data Explanation Hover" className="w-full h-full object-contain absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
           </div>
 
           <div
