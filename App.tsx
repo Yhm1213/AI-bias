@@ -198,12 +198,12 @@ const App: React.FC = () => {
 
           <div
             onClick={toggleLanguage}
-            className="w-32 h-10 relative cursor-pointer group"
+            className="h-10 cursor-pointer group"
           >
             <img
               src={language === 'CN' ? (import.meta.env.BASE_URL + "ICON/language_zh.png") : (import.meta.env.BASE_URL + "ICON/language_en.png")}
               alt="Language Switch"
-              className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
+              className="h-full w-auto object-contain transition-transform duration-300 group-hover:scale-105"
             />
           </div>
         </div>
