@@ -72,10 +72,13 @@ const TileGridMap: React.FC<TileGridMapProps> = ({ onBack }) => {
             <div className="absolute top-4 left-4 right-4 z-50 flex justify-between items-start pointer-events-none">
                 <button
                     onClick={onBack}
-                    className="pointer-events-auto px-4 py-2 bg-white/10 backdrop-blur shadow-md rounded-full border border-white/20 hover:bg-white/20 hover:scale-105 transition-all text-sm font-medium flex items-center gap-2 text-white"
+                    className="pointer-events-auto hover:scale-105 transition-transform duration-300 flex items-center justify-center p-1"
                 >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5" /><path d="M12 19l-7-7 7-7" /></svg>
-                    返回首页
+                    <img 
+                        src={import.meta.env.BASE_URL + "ICON/HOME.png"} 
+                        alt="返回首页" 
+                        className="h-10 w-auto object-contain drop-shadow-md" 
+                    />
                 </button>
 
                 <div className="pointer-events-auto flex p-1 bg-white/10 backdrop-blur shadow-md rounded-full border border-white/20">
