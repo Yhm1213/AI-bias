@@ -91,7 +91,7 @@ const App: React.FC = () => {
           muted
           playsInline
         >
-          <source src={import.meta.env.BASE_URL + "video.mp4"} type="video/mp4" />
+          <source src={`${import.meta.env.BASE_URL}video.mp4`} type="video/mp4" />
         </video>
 
         {/* 提示文字 */}
@@ -198,12 +198,12 @@ const App: React.FC = () => {
 
           <div
             onClick={toggleLanguage}
-            className="cursor-pointer flex items-center justify-center p-2"
+            className="w-32 h-10 relative cursor-pointer group"
           >
             <img
               src={language === 'CN' ? (import.meta.env.BASE_URL + "ICON/language_zh.png") : (import.meta.env.BASE_URL + "ICON/language_en.png")}
               alt="Language Switch"
-              className="h-6 w-auto object-contain transition-all duration-300 hover:scale-110"
+              className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
             />
           </div>
         </div>
