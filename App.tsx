@@ -89,6 +89,7 @@ const App: React.FC = () => {
           loop
           muted
           playsInline
+          preload="auto"
         >
           <source src={`${import.meta.env.BASE_URL}video.mp4`} type="video/mp4" />
         </video>

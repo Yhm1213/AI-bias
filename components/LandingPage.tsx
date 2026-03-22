@@ -27,6 +27,16 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
     return () => clearInterval(timer);
   }, []);
 
+  // 在初始页就开始预加载视频，用户进入主页时已缓冲好
+  useEffect(() => {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'video';
+    link.href = `${import.meta.env.BASE_URL}video.mp4`;
+    document.head.appendChild(link);
+    return () => { document.head.removeChild(link); };
+  }, []);
+
   return (
     <div className="fixed inset-0 bg-[#0a0a0a] z-[999] flex flex-col items-center justify-center p-6 overflow-hidden">
       <div className="max-w-3xl w-full flex flex-col items-center">
