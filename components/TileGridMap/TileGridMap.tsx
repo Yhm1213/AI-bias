@@ -81,19 +81,19 @@ const TileGridMap: React.FC<TileGridMapProps> = ({ onBack }) => {
                     />
                 </button>
 
-                <div className="pointer-events-auto flex p-1 bg-white/10 backdrop-blur shadow-md rounded-full border border-white/20">
-                    <button
-                        onClick={() => handleLanguageSwitch('zh')}
-                        className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 ${language === 'zh' ? 'bg-[#ff4d94] text-white shadow-sm' : 'text-gray-300 hover:bg-white/10'}`}
-                    >
-                        中文
-                    </button>
-                    <button
-                        onClick={() => handleLanguageSwitch('en')}
-                        className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 ${language === 'en' ? 'bg-[#ff4d94] text-white shadow-sm' : 'text-gray-300 hover:bg-white/10'}`}
-                    >
-                        English
-                    </button>
+            </div>
+
+            {/* 语言切换按钮 - 固定在右下角 */}
+            <div className="absolute bottom-4 right-4 md:bottom-8 md:right-8 z-50 pointer-events-auto">
+                <div
+                    onClick={() => handleLanguageSwitch(language === 'zh' ? 'en' : 'zh')}
+                    className="h-10 cursor-pointer drop-shadow-md"
+                >
+                    <img
+                        src={language === 'zh' ? (import.meta.env.BASE_URL + "ICON/language_zh.png") : (import.meta.env.BASE_URL + "ICON/language_en.png")}
+                        alt="Language Switch"
+                        className="h-full w-auto object-contain"
+                    />
                 </div>
             </div>
 
