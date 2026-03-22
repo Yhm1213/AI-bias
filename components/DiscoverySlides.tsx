@@ -346,6 +346,26 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, language, tog
         <GdpGenderDiscourseSlide />
       </section>
 
+      {/* 补充占位屏：放在两个数据洞察页面之间 */}
+      <section className="h-screen w-full snap-start snap-always relative flex flex-col items-center justify-center p-6 text-center z-20 bg-transparent">
+        <div className="w-full max-w-2xl z-10 flex flex-col items-center">
+          <h2 className="text-[#22c55e] text-xl md:text-2xl font-bold tracking-[0.3em] mb-12 leading-relaxed">
+            中文大模型被「男强女柔」框住了想象力
+          </h2>
+          <div className="text-zinc-300 text-sm md:text-[15px] leading-[2.4] font-light tracking-widest max-w-xl">
+            <p className="mb-4 text-justify">
+              首先，我们对比中文大模型DeepSeek对男人和女人的描述差异，我们将DeepSeek对于男性和女性的描述分词，经过清洗后获得584个词语【2】。我们分析发现了如下差异
+              <span className="inline-flex items-center ml-4 translate-y-2">
+                <img src={import.meta.env.BASE_URL + "ICON/binoculars_wh.png"} alt="binoculars" className="w-12 h-auto object-contain" />
+              </span>
+            </p>
+          </div>
+          <div className="mt-20 opacity-10">
+            <div className="w-[1px] h-12 bg-white"></div>
+          </div>
+        </div>
+      </section>
+
       {/* 第九屏：WBL Gender Discourse Visualization */}
       <section className="h-screen w-full snap-start snap-always relative z-20">
         <WblGenderDiscourseSlide />
