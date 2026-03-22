@@ -243,6 +243,20 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack }) => {
         <PixelBackground />
       </div>
 
+      {/* 返回首页按钮 - 固定在左上角 */}
+      <div className="fixed top-4 left-4 z-50 pointer-events-auto">
+        <button
+          onClick={onBack}
+          className="hover:scale-105 transition-transform duration-300 flex items-center justify-center p-1"
+        >
+          <img 
+            src={import.meta.env.BASE_URL + "ICON/HOME.png"} 
+            alt="返回首页" 
+            className="h-10 w-auto object-contain drop-shadow-md" 
+          />
+        </button>
+      </div>
+
       {/* 第一屏：首屏内容 */}
       <section className="h-screen w-full snap-start snap-always relative flex flex-col items-center justify-center p-6 text-center z-20 bg-transparent">
         {/* 注意：bg-transparent 让它透出下面的 PixelBackground */}
