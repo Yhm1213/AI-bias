@@ -11,6 +11,8 @@ import NetworkScrolly from './NetworkScrolly';
 import cnNetworkData from '../data/cn_network.json';
 import enNetworkData from '../data/en_network.json';
 
+import { useTranslation } from '../contexts/LanguageContext';
+
 interface DiscoverySlidesProps {
   onBack: () => void;
   language: 'CN' | 'EN';
@@ -18,125 +20,124 @@ interface DiscoverySlidesProps {
 }
 
 const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, language, toggleLanguage }) => {
+  const { t } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // 模拟数据内容 (Page 2: Gender Bias)
   const GENDER_BIAS_DATA = [
     {
       titleLeft: <>
-        <span className="font-bold text-pink-700 mx-1">温柔美丽</span>
-        <span className="text-xs text-zinc-600">的她 &</span>
-        <span className="font-bold text-green-800 mx-1">高大富有</span>
-        <span className="text-xs text-zinc-600">的他</span>
+        <span className="font-bold text-pink-700 mx-1">{t('discovery.bias_cn.0.title_female_1')}</span>
+        <span className="text-xs text-zinc-600">{t('discovery.bias_cn.0.title_female_2')}</span>
+        <span className="font-bold text-green-800 mx-1">{t('discovery.bias_cn.0.title_male_1')}</span>
+        <span className="text-xs text-zinc-600">{t('discovery.bias_cn.0.title_male_2')}</span>
       </>,
       content: (
         <>
           <p>
-            从外貌、气质与文化符号看，女性形象往往围绕 <span className="font-bold text-pink-800">温柔</span> 等特性展开，而男性则与 <span className="font-bold text-green-900">勇敢、勤奋</span> 强相关。
+            {t('discovery.bias_cn.0.p1_1')}<span className="font-bold text-pink-800">{t('discovery.bias_cn.0.p1_2')}</span>{t('discovery.bias_cn.0.p1_3')}<span className="font-bold text-green-900">{t('discovery.bias_cn.0.p1_4')}</span>{t('discovery.bias_cn.0.p1_5')}
           </p>
           <p>
-            女性外貌常被精细描绘（<span className="bg-zinc-900/5 ring-1 ring-zinc-900/10 px-1 rounded">身材/眼睛/发质</span>），男性则常被简化为“高大強壯”。
+            {t('discovery.bias_cn.0.p2_1')}<span className="bg-zinc-900/5 ring-1 ring-zinc-900/10 px-1 rounded">{t('discovery.bias_cn.0.p2_2')}</span>{t('discovery.bias_cn.0.p2_3')}
           </p>
           <p>
-            服饰意象上，女性被赋予“头巾/长袍”，男性则多关联“宗教/信仰”。
+            {t('discovery.bias_cn.0.p3')}
           </p>
         </>
       )
     },
     {
       titleLeft: <>
-        <span className="font-bold text-blue-700 mx-1">家庭琐事</span>
-        <span className="text-xs text-zinc-600">的她 &</span>
-        <span className="font-bold text-orange-800 mx-1">社会征战</span>
-        <span className="text-xs text-zinc-600">的他</span>
+        <span className="font-bold text-blue-700 mx-1">{t('discovery.bias_cn.1.title_female_1')}</span>
+        <span className="text-xs text-zinc-600">{t('discovery.bias_cn.1.title_female_2')}</span>
+        <span className="font-bold text-orange-800 mx-1">{t('discovery.bias_cn.1.title_male_1')}</span>
+        <span className="text-xs text-zinc-600">{t('discovery.bias_cn.1.title_male_2')}</span>
       </>,
       content: (
         <>
           <p className="font-bold text-sm mb-2 text-zinc-900">
-            场景主要构建：
+            {t('discovery.bias_cn.1.p1')}
           </p>
           <p>
-            女性角色高频出现于 <span className="text-blue-800 bg-blue-100/50 px-1 rounded">家庭内部、厨房、卧室</span>，行为多为“照顾”、“打扫”、“等待”。
+            {t('discovery.bias_cn.1.p2_1')}<span className="text-blue-800 bg-blue-100/50 px-1 rounded">{t('discovery.bias_cn.1.p2_2')}</span>{t('discovery.bias_cn.1.p2_3')}
           </p>
           <p>
-            男性角色则更多活跃于 <span className="text-orange-800 bg-orange-100/50 px-1 rounded">战场、商场、会议室</span>，行为多为“决策”、“战斗”、“演讲”。
+            {t('discovery.bias_cn.1.p3_1')}<span className="text-orange-800 bg-orange-100/50 px-1 rounded">{t('discovery.bias_cn.1.p3_2')}</span>{t('discovery.bias_cn.1.p3_3')}
           </p>
         </>
       )
     },
     {
       titleLeft: <>
-        <span className="font-bold text-purple-700 mx-1">情感支撑</span>
-        <span className="text-xs text-zinc-600">的她 &</span>
-        <span className="font-bold text-red-800 mx-1">逻辑理性</span>
-        <span className="text-xs text-zinc-600">的他</span>
+        <span className="font-bold text-purple-700 mx-1">{t('discovery.bias_cn.2.title_female_1')}</span>
+        <span className="text-xs text-zinc-600">{t('discovery.bias_cn.2.title_female_2')}</span>
+        <span className="font-bold text-red-800 mx-1">{t('discovery.bias_cn.2.title_male_1')}</span>
+        <span className="text-xs text-zinc-600">{t('discovery.bias_cn.2.title_male_2')}</span>
       </>,
       content: (
         <>
           <p className="font-bold text-sm mb-2 text-zinc-900">
-            性格深层归因：
+            {t('discovery.bias_cn.2.p1')}
           </p>
           <p>
-            遇到危机时，女性角色的反应常被描述为 <span className="text-purple-800 italic">“惊慌”、“哭泣”、“寻求帮助”</span>。
+            {t('discovery.bias_cn.2.p2_1')}<span className="text-purple-800 italic">{t('discovery.bias_cn.2.p2_2')}</span>{t('discovery.bias_cn.2.p2_3')}
           </p>
           <p>
-            而男性角色则倾向于被描述为 <span className="text-red-800 italic">“冷静”、“分析”、“挺身而出”</span>，似乎天生具备解决麻烦的能力。
+            {t('discovery.bias_cn.2.p3_1')}<span className="text-red-800 italic">{t('discovery.bias_cn.2.p3_2')}</span>{t('discovery.bias_cn.2.p3_3')}
           </p>
         </>
       )
     }
   ];
 
-  // 模拟数据内容 (Page 4: English Gender Bias)
   const EN_GENDER_BIAS_DATA = [
     {
       titleLeft: <>
-        <span className="font-bold text-pink-700 mx-1">优雅</span>
-        <span className="text-xs text-zinc-600">的女性</span>
+        <span className="font-bold text-pink-700 mx-1">{t('discovery.bias_en.0.title_female_1')}</span>
+        <span className="text-xs text-zinc-600">{t('discovery.bias_en.0.title_female_2')}</span>
       </>,
       content: (
         <>
           <p>
-            The theme of <span className="font-bold text-pink-800">Elegance and Beauty</span> remains highly relevant when ChatGPT describes women.
+            {t('discovery.bias_en.0.p1_1')}<span className="font-bold text-pink-800">{t('discovery.bias_en.0.p1_2')}</span>{t('discovery.bias_en.0.p1_3')}
           </p>
           <p>
-            References to terms like 'elegant', 'beautiful', and 'graceful' form the core of describing the 'Elegant Woman' archetype, suggesting persistent aesthetic stereotypes even in modern LLMs.
+            {t('discovery.bias_en.0.p2')}
           </p>
-          <p className="text-zinc-500 italic mt-2 text-[10px]">* Placeholder text for ChatGPT English Dataset Analysis</p>
+          <p className="text-zinc-500 italic mt-2 text-[10px]">{t('discovery.bias_en.0.placeholder')}</p>
         </>
       )
     },
     {
       titleLeft: <>
-        <span className="font-bold text-blue-700 mx-1">"Care"</span>
-        <span className="text-xs text-zinc-600">的她</span>
+        <span className="font-bold text-blue-700 mx-1">{t('discovery.bias_en.1.title_female_1')}</span>
+        <span className="text-xs text-zinc-600">{t('discovery.bias_en.1.title_female_2')}</span>
       </>,
       content: (
         <>
           <p>
-            When discussing women, the concept of <span className="font-bold text-blue-800">Caregiving</span> dominates the narrative significantly.
+            {t('discovery.bias_en.1.p1_1')}<span className="font-bold text-blue-800">{t('discovery.bias_en.1.p1_2')}</span>{t('discovery.bias_en.1.p1_3')}
           </p>
           <p>
-            Words associated with nurturing, supporting, and emotional labor co-occur frequently, painting an image of women as primary empathetic providers in both domestic and professional settings.
+            {t('discovery.bias_en.1.p2')}
           </p>
-          <p className="text-zinc-500 italic mt-2 text-[10px]">* Placeholder text for ChatGPT English Dataset Analysis</p>
+          <p className="text-zinc-500 italic mt-2 text-[10px]">{t('discovery.bias_en.1.placeholder')}</p>
         </>
       )
     },
     {
       titleLeft: <>
-        <span className="font-bold text-purple-700 mx-1">"Advocacy"</span>
-        <span className="text-xs text-zinc-600">的她</span>
+        <span className="font-bold text-purple-700 mx-1">{t('discovery.bias_en.2.title_female_1')}</span>
+        <span className="text-xs text-zinc-600">{t('discovery.bias_en.2.title_female_2')}</span>
       </>,
       content: (
         <>
           <p>
-            An interesting dimension in the English dataset is the prominent theme of <span className="bold text-purple-800">Advocacy and Empowerment</span>.
+            {t('discovery.bias_en.2.p1_1')}<span className="font-bold text-purple-800">{t('discovery.bias_en.2.p1_2')}</span>{t('discovery.bias_en.2.p1_3')}
           </p>
           <p>
-            This reflects a modern shift in discourse where women are frequently associated with fighting for rights, leading change, and breaking barriers—a narrative distinct from the traditional Chinese corpus.
+            {t('discovery.bias_en.2.p2')}
           </p>
-          <p className="text-zinc-500 italic mt-2 text-[10px]">* Placeholder text for ChatGPT English Dataset Analysis</p>
+          <p className="text-zinc-500 italic mt-2 text-[10px]">{t('discovery.bias_en.2.placeholder')}</p>
         </>
       )
     }
@@ -146,13 +147,13 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, language, tog
   const PAGE_3_EXIT_CONTENT = (
     <div className="w-full max-w-2xl px-6 text-center">
       <h2 className="text-[#22c55e] text-xl md:text-2xl font-bold tracking-[0.2em] mb-8 leading-relaxed">
-        英文大模型部分更新了<br className="md:hidden" />性别剧本
+        {t('discovery.page3_exit.title_1')}<br className="md:hidden" />{t('discovery.page3_exit.title_2')}
       </h2>
       <div className="text-zinc-300 text-sm md:text-[15px] leading-[2.4] font-light tracking-widest">
         <p className="mb-4">
-          再来看看英文语境下AI语言中的性别差异。<br />
-          我们将chatgpt对于男性和女性的描述分词，经过清洗和筛选后获得756个英文词汇【3】。<br />
-          我们观察这些词，最终发现了如下差异
+          {t('discovery.page3_exit.p1_1')}<br />
+          {t('discovery.page3_exit.p1_2')}<br />
+          {t('discovery.page3_exit.p1_3')}
           <span className="inline-flex items-center ml-2 translate-y-1.5 opacity-80">
             <img src={import.meta.env.BASE_URL + "ICON/binoculars_wh.png"} alt="binoculars" className="w-10 h-auto object-contain" />
           </span>
@@ -211,25 +212,25 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, language, tog
       {/* 右侧：文字说明 - Scrollable with hidden scrollbar */}
       <div className="w-full md:w-1/2 max-w-md text-left h-[400px] overflow-y-auto pr-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
         <p className="text-zinc-700 text-sm md:text-[15px] leading-[2.2] font-light tracking-wide mb-6">
-          为了更好地对比DeepSeek和ChatGPT在男女描述上的差异，我们提出 <span className="font-bold text-zinc-900">词语性别差异指数【4】</span>：通过计算同一词语在两种续写（"女人是……"和"男人是……"）中词频排序的百分比差值，来量化单一语言模型中的性别偏见程度。
+          {t('discovery.page4_exit.p1_1')}<span className="font-bold text-zinc-900">{t('discovery.page4_exit.p1_2')}</span>{t('discovery.page4_exit.p1_3')}
         </p>
         <p className="text-zinc-700 text-sm md:text-[15px] leading-[2.2] font-light tracking-wide mb-6">
-          一个理想中的没有差异的词语，在两性描述下被提到的可能性应该相同，即差异指数为0。
+          {t('discovery.page4_exit.p2')}
         </p>
         <p className="text-zinc-700 text-sm md:text-[15px] leading-[2.2] font-light tracking-wide mb-6">
-          比如："家庭"一词在中文男性数据中被提到1384次，其词频排序百分比为0.997，在中文女性数据中被提到1667次，其词频排序百分比为1，"家庭"的词语性别差异指数为0.003，约等于0，意味着此词在不同性别背景下被同等地被提到，呈现出"无差别化"现象。
+          {t('discovery.page4_exit.p3')}
         </p>
         <p className="text-zinc-700 text-sm md:text-[15px] leading-[2.2] font-light tracking-wide mb-6">
-          相反地，"照顾"一词在女性中文包之中被提及927次，女性词频排序显著高于男性。这种差异并非孤例。我们在数据中发现了大量类似的模式，例如"温柔"、"美丽"等词汇高度集中于女性描述，而"强壮"、"领袖"等词汇则更多出现在男性描述中。
+          {t('discovery.page4_exit.p4')}
         </p>
         <p className="text-zinc-700 text-sm md:text-[15px] leading-[2.2] font-light tracking-wide mb-6">
-          通过词语性别差异指数，我们可以清晰地看到这些刻板印象如何在模型生成的文本中被量化。这个指数不仅揭示了单个词汇的偏见，也为我们提供了一个宏观的视角，去审视大语言模型在训练过程中所习得的社会偏见。
+          {t('discovery.page4_exit.p5')}
         </p>
         <p className="text-zinc-700 text-sm md:text-[15px] leading-[2.2] font-light tracking-wide mb-6">
-          当我们把成百上千个词汇的差异指数汇聚成图表时（如左图所示），这种结构性的不平衡便一目了然。每一个数据点都代表了一个词语在性别叙事中的位置，它们共同构建了一个由数据定义的性别图景。我们也可以看到，在某些中性词汇上，模型表现出了较好的公平性，但在涉及职业、性格和家庭角色的词汇上，偏见依然根深蒂固。
+          {t('discovery.page4_exit.p6')}
         </p>
         <p className="text-zinc-700 text-sm md:text-[15px] leading-[2.2] font-light tracking-wide mb-6">
-          这些发现提醒我们，在享受人工智能带来的便利的同时，必须警惕其中隐藏的偏见。只有通过不断的监测和修正，我们才能推动AI向着更加公平、包容的方向发展。
+          {t('discovery.page4_exit.p7')}
         </p>
       </div>
     </div>
@@ -253,7 +254,7 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, language, tog
         >
           <img 
             src={import.meta.env.BASE_URL + "ICON/HOME.png"} 
-            alt="返回首页" 
+            alt={t('discovery.back')} 
             className="h-10 w-auto object-contain drop-shadow-md" 
           />
         </button>
@@ -278,11 +279,11 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, language, tog
         {/* 注意：bg-transparent 让它透出下面的 PixelBackground */}
         <div className="w-full max-w-2xl z-10 flex flex-col items-center">
           <h2 className="text-[#22c55e] text-xl md:text-2xl font-bold tracking-[0.3em] mb-12 leading-relaxed">
-            中文大模型被「男强女柔」框住了想象力
+            {t('discovery.slide1.title')}
           </h2>
           <div className="text-zinc-300 text-sm md:text-[15px] leading-[2.4] font-light tracking-widest max-w-xl">
             <p className="mb-4 text-justify">
-              首先，我们对比中文大模型DeepSeek对男人和女人的描述差异，我们将DeepSeek对于男性和女性的描述分词，经过清洗后获得584个词语【2】。我们分析发现了如下差异
+              {t('discovery.slide1.p1')}
               <span className="inline-flex items-center ml-4 translate-y-2">
                 <img src={import.meta.env.BASE_URL + "ICON/binoculars_wh.png"} alt="binoculars" className="w-12 h-auto object-contain" />
               </span>
@@ -318,16 +319,15 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, language, tog
         )}
       />
 
-      {/* 第六屏：首页复刻 (Page 6) */}
+      {/* 第六屏：过渡屏 (Page 6) */}
       <section className="h-screen w-full snap-start snap-always relative flex flex-col items-center justify-center p-6 text-center z-20 bg-transparent">
-        {/* 注意：bg-transparent 让它透出下面的 PixelBackground */}
         <div className="w-full max-w-2xl z-10 flex flex-col items-center">
           <h2 className="text-[#22c55e] text-xl md:text-2xl font-bold tracking-[0.3em] mb-12 leading-relaxed">
-            中文大模型被「男强女柔」框住了想象力
+            {t('discovery.slide6.title')}
           </h2>
           <div className="text-zinc-300 text-sm md:text-[15px] leading-[2.4] font-light tracking-widest max-w-xl">
             <p className="mb-4 text-justify">
-              首先，我们对比中文大模型DeepSeek对男人和女人的描述差异，我们将DeepSeek对于男性和女性的描述分词，经过清洗后获得584个词语【2】。我们分析发现了如下差异
+              {t('discovery.slide6.p1')}
               <span className="inline-flex items-center ml-4 translate-y-2">
                 <img src={import.meta.env.BASE_URL + "ICON/binoculars_wh.png"} alt="binoculars" className="w-12 h-auto object-contain" />
               </span>
@@ -346,15 +346,15 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, language, tog
         <GdpGenderDiscourseSlide language={language} toggleLanguage={toggleLanguage} />
       </section>
 
-      {/* 补充占位屏：放在两个数据洞察页面之间 */}
+      {/* 补充过渡屏：放在两个数据洞察页面之间 */}
       <section className="h-screen w-full snap-start snap-always relative flex flex-col items-center justify-center p-6 text-center z-20 bg-transparent">
         <div className="w-full max-w-2xl z-10 flex flex-col items-center">
           <h2 className="text-[#22c55e] text-xl md:text-2xl font-bold tracking-[0.3em] mb-12 leading-relaxed">
-            中文大模型被「男强女柔」框住了想象力
+            {t('discovery.slide_interstitial.title')}
           </h2>
           <div className="text-zinc-300 text-sm md:text-[15px] leading-[2.4] font-light tracking-widest max-w-xl">
             <p className="mb-4 text-justify">
-              首先，我们对比中文大模型DeepSeek对男人和女人的描述差异，我们将DeepSeek对于男性和女性的描述分词，经过清洗后获得584个词语【2】。我们分析发现了如下差异
+              {t('discovery.slide_interstitial.p1')}
               <span className="inline-flex items-center ml-4 translate-y-2">
                 <img src={import.meta.env.BASE_URL + "ICON/binoculars_wh.png"} alt="binoculars" className="w-12 h-auto object-contain" />
               </span>

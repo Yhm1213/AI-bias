@@ -206,7 +206,7 @@ const ScrollTelescopeSection: React.FC<ScrollTelescopeSectionProps> = ({
 
                                     <div className="pt-2 border-t border-black/10 mt-2">
                                         <p className="text-[10px] opacity-60 leading-tight">
-                                            * Page {subPage + 1} / {slides.length} | DeepSeek 性别偏见分析
+                                            * Page {subPage + 1} / {slides.length} | {id === 'page-3' ? 'DeepSeek Gender Bias Analysis' : 'ChatGPT English Dataset Bias Analysis'}
                                         </p>
                                     </div>
                                 </div>

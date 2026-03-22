@@ -5,6 +5,8 @@ import { rawFemaleCSV_WBL_CN, rawMaleCSV_WBL_CN, rawFemaleCSV_WBL_EN, rawMaleCSV
 import { ParsedData, GDPGroup } from '../types';
 import { MousePointer2, Languages } from 'lucide-react';
 
+import { useTranslation } from '../contexts/LanguageContext';
+
 type Language = 'CN' | 'EN';
 
 interface WblGenderDiscourseSlideProps {
@@ -13,50 +15,10 @@ interface WblGenderDiscourseSlideProps {
 }
 
 export const WblGenderDiscourseSlide: React.FC<WblGenderDiscourseSlideProps> = ({ language, toggleLanguage }) => {
-    // Default to WBL1 so we always show data
-    const [activeGroup, setActiveGroup] = useState<string>('WBL1');
+    const { t } = useTranslation();
+    const [activeGroup, setActiveGroup] = useState<string>('GDP1');
     const [chartLang, setChartLang] = useState<'CN' | 'EN'>('CN');
     const lang = language;
-
-    // Localization Maps
-    const content = {
-        CN: {
-            title: "WBL分组与性别描述词频",
-            desc: "展示了不同WBL分组国家中，针对男性和女性最高频的30个描述词。",
-            descSub: "圆圈大小代表词频高低。",
-            interactiveTitle: "交互模式",
-            interactiveHint: "点击中间的按钮切换数据视图",
-            hoverHint: "悬停词语可高亮详情",
-            legendFemale: "女性描述 (Female)",
-            legendMale: "男性描述 (Male)",
-            labelMap: {
-                'GDP1': '低',
-                'GDP2': '低中',
-                'GDP3': '中',
-                'GDP4': '中高',
-                'GDP5': '高',
-            } as Record<string, string>
-        },
-        EN: {
-            title: "WBL Group & Gender Discourse",
-            desc: "Visualizing high-frequency descriptive words for males and females across 5 WBL groups.",
-            descSub: "Circle size represents word frequency.",
-            interactiveTitle: "Interactive Mode",
-            interactiveHint: "Click center buttons to switch views",
-            hoverHint: "Hover over words to highlight details",
-            legendFemale: "Female Descriptors",
-            legendMale: "Male Descriptors",
-            labelMap: {
-                'GDP1': 'Low',
-                'GDP2': 'Lo-Mid',
-                'GDP3': 'Mid',
-                'GDP4': 'Hi-Mid',
-                'GDP5': 'High',
-            } as Record<string, string>
-        }
-    };
-
-    const currentText = content[lang];
 
     // Parse data based on language selection
     const data: ParsedData = useMemo(() => {
@@ -73,7 +35,7 @@ export const WblGenderDiscourseSlide: React.FC<WblGenderDiscourseSlideProps> = (
             const mg = maleGroups[index];
             groups.push({
                 id: fg.id,
-                label: currentText.labelMap[fg.id] || fg.id,
+                label: (t('dataInsights.wbl.labelMap') as unknown as Record<string, string>)[fg.id] || fg.id,
                 femaleWords: fg.words,
                 maleWords: mg ? mg.words : [],
                 color: '#FFFFFF'
@@ -81,7 +43,7 @@ export const WblGenderDiscourseSlide: React.FC<WblGenderDiscourseSlideProps> = (
         });
 
         return { groups };
-    }, [lang, currentText.labelMap]);
+    }, [lang, t]);
 
     return (
         <div className="flex flex-col h-screen w-full bg-transparent relative overflow-hidden transition-colors duration-500">
@@ -126,18 +88,14 @@ export const WblGenderDiscourseSlide: React.FC<WblGenderDiscourseSlideProps> = (
                 <div className="w-1/3 h-full flex flex-col justify-center pr-8 lg:pr-16 z-10">
                     <div className="h-[70%] max-h-[600px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
                         <h2 className="text-xl md:text-2xl font-bold text-white mb-6">
-                            {lang === 'CN' ? '数据洞察 (占位符)' : 'Data Insights (Placeholder)'}
+                            {t('dataInsights.wbl.placeholder_title')}
                         </h2>
                         <div className="space-y-6 text-sm tracking-wide leading-relaxed text-slate-300">
                             <p>
-                                {lang === 'CN'
-                                    ? '这里是一个文本框占位符。未来你可以在这里添加关于当前选择的 WBL 分组和性别描述词频的详细分析和见解。'
-                                    : 'This is a placeholder for a text box. In the future, you can add detailed analysis and insights regarding the currently selected WBL group and gender discourse frequency.'}
+                                {t('dataInsights.wbl.placeholder_p1')}
                             </p>
                             <p>
-                                {lang === 'CN'
-                                    ? '现在的布局是将左侧的三分之二分配给动态词云图，右侧的三分之一用于展示这些文本信息。可以通过点击中间的按钮切换不同国家组别的数据。'
-                                    : 'The current layout allocates the left two-thirds to the dynamic word cloud and the right one-third for displaying text information. You can switch between different country groups by clicking the center buttons.'}
+                                {t('dataInsights.wbl.placeholder_p2')}
                             </p>
                         </div>
                     </div>

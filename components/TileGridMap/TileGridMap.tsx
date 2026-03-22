@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { TileGridMapAPI } from './tile-grid-map-api';
 import PixelBackground from '../PixelBackground';
+import { useTranslation } from '../../contexts/LanguageContext';
 import './TileGridMap.css';
 
 interface TileGridMapProps {
@@ -10,9 +11,10 @@ interface TileGridMapProps {
 }
 
 const TileGridMap: React.FC<TileGridMapProps> = ({ onBack, language, toggleLanguage }) => {
+    const { t } = useTranslation();
     const mapRef = useRef<HTMLDivElement>(null);
     const apiRef = useRef<TileGridMapAPI | null>(null);
-    const [status, setStatus] = useState('初始化中...');
+    const [status, setStatus] = useState(t('map.init'));
 
     // Synchronize language changes with the map API
     useEffect(() => {
@@ -77,7 +79,7 @@ const TileGridMap: React.FC<TileGridMapProps> = ({ onBack, language, toggleLangu
                 >
                     <img 
                         src={import.meta.env.BASE_URL + "ICON/HOME.png"} 
-                        alt="返回首页" 
+                        alt={t('discovery.back')} 
                         className="h-10 w-auto object-contain drop-shadow-md" 
                     />
                 </button>
@@ -107,7 +109,7 @@ const TileGridMap: React.FC<TileGridMapProps> = ({ onBack, language, toggleLangu
 
             {/* Map Container */}
             <div className="w-full h-full relative z-10" ref={mapRef}>
-                <div className="loading absolute inset-0 flex items-center justify-center text-gray-400">正在加载地图数据...</div>
+                <div className="loading absolute inset-0 flex items-center justify-center text-gray-400">{t('map.loading')}</div>
             </div>
         </div>
     );

@@ -5,15 +5,14 @@ import DiscoverySlides from './components/DiscoverySlides';
 import DataExplanation from './components/DataExplanation';
 import TileGridMap from './components/TileGridMap/TileGridMap';
 
+import { useTranslation } from './contexts/LanguageContext';
+
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<'landing' | 'main' | 'discovery' | 'data' | 'explore'>('landing');
   const [highlightDataId, setHighlightDataId] = useState<number | null>(null);
-  const [language, setLanguage] = useState<'CN' | 'EN'>('CN');
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const toggleLanguage = () => {
-    setLanguage(prev => prev === 'CN' ? 'EN' : 'CN');
-  };
+  const { language, toggleLanguage, t } = useTranslation();
 
   const handleEnter = () => {
     setCurrentView('main');
@@ -96,7 +95,7 @@ const App: React.FC = () => {
 
         {/* 提示文字 */}
         <div className="absolute bottom-12 text-white/50 font-mono text-[10px] tracking-[0.6em] uppercase animate-pulse z-10 pointer-events-none">
-          SCROLL_TO_REVEAL
+          {t('home.scroll_to_reveal')}
         </div>
       </section>
 
@@ -109,30 +108,29 @@ const App: React.FC = () => {
 
           {/* 我们的初衷 */}
           <div className="w-full space-y-12">
-            <h2 className="text-[#22c55e] font-bold text-center text-xl tracking-[0.5em]">我们的初衷</h2>
+            <h2 className="text-[#22c55e] font-bold text-center text-xl tracking-[0.5em]">{t('home.our_intention')}</h2>
             <div className="text-zinc-300 text-[15px] leading-[2.2] space-y-10 font-light tracking-wide text-justify">
               <p className="text-center italic text-zinc-500 mb-14 text-sm border-b border-zinc-800/50 pb-10">
-                哲学家维特根斯坦认为：语言的边界即是思想的边界。
+                {t('home.wittgenstein_quote')}
               </p>
               <p>
-                AI时代，大模型正悄然进入搜索框、朋友圈等各个场景，它的语言，将从很大程度上影响人类的思想。也许短时间内，我们无法获知影响几何，但可以借模型之眼，了解性别如何被人类过往生产的庞大语料，被精心设计的算法结构观看和评论。
+                {t('home.intro_1')}
               </p>
               <p>
-                而当屏幕前的你凝视着这个作品，实际上是现在的你，在凝视人类的过去，此刻，你看到了什么？又在思考什么？
+                {t('home.intro_2')}
               </p>
               <p>
-                我们把这种互相凝视，抽象成“眼睛”这一视觉映射，希望能帮助人们重新审视并思考性别的现实与想象。
-                大模型会如何描述男性和女性？这些文本数据将展现出不同经济水平、语言、性别之间的何种差异与共性？这背后又隐含了哪些“刻板印象”？
+                {t('home.intro_3')}
               </p>
             </div>
           </div>
 
           {/* 方法 */}
           <div className="w-full space-y-12">
-            <h2 className="text-[#22c55e] font-bold text-center text-xl tracking-[0.5em]">方法</h2>
+            <h2 className="text-[#22c55e] font-bold text-center text-xl tracking-[0.5em]">{t('home.method_title')}</h2>
             <div className="text-zinc-300 text-[15px] leading-[2.2] text-center font-light tracking-wide">
               <p className="mb-8">
-                我们以ChatGPT和DeepSeek两种大语言模型为对象，系统采集其对196个国家“男人是……”和“女人是……”的续写回答，每个国家、性别、语言采集10条生成文本，总计近8千条。
+                {t('home.method_1')}
                 <span
                   id="citation-1"
                   onClick={() => handleGoToData(1)}
@@ -140,7 +138,7 @@ const App: React.FC = () => {
                 >1</span>
               </p>
               <p className="opacity-50 text-zinc-400 text-[13px] italic">
-                也许这种句式已经带有本质主义的偏向，但它就像一场“高压测试”，能最大限度地暴露模型内在的偏见结构与训练语料的倾斜性。
+                {t('home.method_2')}
               </p>
             </div>
           </div>
