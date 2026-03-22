@@ -343,7 +343,7 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, language, tog
 
       {/* 第八屏：GDP Gender Discourse Visualization */}
       <section className="h-screen w-full snap-start snap-always relative z-20">
-        <GdpGenderDiscourseSlide />
+        <GdpGenderDiscourseSlide language={language} toggleLanguage={toggleLanguage} />
       </section>
 
       {/* 补充占位屏：放在两个数据洞察页面之间 */}
@@ -368,7 +368,7 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, language, tog
 
       {/* 第九屏：WBL Gender Discourse Visualization */}
       <section className="h-screen w-full snap-start snap-always relative z-20">
-        <WblGenderDiscourseSlide />
+        <WblGenderDiscourseSlide language={language} toggleLanguage={toggleLanguage} />
       </section>
 
     </div>

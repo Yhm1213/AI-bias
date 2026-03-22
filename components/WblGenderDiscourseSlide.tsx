@@ -7,10 +7,15 @@ import { MousePointer2, Languages } from 'lucide-react';
 
 type Language = 'CN' | 'EN';
 
-export const WblGenderDiscourseSlide: React.FC = () => {
-    // Default to GDP1 (which corresponds to Group 1 in parsing) so we always show data
-    const [activeGroup, setActiveGroup] = useState<string>('GDP1');
-    const [lang, setLang] = useState<Language>('CN');
+interface WblGenderDiscourseSlideProps {
+    language: 'CN' | 'EN';
+    toggleLanguage: () => void;
+}
+
+export const WblGenderDiscourseSlide: React.FC<WblGenderDiscourseSlideProps> = ({ language, toggleLanguage }) => {
+    // Default to WBL1 so we always show data
+    const [activeGroup, setActiveGroup] = useState<string>('WBL1');
+    const lang = language;
 
     // Localization Maps
     const content = {
@@ -80,35 +85,34 @@ export const WblGenderDiscourseSlide: React.FC = () => {
     return (
         <div className="flex flex-col h-screen w-full bg-transparent relative overflow-hidden transition-colors duration-500">
 
-
-            {/* Header */}
-            <header className="absolute top-0 left-0 w-full p-6 z-20 pointer-events-none flex justify-between items-start">
-                <div className="transition-opacity duration-300">
-                    {/* 标题和文字已移除 */}
-                </div>
-
-                <div className="pointer-events-auto flex flex-col items-end gap-3">
-                    {/* Language Switcher */}
-                    <button
-                        onClick={() => setLang(prev => prev === 'CN' ? 'EN' : 'CN')}
-                        className="flex items-center gap-2 bg-slate-900/80 backdrop-blur border border-slate-700 hover:border-slate-500 rounded-full px-4 py-2 shadow-lg transition-all active:scale-95 group"
-                    >
-                        <Languages className="w-4 h-4 text-slate-300 group-hover:text-white transition-colors" />
-                        <div className="flex items-center text-xs font-bold text-slate-400">
-                            <span className={`px-1 transition-colors ${lang === 'CN' ? 'text-white' : ''}`}>CN</span>
-                            <span className="opacity-30">/</span>
-                            <span className={`px-1 transition-colors ${lang === 'EN' ? 'text-white' : ''}`}>EN</span>
-                        </div>
-                    </button>
-
-
-                </div>
-            </header>
-
             {/* Main Content Area: Left 2/3 Visualization, Right 1/3 Text Box */}
             <main className="flex-1 w-full h-full flex relative z-0">
                 {/* Left 2/3: Visualization Area */}
                 <div className="w-2/3 h-full relative">
+                    {/* 语言切换按钮 - 展示图的正上方中间 */}
+                    <div className="absolute top-8 left-1/2 -translate-x-1/2 z-50 pointer-events-auto flex gap-2 items-center">
+                        <button
+                            onClick={() => { if (lang !== 'CN') toggleLanguage(); }}
+                            className="transition-transform hover:scale-105 cursor-pointer flex items-center justify-center p-1"
+                        >
+                            <img 
+                                src={import.meta.env.BASE_URL + (lang === 'CN' ? "ICON/form/ZH_press.png" : "ICON/form/ZH_default.png")}
+                                className="h-10 w-auto object-contain drop-shadow-md"
+                                alt="中文"
+                            />
+                        </button>
+                        <button
+                            onClick={() => { if (lang !== 'EN') toggleLanguage(); }}
+                            className="transition-transform hover:scale-105 cursor-pointer flex items-center justify-center p-1"
+                        >
+                            <img 
+                                src={import.meta.env.BASE_URL + (lang === 'EN' ? "ICON/form/EN_press.png" : "ICON/form/EN_default.png")}
+                                className="h-10 w-auto object-contain drop-shadow-md"
+                                alt="English"
+                            />
+                        </button>
+                    </div>
+
                     <WordGraph
                         data={data}
                         activeGroup={activeGroup}
