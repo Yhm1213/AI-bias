@@ -80,20 +80,27 @@ const TileGridMap: React.FC<TileGridMapProps> = ({ onBack }) => {
                         className="h-10 w-auto object-contain drop-shadow-md" 
                     />
                 </button>
-
-            </div>
-
-            {/* 语言切换按钮 - 固定在右下角 */}
-            <div className="absolute bottom-4 right-4 md:bottom-8 md:right-8 z-50 pointer-events-auto">
-                <div
-                    onClick={() => handleLanguageSwitch(language === 'zh' ? 'en' : 'zh')}
-                    className="h-10 cursor-pointer drop-shadow-md"
-                >
-                    <img
-                        src={language === 'zh' ? (import.meta.env.BASE_URL + "ICON/language_zh.png") : (import.meta.env.BASE_URL + "ICON/language_en.png")}
-                        alt="Language Switch"
-                        className="h-full w-auto object-contain"
-                    />
+                <div className="pointer-events-auto flex gap-2 items-center">
+                    <button
+                        onClick={() => handleLanguageSwitch('zh')}
+                        className="transition-transform hover:scale-105 cursor-pointer flex items-center justify-center p-1"
+                    >
+                        <img 
+                            src={import.meta.env.BASE_URL + (language === 'zh' ? "ICON/form/ZH_press.png" : "ICON/form/ZH_default.png")}
+                            className="h-10 w-auto object-contain drop-shadow-md"
+                            alt="中文"
+                        />
+                    </button>
+                    <button
+                        onClick={() => handleLanguageSwitch('en')}
+                        className="transition-transform hover:scale-105 cursor-pointer flex items-center justify-center p-1"
+                    >
+                        <img 
+                            src={import.meta.env.BASE_URL + (language === 'en' ? "ICON/form/EN_press.png" : "ICON/form/EN_default.png")}
+                            className="h-10 w-auto object-contain drop-shadow-md"
+                            alt="English"
+                        />
+                    </button>
                 </div>
             </div>
 
