@@ -193,7 +193,7 @@ export class TileGridMapAPI {
                 data: [],
                 label: {
                     show: true,
-                    color: '#3CE58A', // Custom User Color matching theme
+                    color: '#2ABB3A', // Custom User Color matching theme
                     fontSize: 10,
                     fontWeight: 'bold',
                     formatter: function (params) {
@@ -202,14 +202,14 @@ export class TileGridMapAPI {
                 },
                 itemStyle: {
                     color: 'rgba(255, 255, 255, 0.05)', // transparent white
-                    borderColor: '#3CE58A', // zinc-800
+                    borderColor: '#2ABB3A', // zinc-800
                     borderWidth: 1,
                     borderRadius: 4 // Rounded corners
                 },
                 emphasis: {
                     itemStyle: {
-                        color: 'rgba(60, 229, 138, 0.8)', // Matching highlight #3CE58A
-                        borderColor: '#3CE58A',
+                        color: 'rgba(42, 187, 58, 0.8)', // Matching highlight #2ABB3A
+                        borderColor: '#2ABB3A',
                         borderWidth: 2
                     },
                     label: {

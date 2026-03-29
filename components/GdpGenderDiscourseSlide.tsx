@@ -28,14 +28,20 @@ export const GdpGenderDiscourseSlide: React.FC<GdpGenderDiscourseSlideProps> = (
         const femaleGroups = parseCSVData(rawFemale, 'Female');
         const maleGroups = parseCSVData(rawMale, 'Male');
 
+        const labelMapCN: Record<string, string> = { 'GDP1': '低', 'GDP2': '中低', 'GDP3': '中等', 'GDP4': '中高', 'GDP5': '高' };
+        const labelMapEN: Record<string, string> = { 'GDP1': 'Low', 'GDP2': 'Lo-Mid', 'GDP3': 'Medium', 'GDP4': 'Hi-Mid', 'GDP5': 'High' };
+
         const groups: GDPGroup[] = [];
 
         // Assuming both CSVs have the same GDP structure (GDP1...GDP5)
         femaleGroups.forEach((fg, index) => {
             const mg = maleGroups[index];
+            
+            const labelStr = chartLang === 'CN' ? labelMapCN[fg.id] : labelMapEN[fg.id];
+            
             groups.push({
                 id: fg.id,
-                label: (t('dataInsights.gdp.labelMap') as unknown as Record<string, string>)[fg.id] || fg.id,
+                label: labelStr || fg.id,
                 femaleWords: fg.words,
                 maleWords: mg ? mg.words : [],
                 color: '#FFFFFF'
@@ -43,7 +49,7 @@ export const GdpGenderDiscourseSlide: React.FC<GdpGenderDiscourseSlideProps> = (
         });
 
         return { groups };
-    }, [lang, t]);
+    }, [lang, t, chartLang]);
 
     return (
         <div className="flex flex-col h-screen w-full bg-transparent relative overflow-hidden transition-colors duration-500">
@@ -52,26 +58,16 @@ export const GdpGenderDiscourseSlide: React.FC<GdpGenderDiscourseSlideProps> = (
             <main className="flex-1 w-full h-full flex relative z-0">
                 {/* Left 2/3: Visualization Area */}
                 <div className="w-2/3 h-full relative">
-                    {/* 语言切换按钮 - 展示图的正上方中间 */}
-                    <div className="absolute top-8 left-1/2 -translate-x-1/2 z-50 pointer-events-auto flex gap-2 items-center">
+                    {/* 语言切换按钮 - 紧贴在顶部节点(例如「低」)的上方一点点 */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[220px] 2xl:-translate-y-[240px] z-50 pointer-events-auto flex items-center justify-center">
                         <button
-                            onClick={() => setChartLang('CN')}
-                            className="transition-transform hover:scale-105 cursor-pointer flex items-center justify-center p-1"
+                            onClick={() => setChartLang(prev => prev === 'CN' ? 'EN' : 'CN')}
+                            className="transition-all hover:scale-105 cursor-pointer flex items-center justify-center p-1 drop-shadow-md"
                         >
                             <img 
-                                src={import.meta.env.BASE_URL + (chartLang === 'CN' ? "ICON/form/ZH_press.png" : "ICON/form/ZH_default.png")}
-                                className="h-10 w-auto object-contain drop-shadow-md"
-                                alt="中文"
-                            />
-                        </button>
-                        <button
-                            onClick={() => setChartLang('EN')}
-                            className="transition-transform hover:scale-105 cursor-pointer flex items-center justify-center p-1"
-                        >
-                            <img 
-                                src={import.meta.env.BASE_URL + (chartLang === 'EN' ? "ICON/form/EN_press.png" : "ICON/form/EN_default.png")}
-                                className="h-10 w-auto object-contain drop-shadow-md"
-                                alt="English"
+                                src={import.meta.env.BASE_URL + (chartLang === 'CN' ? "ICON/form/ZH.png" : "ICON/form/EN.png")}
+                                className="w-[77px] h-[30px] object-contain"
+                                alt={chartLang === 'CN' ? "切换语言" : "Switch Language"}
                             />
                         </button>
                     </div>

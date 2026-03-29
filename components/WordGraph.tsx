@@ -311,6 +311,47 @@ export const WordGraph: React.FC<WordGraphProps> = ({ data, activeGroup, onSelec
                             strokeOpacity={0.05}
                             strokeLinecap="round"
                         />
+
+                        {/* 椭圆眼眶图 - 将整个图表当成眼球包上去 */}
+                        <image 
+                            href={import.meta.env.BASE_URL + "ICON/tuoyuan.png"}
+                            x={- (outerRadius * 2.15 * (1720 / 672)) / 2}
+                            y={- (outerRadius * 2.15) / 2}
+                            width={outerRadius * 2.15 * (1720 / 672)}
+                            height={outerRadius * 2.15}
+                            preserveAspectRatio="xMidYMid meet"
+                            className="pointer-events-none opacity-80"
+                        />
+
+                        {/* Female Label - positioned exactly below the center stack aligned left */}
+                        <text
+                            x={-70}
+                            y={Math.min(140, (dimensions.height / 9) * 2) + 110}
+                            textAnchor="middle"
+                            alignmentBaseline="middle"
+                            fill="#F68CB2"
+                            fontSize={14}
+                            fontWeight="500"
+                            letterSpacing="0.1em"
+                            className="select-none pointer-events-none drop-shadow-lg"
+                        >
+                            {lang === 'CN' ? '女性描述' : 'Female'}
+                        </text>
+
+                        {/* Male Label - positioned exactly below the center stack aligned right */}
+                        <text
+                            x={70}
+                            y={Math.min(140, (dimensions.height / 9) * 2) + 110}
+                            textAnchor="middle"
+                            alignmentBaseline="middle"
+                            fill="#2ABB3A"
+                            fontSize={14}
+                            fontWeight="500"
+                            letterSpacing="0.1em"
+                            className="select-none pointer-events-none drop-shadow-lg"
+                        >
+                            {lang === 'CN' ? '男性描述' : 'Male'}
+                        </text>
                     </g>
                 )}
 
@@ -485,24 +526,7 @@ export const WordGraph: React.FC<WordGraphProps> = ({ data, activeGroup, onSelec
                 </g>
             </svg>
 
-            {/* Left/Right Centered Legends */}
-            {dimensions.width > 0 && (
-                <>
-                    {/* Left Legend (Female) - Text only, shifted left */}
-                    <div className="absolute top-1/2 left-[35%] -translate-y-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10 px-3 py-3 pointer-events-none transition-all">
-                        <span className="text-xl font-bold text-slate-100/40 tracking-[0.3em] font-mono blur-[0.5px]" style={{ writingMode: 'vertical-rl', textOrientation: 'upright' }}>
-                            {lang === 'CN' ? '女性描述' : 'Female'}
-                        </span>
-                    </div>
-
-                    {/* Right Legend (Male) - Text only, shifted right */}
-                    <div className="absolute top-1/2 left-[65%] -translate-y-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10 px-3 py-3 pointer-events-none transition-all">
-                        <span className="text-xl font-bold text-slate-100/40 tracking-[0.3em] font-mono blur-[0.5px]" style={{ writingMode: 'vertical-rl', textOrientation: 'upright' }}>
-                            {lang === 'CN' ? '男性描述' : 'Male'}
-                        </span>
-                    </div>
-                </>
-            )}
+            {/* Bottom Centered Legends (Removed in favor of SVG texts on arcs) */}
 
 
             <style>{`

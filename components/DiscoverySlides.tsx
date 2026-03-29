@@ -246,8 +246,8 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, language, tog
         <PixelBackground />
       </div>
 
-      {/* 返回首页按钮 - 固定在左上角 */}
-      <div className="fixed top-4 left-4 z-50 pointer-events-auto">
+      {/* 返回首页按钮 - 固定在左下角 */}
+      <div className="fixed bottom-4 left-4 md:bottom-8 md:left-8 z-50 pointer-events-auto">
         <button
           onClick={onBack}
           className="hover:scale-105 transition-transform duration-300 flex items-center justify-center p-1"
@@ -264,12 +264,12 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, language, tog
       <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-50 pointer-events-auto">
         <div
           onClick={toggleLanguage}
-          className="h-10 cursor-pointer drop-shadow-md"
+          className="w-[146px] h-[25px] cursor-pointer drop-shadow-md"
         >
           <img
             src={language === 'CN' ? (import.meta.env.BASE_URL + "ICON/language_zh.png") : (import.meta.env.BASE_URL + "ICON/language_en.png")}
             alt="Language Switch"
-            className="h-full w-auto object-contain"
+            className="w-full h-full object-contain"
           />
         </div>
       </div>

@@ -71,11 +71,35 @@ const TileGridMap: React.FC<TileGridMapProps> = ({ onBack, language, toggleLangu
     return (
         <div className="tile-grid-map-page flex flex-col w-full h-screen bg-[#121212] selection:bg-[#ff4d94]/30 relative overflow-hidden">
             <PixelBackground />
-            {/* Header / Nav */}
-            <div className="absolute top-4 left-4 right-4 z-50 flex justify-between items-start pointer-events-none">
+            {/* 语言切换 (Top Right) */}
+            <div className="absolute top-4 right-4 z-50 flex gap-2 items-center pointer-events-auto">
+                <button
+                    onClick={() => { if (language !== 'CN') toggleLanguage(); }}
+                    className="transition-transform hover:scale-105 cursor-pointer flex items-center justify-center p-1"
+                >
+                    <img 
+                        src={import.meta.env.BASE_URL + (language === 'CN' ? "ICON/form/ZH_press.png" : "ICON/form/ZH_default.png")}
+                        className="h-10 w-auto object-contain drop-shadow-md"
+                        alt="中文"
+                    />
+                </button>
+                <button
+                    onClick={() => { if (language !== 'EN') toggleLanguage(); }}
+                    className="transition-transform hover:scale-105 cursor-pointer flex items-center justify-center p-1"
+                >
+                    <img 
+                        src={import.meta.env.BASE_URL + (language === 'EN' ? "ICON/form/EN_press.png" : "ICON/form/EN_default.png")}
+                        className="h-10 w-auto object-contain drop-shadow-md"
+                        alt="English"
+                    />
+                </button>
+            </div>
+
+            {/* 返回首页按钮 (Bottom Left) */}
+            <div className="absolute bottom-4 left-4 md:bottom-8 md:left-8 z-50 pointer-events-auto">
                 <button
                     onClick={onBack}
-                    className="pointer-events-auto hover:scale-105 transition-transform duration-300 flex items-center justify-center p-1"
+                    className="hover:scale-105 transition-transform duration-300 flex items-center justify-center p-1"
                 >
                     <img 
                         src={import.meta.env.BASE_URL + "ICON/HOME.png"} 
@@ -83,28 +107,6 @@ const TileGridMap: React.FC<TileGridMapProps> = ({ onBack, language, toggleLangu
                         className="h-10 w-auto object-contain drop-shadow-md" 
                     />
                 </button>
-                <div className="pointer-events-auto flex gap-2 items-center">
-                    <button
-                        onClick={() => { if (language !== 'CN') toggleLanguage(); }}
-                        className="transition-transform hover:scale-105 cursor-pointer flex items-center justify-center p-1"
-                    >
-                        <img 
-                            src={import.meta.env.BASE_URL + (language === 'CN' ? "ICON/form/ZH_press.png" : "ICON/form/ZH_default.png")}
-                            className="h-10 w-auto object-contain drop-shadow-md"
-                            alt="中文"
-                        />
-                    </button>
-                    <button
-                        onClick={() => { if (language !== 'EN') toggleLanguage(); }}
-                        className="transition-transform hover:scale-105 cursor-pointer flex items-center justify-center p-1"
-                    >
-                        <img 
-                            src={import.meta.env.BASE_URL + (language === 'EN' ? "ICON/form/EN_press.png" : "ICON/form/EN_default.png")}
-                            className="h-10 w-auto object-contain drop-shadow-md"
-                            alt="English"
-                        />
-                    </button>
-                </div>
             </div>
 
             {/* Map Container */}
