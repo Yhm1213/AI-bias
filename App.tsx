@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import LandingPage from './components/LandingPage';
 import PixelBackground from './components/PixelBackground';
 import DiscoverySlides from './components/DiscoverySlides';
@@ -11,6 +11,7 @@ const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<'landing' | 'main' | 'discovery' | 'data' | 'explore'>('landing');
   const [highlightDataId, setHighlightDataId] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const pendingScrollAction = useRef<'highlight' | 'default' | null>(null);
 
   const { language, toggleLanguage, t } = useTranslation();
 
@@ -26,23 +27,37 @@ const App: React.FC = () => {
 
   const handleBackToMain = () => {
     setCurrentView('main');
-    // 通用逻辑：如果是从脚注跳转回来的，根据 highlightDataId 查找对应的 ID 并在渲染后滚动
     if (highlightDataId) {
-      setTimeout(() => {
-        const element = document.getElementById(`citation-${highlightDataId}`);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-        // 保持 highlightDataId 不清空或者稍后清空都可以，这里清空以免影响下次
-        setHighlightDataId(null);
-      }, 100);
+      pendingScrollAction.current = 'highlight';
     } else {
-      // 默认回到主页
-      setTimeout(() => {
-        if (containerRef.current) containerRef.current.scrollTop = window.innerHeight;
-      }, 10);
+      pendingScrollAction.current = 'default';
     }
   };
+
+  useLayoutEffect(() => {
+    if (currentView === 'main') {
+      if (pendingScrollAction.current === 'highlight') {
+        const element = document.getElementById(`citation-${highlightDataId}`);
+        if (element && containerRef.current) {
+          // Temporarily disable scroll snap to prevent jumping animations forced by the browser
+          const orig = containerRef.current.style.scrollSnapType;
+          containerRef.current.style.scrollSnapType = 'none';
+          element.scrollIntoView({ behavior: 'auto', block: 'center' });
+          containerRef.current.style.scrollSnapType = orig;
+        }
+        setHighlightDataId(null);
+        pendingScrollAction.current = null;
+      } else if (pendingScrollAction.current === 'default') {
+        if (containerRef.current) {
+          const orig = containerRef.current.style.scrollSnapType;
+          containerRef.current.style.scrollSnapType = 'none';
+          containerRef.current.scrollTop = window.innerHeight;
+          containerRef.current.style.scrollSnapType = orig;
+        }
+        pendingScrollAction.current = null;
+      }
+    }
+  }, [currentView, highlightDataId]);
 
   const handleGoToData = (id?: number) => {
     if (id) setHighlightDataId(id);
@@ -94,9 +109,13 @@ const App: React.FC = () => {
           <source src={`${import.meta.env.BASE_URL}video.mp4`} type="video/mp4" />
         </video>
 
-        {/* 提示文字 */}
-        <div className="absolute bottom-12 text-white/50 font-mono text-[10px] tracking-[0.6em] uppercase animate-pulse z-10 pointer-events-none">
-          {t('home.scroll_to_reveal')}
+        {/* 提示图标 */}
+        <div className="absolute bottom-4 animate-pulse z-10 pointer-events-none flex flex-col items-center">
+          <img 
+            src={`${import.meta.env.BASE_URL}ICON/cursor_pink.png`} 
+            alt="Scroll down" 
+            className="w-8 h-auto object-contain opacity-80 drop-shadow-lg" 
+          />
         </div>
       </section>
 
@@ -110,7 +129,7 @@ const App: React.FC = () => {
           {/* 我们的初衷 */}
           <div className="w-full space-y-12">
             <h2 className="text-[#22c55e] font-bold text-center text-xl tracking-[0.5em]">{t('home.our_intention')}</h2>
-            <div className="text-zinc-300 text-[15px] leading-[2.2] space-y-10 font-light tracking-wide text-justify">
+            <div className="text-zinc-300 text-[15px] leading-[2.2] space-y-10 font-light tracking-wide text-left">
               <p className="text-center italic text-zinc-500 mb-14 text-sm border-b border-zinc-800/50 pb-10">
                 {t('home.wittgenstein_quote')}
               </p>
@@ -129,7 +148,7 @@ const App: React.FC = () => {
           {/* 方法 */}
           <div className="w-full space-y-12">
             <h2 className="text-[#22c55e] font-bold text-center text-xl tracking-[0.5em]">{t('home.method_title')}</h2>
-            <div className="text-zinc-300 text-[15px] leading-[2.2] text-center font-light tracking-wide">
+            <div className="text-zinc-300 text-[15px] leading-[2.2] text-left font-light tracking-wide">
               <p className="mb-8">
                 {t('home.method_1')}
                 <span

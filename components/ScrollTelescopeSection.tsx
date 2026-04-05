@@ -191,7 +191,7 @@ const ScrollTelescopeSection: React.FC<ScrollTelescopeSectionProps> = ({
                     transition-opacity duration-1000 delay-500
                   `}
                             >
-                                <div className="space-y-6 text-zinc-900 font-medium text-justify">
+                                <div className="space-y-6 text-zinc-900 font-medium text-left">
                                     {/* Title Swapper */}
                                     <div key={`title-${subPage}`} className="text-center mb-4 animate-fadeIn">
                                         <div className="inline-block bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 border border-black/5 shadow-sm">

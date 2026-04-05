@@ -149,7 +149,7 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, language, tog
       <h2 className="text-[#22c55e] text-xl md:text-2xl font-bold tracking-[0.2em] mb-8 leading-relaxed">
         {t('discovery.page3_exit.title_1')}<br className="md:hidden" />{t('discovery.page3_exit.title_2')}
       </h2>
-      <div className="text-zinc-300 text-sm md:text-[15px] leading-[2.4] font-light tracking-widest">
+      <div className="text-zinc-300 text-sm md:text-[15px] leading-[2.4] font-light tracking-widest text-left">
         <p className="mb-4">
           {t('discovery.page3_exit.p1_1')}<br />
           {t('discovery.page3_exit.p1_2')}<br />
@@ -282,7 +282,7 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, language, tog
             {t('discovery.slide1.title')}
           </h2>
           <div className="text-zinc-300 text-sm md:text-[15px] leading-[2.4] font-light tracking-widest max-w-xl">
-            <p className="mb-4 text-justify">
+            <p className="mb-4 text-left">
               {t('discovery.slide1.p1')}
               <span className="inline-flex items-center ml-4 translate-y-2">
                 <img src={import.meta.env.BASE_URL + "ICON/binoculars_wh.png"} alt="binoculars" className="w-12 h-auto object-contain" />
@@ -326,7 +326,7 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, language, tog
             {t('discovery.slide6.title')}
           </h2>
           <div className="text-zinc-300 text-sm md:text-[15px] leading-[2.4] font-light tracking-widest max-w-xl">
-            <p className="mb-4 text-justify">
+            <p className="mb-4 text-left">
               {t('discovery.slide6.p1')}
               <span className="inline-flex items-center ml-4 translate-y-2">
                 <img src={import.meta.env.BASE_URL + "ICON/binoculars_wh.png"} alt="binoculars" className="w-12 h-auto object-contain" />
@@ -353,7 +353,7 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, language, tog
             {t('discovery.slide_interstitial.title')}
           </h2>
           <div className="text-zinc-300 text-sm md:text-[15px] leading-[2.4] font-light tracking-widest max-w-xl">
-            <p className="mb-4 text-justify">
+            <p className="mb-4 text-left">
               {t('discovery.slide_interstitial.p1')}
               <span className="inline-flex items-center ml-4 translate-y-2">
                 <img src={import.meta.env.BASE_URL + "ICON/binoculars_wh.png"} alt="binoculars" className="w-12 h-auto object-contain" />
