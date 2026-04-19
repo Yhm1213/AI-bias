@@ -89,7 +89,8 @@ const DataExplanation: React.FC<DataExplanationProps> = ({ onBack, highlightId }
   ];
 
   return (
-    <div className="min-h-screen w-full bg-[#121212] flex flex-col p-8 md:p-16 animate-fade-in relative">
+    <>
+      <div className="min-h-screen w-full bg-[#121212] flex flex-col p-8 md:p-16 animate-fade-in relative">
       {/* Header - Positioned at top left */}
       <h1 className="fixed top-8 left-8 md:top-16 md:left-16 font-quan text-4xl md:text-6xl text-[#22c55e] z-20 tracking-tighter pointer-events-none">
         数据说明
@@ -169,20 +170,6 @@ const DataExplanation: React.FC<DataExplanationProps> = ({ onBack, highlightId }
         </div>
       </div>
 
-      {/* 返回首页按钮 - 固定在左下角 */}
-      <div className="fixed bottom-4 left-4 md:bottom-8 md:left-8 z-50 pointer-events-auto flex items-center gap-2">
-        <button
-          onClick={onBack}
-          className="hover:scale-105 transition-transform duration-300 flex items-center justify-center p-1"
-        >
-          <img 
-            src={import.meta.env.BASE_URL + "ICON/HOME.png"} 
-            alt="返回首页"
-            className="h-10 w-auto object-contain drop-shadow-md" 
-          />
-        </button>
-      </div>
-
       <style>{`
         .pixel-font {
              font-family: 'Fira Code', monospace; 
@@ -190,6 +177,21 @@ const DataExplanation: React.FC<DataExplanationProps> = ({ onBack, highlightId }
         }
       `}</style>
     </div>
+
+    {/* 返回首页按钮 - 固定在左下角 (必须在 animate-fade-in 容器外，否则会被带着走) */}
+    <div className="fixed bottom-4 left-4 md:bottom-8 md:left-8 z-50 pointer-events-auto flex items-center gap-2">
+      <button
+        onClick={onBack}
+        className="hover:scale-105 transition-transform duration-300 flex items-center justify-center p-1"
+      >
+        <img 
+          src={import.meta.env.BASE_URL + "ICON/HOME.png"} 
+          alt="返回首页"
+          className="h-10 w-auto object-contain drop-shadow-md" 
+        />
+      </button>
+    </div>
+    </>
   );
 };
 
