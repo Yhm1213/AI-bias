@@ -91,7 +91,7 @@ const DataExplanation: React.FC<DataExplanationProps> = ({ onBack, highlightId }
   return (
     <div className="min-h-screen w-full bg-[#121212] flex flex-col p-8 md:p-16 animate-fade-in relative">
       {/* Header - Positioned at top left */}
-      <h1 className="fixed top-8 left-8 md:top-16 md:left-16 font-quan text-4xl md:text-6xl text-[#22c55e] z-20 tracking-tighter pixel-font pointer-events-none">
+      <h1 className="fixed top-8 left-8 md:top-16 md:left-16 font-quan text-4xl md:text-6xl text-[#22c55e] z-20 tracking-tighter pointer-events-none">
         数据说明
       </h1>
 
