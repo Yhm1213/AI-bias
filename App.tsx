@@ -9,6 +9,7 @@ import { useTranslation } from './contexts/LanguageContext';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<'landing' | 'main' | 'discovery' | 'data' | 'explore'>('landing');
+  const [previousView, setPreviousView] = useState<'landing' | 'main' | 'discovery' | 'data' | 'explore' | null>(null);
   const [highlightDataId, setHighlightDataId] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const pendingScrollAction = useRef<'highlight' | 'default' | null>(null);
@@ -27,6 +28,15 @@ const App: React.FC = () => {
 
   const handleBackToMain = () => {
     setCurrentView('main');
+    if (highlightDataId) {
+      pendingScrollAction.current = 'highlight';
+    } else {
+      pendingScrollAction.current = 'default';
+    }
+  };
+
+  const handleBackFromData = () => {
+    setCurrentView(previousView || 'main');
     if (highlightDataId) {
       pendingScrollAction.current = 'highlight';
     } else {
@@ -61,6 +71,9 @@ const App: React.FC = () => {
 
   const handleGoToData = (id?: number) => {
     if (id) setHighlightDataId(id);
+    if (currentView !== 'data') {
+      setPreviousView(currentView);
+    }
     setCurrentView('data');
     window.scrollTo(0, 0);
   };
@@ -77,12 +90,12 @@ const App: React.FC = () => {
   }
 
   if (currentView === 'discovery') {
-    return <DiscoverySlides onBack={handleBackToMain} language={language} toggleLanguage={toggleLanguage} />;
+    return <DiscoverySlides onBack={handleBackToMain} onGoToData={handleGoToData} language={language} toggleLanguage={toggleLanguage} highlightId={highlightDataId} pendingScrollAction={pendingScrollAction} onClearHighlight={() => { setHighlightDataId(null); pendingScrollAction.current = null; }} />;
   }
 
 
   if (currentView === 'data') {
-    return <DataExplanation onBack={handleBackToMain} highlightId={highlightDataId} />;
+    return <DataExplanation onBack={handleBackFromData} highlightId={highlightDataId} />;
   }
 
   if (currentView === 'explore') {
@@ -120,27 +133,33 @@ const App: React.FC = () => {
       </section>
 
       {/* 第二部分：内容展示 */}
-      <section className="min-h-screen w-full snap-start relative flex flex-col items-center justify-center py-32 px-6">
+      <section className="min-h-screen w-full snap-start relative flex flex-col items-center justify-center py-32 px-6 bg-[#111111]">
+        <div className="absolute inset-0 bg-[#111111]" />
         <PixelBackground />
 
-        {/* 内容容器：严格控制在屏幕约 1/2 宽度 */}
-        <div className="w-full max-w-2xl z-10 flex flex-col items-center space-y-28">
+        {/* 内容容器：严格控制在屏幕约 1/2 宽度，增加pb-32以还原原来的视觉高度平衡 */}
+        <div className="w-full max-w-2xl z-10 flex flex-col items-center space-y-28 pb-32">
 
           {/* 我们的初衷 */}
           <div className="w-full space-y-12">
             <h2 className="text-[#22c55e] font-bold text-center text-xl tracking-[0.5em]">{t('home.our_intention')}</h2>
-            <div className="text-zinc-300 text-[15px] leading-[2.2] space-y-10 font-light tracking-wide text-left">
-              <p className="text-center italic text-zinc-500 mb-14 text-sm border-b border-zinc-800/50 pb-10">
-                {t('home.wittgenstein_quote')}
-              </p>
+            <div className="text-zinc-300 text-[15px] leading-[2.05] space-y-6 font-light tracking-wide text-left">
               <p>
                 {t('home.intro_1')}
               </p>
               <p>
                 {t('home.intro_2')}
+                <span
+                  id="citation-1"
+                  onClick={() => handleGoToData(1)}
+                  className="inline-flex items-center justify-center bg-[#22c55e] text-[#121212] rounded-full w-4 h-4 text-[10px] font-bold ml-1 transform -translate-y-1 cursor-pointer hover:scale-125 transition-transform"
+                >1</span>
               </p>
               <p>
                 {t('home.intro_3')}
+              </p>
+              <p>
+                {t('home.method_2')}
               </p>
             </div>
           </div>
@@ -151,14 +170,6 @@ const App: React.FC = () => {
             <div className="text-zinc-300 text-[15px] leading-[2.2] text-left font-light tracking-wide">
               <p className="mb-8">
                 {t('home.method_1')}
-                <span
-                  id="citation-1"
-                  onClick={() => handleGoToData(1)}
-                  className="inline-flex items-center justify-center bg-[#22c55e] text-[#121212] rounded-full w-4 h-4 text-[10px] font-bold ml-1 transform -translate-y-1 cursor-pointer hover:scale-125 transition-transform"
-                >1</span>
-              </p>
-              <p className="opacity-50 text-zinc-400 text-[13px] italic">
-                {t('home.method_2')}
               </p>
             </div>
           </div>
@@ -204,8 +215,8 @@ const App: React.FC = () => {
           </div>
         </div>
 
-        {/* 底部导航栏 - 改为跟随内容的静态布局 */}
-        <div className="w-full px-6 md:px-12 flex justify-between items-end z-10 mt-32">
+        {/* 底部导航栏 - 绝对定位贴底 */}
+        <div className="absolute bottom-8 left-0 right-0 w-full px-6 md:px-12 flex justify-between items-end z-10">
           <div
             onClick={() => handleGoToData()}
             className="w-[83px] h-[25px] relative cursor-pointer group"

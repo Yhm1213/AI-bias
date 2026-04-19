@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from '../contexts/LanguageContext';
 
@@ -22,19 +21,20 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
         clearInterval(timer);
         setIsFinished(true);
       }
-    }, 120); // 打字速度
+    }, 120);
 
     return () => clearInterval(timer);
   }, []);
 
-  // 在初始页就开始预加载视频，用户进入主页时已缓冲好
   useEffect(() => {
     const link = document.createElement('link');
     link.rel = 'preload';
     link.as = 'video';
     link.href = `${import.meta.env.BASE_URL}video.mp4`;
     document.head.appendChild(link);
-    return () => { document.head.removeChild(link); };
+    return () => {
+      document.head.removeChild(link);
+    };
   }, []);
 
   return (
@@ -52,7 +52,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
 
         {isFinished && (
           <div className="animate-fade-in opacity-0 flex justify-center mt-4">
-            <button 
+            <button
               onClick={onEnter}
               className="group relative px-12 py-3 bg-transparent border border-green-500 text-green-500 font-mono text-lg uppercase tracking-widest hover:bg-green-500/10 transition-all duration-300 overflow-hidden"
             >

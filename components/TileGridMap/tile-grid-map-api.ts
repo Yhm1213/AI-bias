@@ -151,7 +151,7 @@ export class TileGridMapAPI {
                     }
 
                     return '<div style="font-size:14px;padding:8px">' +
-                        '<div style="font-weight:bold;margin-bottom:4px;color:#ff4d94">' + displayName + '</div>' +
+                        '<div style="font-weight:bold;margin-bottom:4px;color:#F68CB2">' + displayName + '</div>' +
                         '<div style="color:#a1a1aa">' + regionLabel + '</div>' +
                         '</div>';
                 }
@@ -272,7 +272,7 @@ export class TileGridMapAPI {
     // 私有方法：获取单个描述
     _getCompletion(sourceData, country, gender, lang) {
         if (!sourceData || sourceData.length === 0) {
-            return '数据加载中...';
+            return lang === 'en' ? 'Loading data...' : '数据加载中...';
         }
 
         const countryKey = 'Country';
@@ -306,11 +306,11 @@ export class TileGridMapAPI {
         });
 
         if (filtered.length === 0) {
-            return '没有找到匹配的描述。';
+            return lang === 'en' ? 'No matching description found.' : '没有找到匹配的描述。';
         }
 
         const randomIndex = Math.floor(Math.random() * filtered.length);
-        return filtered[randomIndex].Completion || '内容为空';
+        return filtered[randomIndex].Completion || (lang === 'en' ? 'Content is empty.' : '内容为空。');
     }
 
     // 私有方法：显示气泡

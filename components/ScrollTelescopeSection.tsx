@@ -25,10 +25,25 @@ const ScrollTelescopeSection: React.FC<ScrollTelescopeSectionProps> = ({
     const [isVisible, setIsVisible] = useState(false);
     const [subPage, setSubPage] = useState(0);
     const [showExitHint, setShowExitHint] = useState(false);
+    const [isTransitioning, setIsTransitioning] = useState(false);
 
     const sectionRef = useRef<HTMLDivElement>(null);
     const scrollOffset = useRef(0);
-    const wasVisible = useRef(false);
+    const wasBelow = useRef(false);
+    const previousSubPage = useRef(0);
+
+    useEffect(() => {
+        if (previousSubPage.current === subPage) return;
+
+        previousSubPage.current = subPage;
+        setIsTransitioning(true);
+
+        const timer = window.setTimeout(() => {
+            setIsTransitioning(false);
+        }, 420);
+
+        return () => window.clearTimeout(timer);
+    }, [subPage]);
 
     useEffect(() => {
         // We need to attach the listener to the SCROLLABLE CONTAINER, not the window or the section itself.
@@ -65,7 +80,7 @@ const ScrollTelescopeSection: React.FC<ScrollTelescopeSectionProps> = ({
                 } else {
                     // Sticky / Exit Phase
                     // Trigger Exit earlier (2.5 screen heights remaining) to give Page 3 more screentime
-                    if (rect.bottom < vh * 2.5) {
+                    if (rect.bottom <= vh * 2.51) {
                         currentVisible = false;
                         // Hint/Exit Content Logic
                         if (rect.bottom > 0) setShowExitHint(true);
@@ -78,21 +93,24 @@ const ScrollTelescopeSection: React.FC<ScrollTelescopeSectionProps> = ({
 
                 setIsVisible(currentVisible);
 
+                const isBelow = rect.bottom <= 0;
+
                 // 2. Check for Re-entry from Bottom specifically
-                if (!wasVisible.current && currentVisible && rect.top <= 0) {
-                    // Came from bottom -> Teleport to Top
+                if (wasBelow.current && !isBelow) {
+                    // Came from bottom entirely -> Teleport to Top
                     container.scrollTo({
                         top: sectionRef.current.offsetTop,
                         behavior: 'auto'
                     });
                     scrollOffset.current = 0;
                     setSubPage(0);
-                    wasVisible.current = true;
+                    wasBelow.current = false;
                     rafId = null;
                     return;
                 }
 
-                wasVisible.current = currentVisible;
+                // Update wasBelow tracking
+                wasBelow.current = isBelow;
 
                 // 3. Calculate Page Index
                 if (currentVisible) {
@@ -142,12 +160,21 @@ const ScrollTelescopeSection: React.FC<ScrollTelescopeSectionProps> = ({
           `}
                 />
 
+                <div
+                    className={`
+              absolute inset-y-[12%] left-1/2 z-[6] w-[2px] -translate-x-1/2 bg-gradient-to-b from-transparent via-[#22c55e] to-transparent
+              transition-all duration-300 ease-out
+              ${isTransitioning ? 'opacity-40 scale-y-100' : 'opacity-0 scale-y-75'}
+            `}
+                />
+
                 {/* Core Telescope Container */}
                 <div
                     className={`
               relative w-fit h-fit flex justify-center items-center
               will-change-transform
               transition-all duration-[800ms] cubic-bezier(0.23, 1, 0.32, 1) z-10
+              ${isTransitioning ? 'brightness-[1.03]' : 'brightness-100'}
               ${isVisible
                             ? 'opacity-100 scale-100'
                             : (showExitHint && mode === 'inverse' ? 'opacity-0 scale-[5]' : 'opacity-0 scale-[0.01]')}
@@ -183,15 +210,15 @@ const ScrollTelescopeSection: React.FC<ScrollTelescopeSectionProps> = ({
                     {/* Overlay Content */}
                     <div className="absolute inset-0 flex">
                         {/* Left Content (50%) */}
-                        <div className="w-1/2 h-full flex items-center justify-center p-[8%]">
+                        <div className="w-1/2 h-full flex items-center justify-center p-[6%] pt-[12%] pl-[10%]">
                             <div
                                 className={`
-                    w-full max-h-full overflow-hidden pr-1
+                    w-full h-full max-h-full overflow-hidden pr-1 flex flex-col
                     ${isVisible ? 'opacity-100' : 'opacity-0'}
                     transition-opacity duration-1000 delay-500
                   `}
                             >
-                                <div className="space-y-6 text-zinc-900 font-medium text-left">
+                                <div className="space-y-6 text-zinc-900 font-medium text-left flex flex-col min-h-0 h-full">
                                     {/* Title Swapper */}
                                     <div key={`title-${subPage}`} className="text-center mb-4 animate-fadeIn">
                                         <div className="inline-block bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 border border-black/5 shadow-sm">
@@ -200,15 +227,15 @@ const ScrollTelescopeSection: React.FC<ScrollTelescopeSectionProps> = ({
                                     </div>
 
                                     {/* Body Swapper */}
-                                    <div key={`content-${subPage}`} className="space-y-4 text-xs md:text-[13px] leading-[1.7] text-zinc-800/90 animate-fadeInSlideUp">
+                                    <div
+                                        key={`content-${subPage}`}
+                                        className="min-h-0 max-h-[34vh] overflow-y-auto pr-3 space-y-4 text-xs md:text-[13px] leading-[1.7] text-zinc-800/90 animate-fadeInSlideUp [scrollbar-width:thin] [scrollbar-color:rgba(0,0,0,0.16)_transparent] [&::-webkit-scrollbar]:w-[3px] [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-black/15"
+                                    >
                                         {slides[subPage]?.content}
                                     </div>
 
-                                    <div className="pt-2 border-t border-black/10 mt-2">
-                                        <p className="text-[10px] opacity-60 leading-tight">
-                                            * Page {subPage + 1} / {slides.length} | {id === 'page-3' ? 'DeepSeek Gender Bias Analysis' : 'ChatGPT English Dataset Bias Analysis'}
-                                        </p>
-                                    </div>
+                                    <div className="pt-2 border-t border-black/10 mt-3 shrink-0" />
+
                                 </div>
                             </div>
                         </div>
@@ -249,13 +276,17 @@ const ScrollTelescopeSection: React.FC<ScrollTelescopeSectionProps> = ({
             {/* Internal Snap Points to enforce "one page per scroll" */}
             {/* We create snap points at intervals to force the parent snap container to catch us */}
             {
-                Array.from({ length: slides.length + 2 }).map((_, i) => (
-                    <div
-                        key={`snap-${i}`}
-                        className="absolute w-full h-1 pointer-events-none snap-start"
-                        style={{ top: `${i * 100}vh` }}
-                    />
-                ))
+                Array.from({ length: slides.length + 2 }).map((_, i) => {
+                    const isLast = i === slides.length + 1;
+                    return (
+                        <div
+                            key={`snap-${i}`}
+                            id={isLast ? `${id}-exit-snap` : undefined}
+                            className="absolute w-full h-1 pointer-events-none snap-start"
+                            style={{ top: `${i * 100}vh` }}
+                        />
+                    );
+                })
             }
         </section >
     );

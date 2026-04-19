@@ -69,7 +69,7 @@ const TileGridMap: React.FC<TileGridMapProps> = ({ onBack, language, toggleLangu
     }, []);
 
     return (
-        <div className="tile-grid-map-page flex flex-col w-full h-screen bg-[#121212] selection:bg-[#ff4d94]/30 relative overflow-hidden">
+        <div className="tile-grid-map-page flex flex-col w-full h-screen bg-[#121212] selection:bg-[#F68CB2]/30 relative overflow-hidden">
             <PixelBackground />
             {/* 语言切换 (Top Right) */}
             <div className="absolute top-4 right-4 z-50 flex gap-2 items-center pointer-events-auto">
