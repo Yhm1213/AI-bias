@@ -169,13 +169,19 @@ const DataExplanation: React.FC<DataExplanationProps> = ({ onBack, highlightId }
         </div>
       </div>
 
-      {/* Mobile Back Button */}
-      <button
-        onClick={onBack}
-        className="fixed bottom-8 right-8 md:hidden px-4 py-2 border border-[#22c55e] text-[#22c55e] font-mono text-xs uppercase bg-[#121212]"
-      >
-        BACK
-      </button>
+      {/* 返回首页按钮 - 固定在左下角 */}
+      <div className="fixed bottom-4 left-4 md:bottom-8 md:left-8 z-50 pointer-events-auto flex items-center gap-2">
+        <button
+          onClick={onBack}
+          className="hover:scale-105 transition-transform duration-300 flex items-center justify-center p-1"
+        >
+          <img 
+            src={import.meta.env.BASE_URL + "ICON/HOME.png"} 
+            alt="返回首页"
+            className="h-10 w-auto object-contain drop-shadow-md" 
+          />
+        </button>
+      </div>
 
       <style>{`
         .pixel-font {
