@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { locales, Language } from '../locales';
 
 interface LanguageContextProps {
@@ -11,6 +11,10 @@ const LanguageContext = createContext<LanguageContextProps | undefined>(undefine
 
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [language, setLanguage] = useState<Language>('CN');
+
+  useEffect(() => {
+    document.documentElement.lang = language === 'CN' ? 'zh-CN' : 'en';
+  }, [language]);
 
   const toggleLanguage = () => {
     setLanguage((prev) => (prev === 'CN' ? 'EN' : 'CN'));

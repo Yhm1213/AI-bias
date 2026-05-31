@@ -1,178 +1,229 @@
-import re
+import os
 
-with open('components/DiscoverySlides.tsx', 'r') as f:
-    content = f.read()
+file_path = '/Users/yuhaomiao/Desktop/AI_bias/AI-bias/components/DiscoverySlides.tsx'
 
-# 1. Duplicate GENDER_BIAS_DATA
-match_gbd = re.search(r'const GENDER_BIAS_DATA = \[(.*?)\];\n', content, re.DOTALL)
-if match_gbd:
-    gbd_content = match_gbd.group(1)
-    new_gbd = f"const GENDER_BIAS_DATA_CN = [{gbd_content}];\n\n  const GENDER_BIAS_DATA_EN = [{gbd_content}];\n"
-    content = content.replace(match_gbd.group(0), new_gbd)
+with open(file_path, 'r', encoding='utf-8') as f:
+    lines = f.readlines()
 
-# 2. Duplicate EN_GENDER_BIAS_DATA
-match_egbd = re.search(r'const EN_GENDER_BIAS_DATA = \[(.*?)\];\n', content, re.DOTALL)
-if match_egbd:
-    egbd_content = match_egbd.group(1)
-    new_egbd = f"const EN_GENDER_BIAS_DATA_CN = [{egbd_content}];\n\n  const EN_GENDER_BIAS_DATA_EN = [{egbd_content}];\n"
-    content = content.replace(match_egbd.group(0), new_egbd)
+def extract_bounds(lines, start_str, end_str):
+    start = -1
+    end = -1
+    for i, line in enumerate(lines):
+        if start_str in line and start == -1:
+            start = i
+        elif end_str in line and start != -1 and end == -1:
+            end = i
+            break
+    return start, end
 
-# 3. Replace usages of GENDER_BIAS_DATA and EN_GENDER_BIAS_DATA
-content = content.replace('slides={GENDER_BIAS_DATA}', "slides={language === 'CN' ? GENDER_BIAS_DATA_CN : GENDER_BIAS_DATA_EN}")
-content = content.replace('slides={EN_GENDER_BIAS_DATA}', "slides={language === 'CN' ? EN_GENDER_BIAS_DATA_CN : EN_GENDER_BIAS_DATA_EN}")
+# Replace GENDER_BIAS_DATA_EN
+start1, end1 = extract_bounds(lines, "const GENDER_BIAS_DATA_EN = [", "];")
 
-# 4. Replace PAGE_3_EXIT_CONTENT texts
-page3_target = """          <p className="mb-4">
-            再来看看英文语境下AI语言中的性别差异。<br />
-            我们将chatgpt对于男性和女性的描述分词，经过清洗和筛选后获得756个英文词汇<span
-              id="citation-3"
-              onClick={() => onGoToData(3)}
-              className="inline-flex items-center justify-center bg-[#22c55e] text-[#121212] rounded-full w-4 h-4 text-[10px] font-bold ml-1 transform -translate-y-1 cursor-pointer hover:scale-125 transition-transform"
-            >3</span>。我们观察这些词，最终发现了如下差异：
-          </p>"""
-page3_replace = """          <p className="mb-4">
-            {t('discovery.page3_exit.p1_1')}<br />
-            {t('discovery.page3_exit.p1_2_before')}<span
-              id="citation-3"
-              onClick={() => onGoToData(3)}
-              className="inline-flex items-center justify-center bg-[#22c55e] text-[#121212] rounded-full w-4 h-4 text-[10px] font-bold ml-1 transform -translate-y-1 cursor-pointer hover:scale-125 transition-transform"
-            >3</span>{t('discovery.page3_exit.p1_2_after')}{t('discovery.page3_exit.p1_3')}
-          </p>"""
-content = content.replace(page3_target, page3_replace)
+new_gdp_en = """  const GENDER_BIAS_DATA_EN = [
+    {
+      titleLeft: <>
+        <span className="font-bold text-pink-700 mx-1">"Gentle" & "Decorative"</span>
+        <span className="text-xs text-zinc-600">Her vs.</span>
+        <span className="font-bold text-green-800 mx-1">"Tall" & "Powerful"</span>
+        <span className="text-xs text-zinc-600">Him</span>
+      </>,
+      content: (
+        <>
+          <p>
+            From the representation of <strong>appearance, temperament, and cultural symbols</strong>, the gender portrait presented by DeepSeek is extremely conservative.
+          </p>
+          <p>
+            In terms of temperament word frequency, women are firmly locked into soft traits such as
+            <span className="font-bold text-pink-800">"gentle" (33 times) and "elegant" (47 times)</span>
+            , while men are defined by
+            <span className="font-bold text-green-900">"resilient" (185 times), "brave" (87 times), and "strong" (137 times)</span>
+            . This contrast is almost extreme in physical depictions: descriptions of women often point to visual details and clothing, such as
+            <span className="font-bold text-pink-800">"headscarf" (87 times), "robe" (81 times), and "fashion" (63 times)</span>
+            ; whereas men are simplified into pure physiological power, such as
+            <span className="font-bold text-green-900">"tall" (26 times)</span>
+            and
+            <span className="font-bold text-green-900">"strong" (67 times)</span>
+            .
+          </p>
+          <p>
+            This narrative path is distinct: women are <strong>"objectified"</strong> as a visual presence, while men are <strong>"functionalized"</strong> as a symbol of power. Much like the "Boys don't cry" trope in Anglo-American culture, this stereotype remains solid in Chinese models, showing a slow reaction to recent trends of "androgyny" or "role reversal." The model seems to linger in a traditional world of "hair gel and muscles" vs. "silk and tenderness."
+          </p>
+        </>
+      )
+    },
+    {
+      titleLeft: <>
+        <span className="font-bold text-pink-700 mx-1">"Caring"</span>
+        <span className="text-xs text-zinc-600">Family Woman vs.</span>
+        <span className="font-bold text-green-800 mx-1">"Loving"</span>
+        <span className="text-xs text-zinc-600">the World Man</span>
+      </>,
+      content: (
+        <>
+          <p>
+            If the first layer is the shaping of image, the data regarding <strong>behavior and responsibility</strong> reveals deeper inequality.
+          </p>
+          <p>
+            In our statistics, "family" is a high-frequency word for both sides, but the context is entirely different. For women, the keywords are <strong className="text-pink-800">"care" (56 times), "core" (44 times), and "harmony" (62 times)</strong>. They are the lubricants of the family, responsible for specific, repetitive, and maintenance-oriented tasks.
+          </p>
+          <p>
+            In contrast, men’s behavioral verbs are full of <strong className="text-green-900">external exploration</strong>: the objects they <span className="font-bold text-green-900">"love" (147 times) or "like" (297 times)</span> are <span className="font-bold text-green-900">"football" (100 times), "sports" (48 times), or "outdoor activities" (118 times)</span>.
+          </p>
+          <p>
+            When discussing "responsibility," a woman’s <span className="font-bold text-pink-800">"sense of responsibility" (85 times)</span> is often tied to household chores—specific, <strong>unpaid labor</strong>. However, the frequency of a man’s <span className="font-bold text-green-900">"sense of responsibility" (218 times)</span> is 2.5 times higher and usually points to a grand, abstract quality. This implies that in the model's logic, male responsibility is a "social halo," while female responsibility is a "survival routine."
+          </p>
+        </>
+      )
+    },
+    {
+      titleLeft: <>
+        <span className="font-bold text-pink-700 mx-1">"Complying"</span>
+        <span className="text-xs text-zinc-600">Her vs.</span>
+        <span className="font-bold text-green-800 mx-1">"Pioneering"</span>
+        <span className="text-xs text-zinc-600">Him</span>
+      </>,
+      content: (
+        <>
+          <p>
+            When shifting focus from daily life to <strong>social participation</strong>, the data presents an opposition between "discipline" and "expansion."
+          </p>
+          <p>
+            In texts about women, high-frequency words include
+            <span className="font-bold text-pink-800">"comply,"</span>
+            <span className="font-bold text-pink-800">"playing a role" (307 times),</span>
+            and
+            <span className="font-bold text-pink-800">"traditional" (785 times)</span>
+            , emphasizing their <strong>adaptation and obedience</strong> within established social frameworks. Men's high-frequency words involve
+            <span className="font-bold text-green-900">"profession" (25 times),</span>
+            <span className="font-bold text-green-900">"business" (30 times),</span>
+            and
+            <span className="font-bold text-green-900">"social" (109 times)</span>
+            status.
+          </p>
+          <p>
+            Even in the shared context of pursuing
+            <span className="font-bold text-pink-800">"equality" (48 vs. 43 times)</span>
+            , women are more often striving for the right to
+            <span className="font-bold text-pink-800">"education" (306 times)</span>
+            and
+            <span className="font-bold text-pink-800">"independence" (269 times)</span>
+            , while men are already dominant in
+            <span className="font-bold text-green-900">"economy" (41 times)</span>
+            and
+            <span className="font-bold text-green-900">"cultural inheritance" (225 times)</span>
+            . This confirms sociologist Sylvia Walby’s view: modern narratives still tend to place women as "followers of norms" while reserving control of public resources and the role of "innovator" for men.
+          </p>
+        </>
+      )
+    }
+  ];
+"""
 
-# 5. Replace Slide 6 text
-slide6_target = """            <p className="mb-6 text-left">
-              如果说模型中的性别词汇揭示了文化与语言的差异，那么当这些语言落在不同经济体中，又会如何与全球的经济结构产生共鸣与冲突？
-            </p>
-            <p className="mb-4 text-left">
-              为更深入地展开讨论，我们引入了人均GDP（GDP per capita）以交叉分析，这是被广泛用于衡量一国居民平均生活水平提高或恶化的指标
-              <span
-                id="citation-5"
-                onClick={() => onGoToData(5)}
-                className="inline-flex items-center justify-center bg-[#22c55e] text-[#121212] rounded-full w-4 h-4 text-[10px] font-bold ml-1 transform -translate-y-1 cursor-pointer hover:scale-125 transition-transform"
-              >5</span>
-              。我们将2023年各国的人均GDP从低到高排序，把前述196个国家和地区等分为5组（低、低中、中、中高、高）
-              <span
-                id="citation-6"
-                onClick={() => onGoToData(6)}
-                className="inline-flex items-center justify-center bg-[#22c55e] text-[#121212] rounded-full w-4 h-4 text-[10px] font-bold ml-1 transform -translate-y-1 cursor-pointer hover:scale-125 transition-transform"
-              >6</span>
-              ，依照此分组和大模型的描述文本展开交叉分析，探究在不同经济水平下，大语言模型对男性和女性劳动角色与生活方式等多方面的差异化描述。
-              <span className="inline-flex items-center ml-4 translate-y-2">
-                <img src={import.meta.env.BASE_URL + "ICON/binoculars_wh.png"} alt="binoculars" className="w-12 h-auto object-contain" />
-              </span>
-            </p>"""
-slide6_replace = """            <p className="mb-6 text-left">
-              {t('discovery.slide6.p1')}
-            </p>
-            <p className="mb-4 text-left">
-              {t('discovery.slide6.p2_before')}
-              <span
-                id="citation-5"
-                onClick={() => onGoToData(5)}
-                className="inline-flex items-center justify-center bg-[#22c55e] text-[#121212] rounded-full w-4 h-4 text-[10px] font-bold ml-1 transform -translate-y-1 cursor-pointer hover:scale-125 transition-transform"
-              >5</span>
-              {t('discovery.slide6.p2_middle')}
-              <span
-                id="citation-6"
-                onClick={() => onGoToData(6)}
-                className="inline-flex items-center justify-center bg-[#22c55e] text-[#121212] rounded-full w-4 h-4 text-[10px] font-bold ml-1 transform -translate-y-1 cursor-pointer hover:scale-125 transition-transform"
-              >6</span>
-              {t('discovery.slide6.p2_after')}
-              <span className="inline-flex items-center ml-4 translate-y-2">
-                <img src={import.meta.env.BASE_URL + "ICON/binoculars_wh.png"} alt="binoculars" className="w-12 h-auto object-contain" />
-              </span>
-            </p>"""
-content = content.replace(slide6_target, slide6_replace)
+lines = lines[:start1] + [new_gdp_en] + lines[end1+1:]
 
-# 6. Replace Interstitial text
-inter_target = """            <p className="mb-6 text-left">
-              除了利用GDP进行交叉分析之外，我们也从另一个指标——性别平等指数出发，探究大模型在描述不同性别平等指数的地区的男女时，是否存在一定的描述差异。
-            </p>
-            <p className="mb-6 text-left">
-              我们从世界银行官网获取Women, Business and the Law 2.0 Data
-              <span
-                id="citation-7"
-                onClick={() => onGoToData(7)}
-                className="inline-flex items-center justify-center bg-[#22c55e] text-[#121212] rounded-full w-4 h-4 text-[10px] font-bold ml-1 transform -translate-y-1 cursor-pointer hover:scale-125 transition-transform"
-              >7</span>
-              （以下简称WBL）作为国家法律性别平等（Legal gender parities）的度量，其值越大说明该国家不同性别更加平等。我们通过WBL数据的从低到高，将所有国家等分为5个组别
-              <span
-                id="citation-8"
-                onClick={() => onGoToData(8)}
-                className="inline-flex items-center justify-center bg-[#22c55e] text-[#121212] rounded-full w-4 h-4 text-[10px] font-bold ml-1 transform -translate-y-1 cursor-pointer hover:scale-125 transition-transform"
-              >8</span>
-              。
-            </p>
-            <p className="mb-4 text-left">
-              在分析中我们发现，随着WBL指数的提高，语言模型对女性的描述呈现趋势性变化：从传统束缚转向更自主的多元表达。
-              <span className="inline-flex items-center ml-4 translate-y-2">
-                <img src={import.meta.env.BASE_URL + "ICON/binoculars_wh.png"} alt="binoculars" className="w-12 h-auto object-contain" />
-              </span>
-            </p>"""
-inter_replace = """            <p className="mb-6 text-left">
-              {t('discovery.slide_interstitial.p1')}
-            </p>
-            <p className="mb-6 text-left">
-              {t('discovery.slide_interstitial.p2_before')}
-              <span
-                id="citation-7"
-                onClick={() => onGoToData(7)}
-                className="inline-flex items-center justify-center bg-[#22c55e] text-[#121212] rounded-full w-4 h-4 text-[10px] font-bold ml-1 transform -translate-y-1 cursor-pointer hover:scale-125 transition-transform"
-              >7</span>
-              {t('discovery.slide_interstitial.p2_middle')}
-              <span
-                id="citation-8"
-                onClick={() => onGoToData(8)}
-                className="inline-flex items-center justify-center bg-[#22c55e] text-[#121212] rounded-full w-4 h-4 text-[10px] font-bold ml-1 transform -translate-y-1 cursor-pointer hover:scale-125 transition-transform"
-              >8</span>
-              {t('discovery.slide_interstitial.p2_after')}
-            </p>
-            <p className="mb-4 text-left">
-              {t('discovery.slide_interstitial.p3')}
-              <span className="inline-flex items-center ml-4 translate-y-2">
-                <img src={import.meta.env.BASE_URL + "ICON/binoculars_wh.png"} alt="binoculars" className="w-12 h-auto object-contain" />
-              </span>
-            </p>"""
-content = content.replace(inter_target, inter_replace)
+# Recalculate bounds for EN_GENDER_BIAS_DATA_EN
+start2, end2 = extract_bounds(lines, "const EN_GENDER_BIAS_DATA_EN = [", "];")
 
-# 7. Replace Conclusion text
-conc_target = """        <div className="w-full max-w-2xl space-y-6 text-zinc-300 text-left text-[15px] leading-[2.05] font-light tracking-wide">
-          <div className="inline-block max-w-full bg-[#6d2741]/88 px-3 py-2">
-            AI时代，思考问题时，会不自觉地想知道：AI会如何回答？我们已经在被AI“想象”的答案中塑造自己的答案了。
-          </div>
+new_en_en = """  const EN_GENDER_BIAS_DATA_EN = [
+    {
+      titleLeft: <>
+        <span className="font-bold text-pink-700 mx-1">Internalization</span>
+        <span className="text-xs text-zinc-600">of "Grace" vs.</span>
+        <span className="font-bold text-green-800 mx-1">Expansion</span>
+        <span className="text-xs text-zinc-600">of "Influence"</span>
+      </>,
+      content: (
+        <>
+          <p>
+            In physical descriptions, the English models shift from "external decoration" to "internal traits," but gender boundaries remain clear.
+          </p>
+          <p>
+            Women’s images appear more three-dimensional in ChatGPT’s writing, with keywords moving from simple appearance to
+            <span className="font-bold text-pink-800">"Grace" (478 times)</span>
+            and
+            <span className="font-bold text-pink-800">"Resilience" (1,309 times)</span>
+            . Compared to the Chinese model's focus on "body shape," the English model emphasizes a woman's
+            <span className="font-bold text-pink-800">"Poise"</span>
+            and
+            <span className="font-bold text-pink-800">"Confidence."</span>
+          </p>
+          <p>
+            However, male keywords point directly to social power.
+            <span className="font-bold text-green-900">"Influence" (1,089 times),</span>
+            <span className="font-bold text-green-900">"Individual" (847 times),</span>
+            and
+            <span className="font-bold text-green-900">"Intellectual"</span>
+            traits form the core of the male persona. While the English model grants men a sense of "modernity," this modernity is essentially a synonym for <strong>"rationality and control."</strong> Overall, the Chinese model describes looks, while the English model describes personality—yet the distribution still dictates that women manage beauty and emotion, while men manage logic and the world.
+          </p>
+        </>
+      )
+    },
+    {
+      titleLeft: <>
+        <span className="font-bold text-pink-700 mx-1">Multiple Burdens</span>
+        <span className="text-xs text-zinc-600">of "Care" vs.</span>
+        <span className="font-bold text-green-800 mx-1">Boundless</span>
+        <span className="text-xs text-zinc-600">Participation of "Explore"</span>
+      </>,
+      content: (
+        <>
+          <p>
+            In behavioral logic, the English model shows a significant "spatial gap": women are kept in the community, while men head into the world.
+          </p>
+          <p>
+            Data shows women are highly associated with
+            <span className="font-bold text-pink-800">"Community" (1,474 times),</span>
+            <span className="font-bold text-pink-800">"Balance" (676 times),</span>
+            and
+            <span className="font-bold text-pink-800">"Education" (837 times)</span>
+            . High-frequency words like "Juggle" and "Manage" reveal the plight of modern women: they must act as a "Caregiver" while proving themselves in the "Professional" sphere.
+          </p>
+          <p>
+            Conversely, male behavior is full of <strong>publicness and fluidity</strong>. Keywords like
+            <span className="font-bold text-green-900">"Explore,"</span>
+            <span className="font-bold text-green-900">"Diplomacy,"</span>
+            and
+            <span className="font-bold text-green-900">"Technology"</span>
+            position men as global citizens. Unlike the specific physical activities like "fishing/sports" in the Chinese model, male behavior in the English model carries more "intellectual capital." Yet, the constant remains: women are the "Homemakers" and maintainers of relationships, their diligence flavored with <strong>sacrifice and devotion</strong>, while male diligence points toward <strong>professional achievement</strong>.
+          </p>
+        </>
+      )
+    },
+    {
+      titleLeft: <>
+        <span className="font-bold text-pink-700 mx-1">Compensation</span>
+        <span className="text-xs text-zinc-600">of "Advocacy" vs.</span>
+        <span className="font-bold text-green-800 mx-1">Dominance</span>
+        <span className="text-xs text-zinc-600">of "Strategy"</span>
+      </>,
+      content: (
+        <>
+          <p>
+            Regarding social expectations, the English model introduces modern vocabulary about <strong>gender justice</strong>, creating a sharp contrast with the Chinese model.
+          </p>
+          <p>
+            In female word clusters, there is a high frequency of
+            <span className="font-bold text-pink-800">"Equality" (495 times),</span>
+            <span className="font-bold text-pink-800">"Empowerment" (321 times),</span>
+            and
+            <span className="font-bold text-pink-800">"Advocate" (319 times)</span>
+            . This reflects that in an English context, female identity is often tied to <strong>"Challenging barriers."</strong> In other words, the model believes a woman’s "strength" is manifested in "breaking through" the status quo.
+          </p>
+          <p>
+            Male keywords, however, appear "smooth sailing":
+            <span className="font-bold text-green-900">"Strategic,"</span>
+            <span className="font-bold text-green-900">"Geopolitical,"</span>
+            and
+            <span className="font-bold text-green-900">"Perspective" (160 times)</span>
+            . Men are preset as the rule-makers and system operators. This reveals a harsh truth: in the English model’s logic, female "progress" is a compensatory narrative requiring <strong>"Striving,"</strong> whereas male "success" is a natural, strategic extension of <strong>"Nature."</strong> The model has learned "politically correct" vocabulary, but subconsciously, it still believes the world is constructed by male strategy, while women are responsible for calling for fairness within it.
+          </p>
+        </>
+      )
+    }
+  ];
+"""
 
-          <div className="inline-block max-w-full bg-[#6d2741]/88 px-3 py-2">
-            但这不是一个全然悲观的问题。人从来都是在和社会、语言、文化互动中“建构”出来的，正如波伏娃的思想核心——“成为女人，不是出生如此，而是逐渐形成。”大模型只不过是新的“语言环境”，我们在它的语境中也许能创造“新的自我形象”。更关键的是，我们应该思考，如何有能力在技术中重新谈“自我”。
-          </div>
+lines = lines[:start2] + [new_en_en] + lines[end2+1:]
 
-          <div className="inline-block max-w-full bg-[#6d2741]/88 px-3 py-2">
-            从上述分析来看：大模型所读取的世界，是一个北半球中心、男性中心的语料堆叠。它继承的是维多利亚式百科、英美新闻体系、男性主导的互联网络。当我们说AI“看到”了什么，其实是在问：谁拥有被记录的权力？谁在历史里说过话？谁的故事从未被写入数据？
-          </div>
-
-          <div className="inline-block max-w-full bg-[#6d2741]/88 px-3 py-2">
-            我们借分析AI，分析真实世界，也是在借这种分析，表达我身为女性未曾被更多地看见、未曾更多地表达、未曾更多地展现价值的愤怒。这种愤怒，让这篇文章摆在你面前。我们应该承认，在最初请AI续写“男人/女人是”时，我们自带偏见，我希望分析结果能证明AI有偏见的，我希望这篇文章是有影响力的，让更多人能看得见，能让更多人发现：我也应该记录、书写、表达，并借此不断扩大定义的权利。如此，一个更客观、公平的未来也将拥有可能。
-          </div>
-        </div>"""
-conc_replace = """        <div className="w-full max-w-2xl space-y-6 text-zinc-300 text-left text-[15px] leading-[2.05] font-light tracking-wide">
-          <div className="inline-block max-w-full bg-[#6d2741]/88 px-3 py-2">
-            {t('discovery.conclusion.p1')}
-          </div>
-
-          <div className="inline-block max-w-full bg-[#6d2741]/88 px-3 py-2">
-            {t('discovery.conclusion.p2')}
-          </div>
-
-          <div className="inline-block max-w-full bg-[#6d2741]/88 px-3 py-2">
-            {t('discovery.conclusion.p3')}
-          </div>
-
-          <div className="inline-block max-w-full bg-[#6d2741]/88 px-3 py-2">
-            {t('discovery.conclusion.p4')}
-          </div>
-        </div>"""
-content = content.replace(conc_target, conc_replace)
-
-with open('components/DiscoverySlides.tsx', 'w') as f:
-    f.write(content)
-print("Done")
+with open(file_path, 'w', encoding='utf-8') as f:
+    f.writelines(lines)

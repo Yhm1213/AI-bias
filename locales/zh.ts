@@ -21,8 +21,8 @@ export const zh = {
     back: "返回",
     slide1: {
       title: "中文大模型被「男强女柔」框住了想象力",
-      p1_before: "先来看看中文大模型DeepSeek对男人和女人的描述差异。我们将DeepSeek对于男性和女性的描述分词，清洗后获得584个词语",
-      p1_after: "，经过分析发现了如下差异"
+      p1_before: "先来看看中文大模型DeepSeek对男人和女人的描述差异。\n我们将DeepSeek对于男性和女性的描述分词，清洗后获得584个词语",
+      p1_after: "，\n经过分析发现了如下差异"
     },
     slide6: {
       title: "当人均GDP升高，大模型开始重写性别剧本",
@@ -32,7 +32,7 @@ export const zh = {
       p2_after: "，依照此分组和大模型的描述文本展开交叉分析，探究在不同经济水平下，大语言模型对男性和女性劳动角色与生活方式等多方面的差异化描述。"
     },
     slide_interstitial: {
-      title: "当性别平等指数变高，大模型的性别故事变了吗？",
+      title: "当性别平等指数变高，\n大模型的性别故事变了吗？",
       p1: "除了利用GDP进行交叉分析之外，我们也从另一个指标——性别平等指数出发，探究大模型在描述不同性别平等指数的地区的男女时，是否存在一定的描述差异。",
       p2_before: "我们从世界银行官网获取Women, Business and the Law 2.0 Data",
       p2_middle: "（以下简称WBL）作为国家法律性别平等（Legal gender parities）的度量，其值越大说明该国家不同性别更加平等。我们通过WBL数据的从低到高，将所有国家等分为5个组别",
@@ -77,7 +77,7 @@ export const zh = {
       title_1: "英文大模型部分更新了", title_2: "性别剧本",
       p1_1: "再来看看英文语境下AI语言中的性别差异。",
       p1_2_before: "我们将chatgpt对于男性和女性的描述分词，经过清洗和筛选后获得756个英文词汇",
-      p1_2_after: "。",
+      p1_2_after: "。\n",
       p1_3: "我们观察这些词，最终发现了如下差异："
     },
     bias_en: [
@@ -140,4 +140,64 @@ export const zh = {
     init: "初始化中...",
     loading: "正在加载地图数据..."
   }
+,
+  gdpDiscourse: [
+    {
+      title: 'GDP越高，她越跳脱出家庭角色',
+      paragraphs: [
+        '先来看看经济水平对性别角色的塑造作用，我们首先聚焦女性，观察其在不同GDP组别中的劳动与生活叙事变迁。',
+        '在描述低、低中和中GDP组国家的女性时，大模型围绕家庭和劳动建构了她们的主体形象。她们往往被刻画为在承担家庭责任与社会经济压力的底层角色，如村落中背着孩子织布做生意的女性。',
+        '“不平等”“受限制”“家务”“家庭”最常出现，“Mother”等描述母职角色的词汇频率还呈现出：低GDP组 > 低中GDP组 > 中GDP组 的趋势。在英文描述文本中，“mother”出现过29次，其中10次出现在低GDP组。在中文描述文本中，“母亲”一词出现了5次，其中2次出现在低GDP组，2次出现在中GDP组，1次出现在中高GDP组。',
+        '也许我们可以这样理解：母亲作为一种身份象征，被紧密锚定于家庭劳动领域，成为经济欠发达区域女性角色的一种主要描述。',
+        '而在中高、高GDP组国家，女性开始被描述为“独立”“专业”“有事业”“教育”“成长”“野心”。在高GDP组国家的女性还开始变得“优雅”“时尚”“自信”“聪慧”。在英文描述文本中，“独立”被最多地描述丹麦女性（independence）和法国女性(independent)，法国和丹麦都为高GDP组国家。'
+      ]
+    },
+    {
+      title: 'GDP越高，他越“悠闲”？',
+      paragraphs: [
+        '如果聚焦不同经济发展水平国家的劳动、文化价值观、兴趣爱好等社会维度，会发现除性别以外的另一些区分，而这些区分在男性数据中体现得更为明显，无论是中文还是英文模型，可以发现，词汇描述或许正反映着结构性的差异。',
+        '例如，在描述低、中低和中GDP组国家的男性时，传统文化、历史地理和族群身份的社会角色最受强调。他们往往重视“家庭”“传统”，有明确的“社区文化价值观念”和“责任感”，有“民族自豪感”。这3组中的女性也深入地受到“传统文化”的影响，约束着她们的“穿着”——“传统服饰”如“长袍”“面纱”被频繁提及。',
+        '再者，描述低、中低和中GDP组国家男性时，最常用的词语是“男性气质”“physically”（身体物理的）“农业”“家族”“牧业”“渔业”等。“劳动”在这里是主旋律，在“艰苦”的环境中“生存”可能需要“从事”多种劳动。',
+        '相反，以中英文模型对高GDP组的男性描述来看，这些国家地区的男性开始注重“自由的价值观念”“平等”“开放和独立”，关注“自然”“环保”“艺术”。',
+        '特别是，在对他们的描述中，与身体相关的描述词不再主要是劳动与其细分类目，而是“户外活动”“足球”“体育”“板球”“运动”“橄榄球”“体育运动”“啤酒”。',
+        '更具体地说，在运动和爱好领域中，经济欠发达地区的男性喜欢“音乐”和“舞蹈”，而经济发达地区的男性们喜欢“橄榄球”和“滑雪”。',
+        '这些数据或许可以验证这样一种猜想：在大语言模型看来，经济发达水平影响着人们的劳动情况和兴趣爱好。'
+      ]
+    },
+    {
+      title: '父职缺失？',
+      paragraphs: [
+        '随着国家经济水平的提升，我们可以看到女性投入更多在教育和职业领域，男性更多地由传统业劳动者转变为休闲娱乐者。',
+        '等等，那父职角色呢？在原始数据中查找后，我们发现在获取的所有英文词汇中，“father”一词共出现过2次，其他类似词如dad、daddy等均未出现过。“father”一词一次被用来描述来自高GDP组国家的瑞士男性，同时被提到的还有他们平等、开放与平衡的生活方式。【】',
+        'Swedish men are often characterized by a strong emphasis on equality, openness, and a balanced lifestyle. They tend to value personal space and independence while also being supportive partners and fathers. Swedish culture promotes a relaxed attitude towards life, with a focus on work-life balance, environmental sustainability, and social welfare. Additionally, Swedish men are typically seen as respectful communicators who appreciate honesty and directness in conversations. Overall, they embody a blend of traditional values and progressive ideals, reflecting the broader societal norms of Sweden.',
+        '一次被用来描述斯威士兰（Eswatini）男性，他来自于低中GDP组，大语言模型将他描述为社区中的力量支柱和领导者，他的角色可能从父亲到家庭的提供者或保护者不等。【】',
+        'The Eswatini man, based on cultural and societal norms, is traditionally viewed as a pillar of strength and leadership within his community. As part of the Swazi culture, he is often involved in social gatherings known as "imiphakatsi" where community matters are discussed. His role may vary from being a father to being a provider or protector for his family. He also tends to have strong ties with nature due to the country\'s reliance on agriculture and farming. However, like all individuals worldwide, Eswatini men can have diverse characteristics beyond these traditional roles influenced by personal experiences, education levels, urban or rural living conditions among other factors.',
+        '然而，“母亲”一词“父亲”或与之表示类似语义的词汇没有在中文数据中出现过。结合中英文描述文本来看，“father”被提及的比例不足“mother”“母亲”的6%。我们不禁想问，是否在大语言模型看来，男性和女性投入家庭的程度，受到所处社会的经济状况的影响？但这种影响的程度在两个性别上的反映并不相同？除此之外，他们在家庭中的投入还和其它社会性因素有密切关系吗？',
+        '需要注意的是，这一组别差异未必仅仅源于国家真实的性别结构，也可能反映了大模型训练语料的结构性不平等。主流大模型的语料来源以英语内容为主，且倾向于北半球发达国家的新闻、百科、论坛等资料。许多低GDP国家，尤其是非英语国家，其女性现实的多样形象、职场角色和抗争经验，往往缺乏被记录与被训练的机会。这种语料的“看不见”，可能导致模型在面对这些国家时，只能复写那些已有的、刻板的文化图像。'
+      ]
+    }
+  ],
+  wblDiscourse: [
+    {
+      title: '从规训到自主：女性叙事的解放趋势',
+      paragraphs: [
+        '首先是外貌约束性语言的消退。在低WBL组国家的女性描述文本中，“面貌”“黑袍”“传统服饰”等约束性外貌词汇频繁出现，随着WBL指数上升，这类词汇减少，取而代之的是“美丽”“皮肤”等更具自主性的表达。同样地，英文大模型中，高WBL组别更多地提及“appearance”。',
+        '其次是角色和行为的解放。家庭角色的刻板印象同样呈现梯度变化。“孩子”“照顾”“贤惠”等词语在低WBL组国家的描述文本中高频出现，却在高WBL组中大幅淡化，“独立性”“职场”等词汇与女性更多地出现关联。在英文语境下，“occupation”“profession”也呈现随着WBL指数增高而更高频被提到的现象。',
+        '同样地，“活跃”一词随着WBL的增加，更多地在描述女性的文本中体现。活跃一词往往和“xx领域”相关联，意味着女性更多地展露在商业、政治、社会、学术等各大领域中。如“比利时女性……在社会和职业生活中表现活跃，注重个人发展和自由。”',
+        '品德评价的“平等化”也是不容忽视的一点。譬如，尽管男性更多地被表述为好客的（hospitable），但在高WBL分组中，女性热情好客的表达也在增加。',
+        '高WBL分组的数据中，传统男性主导的品德评价也逐渐平等分配至两性。例如，在低WBL组模型中，“勇敢”多用于男性英雄叙事，而高WBL组中同样使用“勇敢”来描述女性。',
+        '在部分“品德”描述上，中英文语言模型显现出差异。如在中文叙述下，“诚实”更多代指男性；而在英文叙事中，“authenticity（真诚）”一词更多用于女性，并且在高WBL分组中，这一规律更加明显。'
+      ]
+    },
+    {
+      title: '甩不掉的偏见：大模型还是有点“老眼光”',
+      paragraphs: [
+        '即便性别平等指数（WBL）高的国家让AI对女性的描述更自由，偏见还是悄悄藏在字里行间。比如，“美丽”一词在女性描述中总是比男性多得多；“母亲”“妻子”常出现在女性描述里，但“父亲”“丈夫”等男性家庭角色却几乎不被提及。同样地，在男性的描述文本中，“活跃”一词更多出现在商业、科技、政治等具体领域，而女性则仍停留在家庭和社会的泛泛描述中。不论中文还是英文语境下，爱国（patriotism）的美德似乎只停留在男性叙事中了。',
+        '此外，中文大模型的“眼光”似乎比英文大模型更老。在英语语境下，高WBL组别中，女性更多被赋予“adaptive”（适应力强）、“versatile”（多才多艺）、“variety”（多样化）等动态标签，而中文模型却将女性更多固化在“贤惠”“顾家”的单一叙事中，“多元”更多描述男性且没有出现随着WBL组别增高而增加的现象。',
+        '值得进一步追问的是，模型是否真正“理解”了这些国家的性别结构？同GDP中的分析一样，我们需要注意大模型训练语料的结构性不平等问题。数据训练中的“文化他者化”，意味着来自某些国家的本地女性声音、非官方叙事、民间知识等没有被广泛记录或进入英文主语料库。在这种不对称的信息结构中，模型学习到的“性别现实”往往是由西方媒体或国际NGO构建的他者视角，而非当地女性自己的叙述。',
+        '“语言模型是社会的一面镜子，”不同性别之间的偏见客观存在，AI叙事的偏向性因此也客观存在，但不应放任AI加大加深它。技术必须主动识别这些偏见，而非被动复制现实。或许当模型开发者引入更多WBL等结构性指标，系统性检测并更加主动修正模型中的歧视性叙事时，机器将拥有一双更加平等的眼睛。'
+      ]
+    }
+  ]
+
 };

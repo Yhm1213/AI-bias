@@ -90,7 +90,7 @@ const DataExplanation: React.FC<DataExplanationProps> = ({ onBack, highlightId }
 
   return (
     <>
-      <div className="min-h-screen w-full bg-[#121212] flex flex-col p-8 md:p-16 animate-fade-in relative">
+      <div id="data-explanation-page" className="h-screen w-full bg-[#121212] flex flex-col p-8 md:p-16 animate-fade-in relative overflow-y-scroll">
       {/* Header - Positioned at top left */}
       <h1 className="fixed top-8 left-8 md:top-16 md:left-16 font-quan text-4xl md:text-6xl text-[#22c55e] z-20 tracking-tighter pointer-events-none">
         数据说明
@@ -125,7 +125,7 @@ const DataExplanation: React.FC<DataExplanationProps> = ({ onBack, highlightId }
                 <div className="whitespace-pre-line">
                   <div>{item.content}</div>
                   {item.tableHeaders && item.tableRows && (
-                    <div className="mt-4 overflow-x-auto">
+                    <div id={`data-table-scroll-${item.id}`} className="mt-4 overflow-x-scroll data-table-scroll">
                       <table className="min-w-[720px] border-collapse text-left">
                         <thead>
                           <tr className="border-b border-[#22c55e]/30">
@@ -171,9 +171,38 @@ const DataExplanation: React.FC<DataExplanationProps> = ({ onBack, highlightId }
       </div>
 
       <style>{`
-        .pixel-font {
-             font-family: 'Fira Code', monospace; 
-             /* In a real pixel font scenario we might load a specific font, but user asked for Fira Code/Inter usage */
+        #data-explanation-page::-webkit-scrollbar {
+            -webkit-appearance: none !important;
+            display: block !important;
+            width: 8px !important;
+        }
+        #data-explanation-page::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.06) !important;
+            border-radius: 10px !important;
+        }
+        #data-explanation-page::-webkit-scrollbar-thumb {
+            background-color: rgba(82, 82, 91, 0.9) !important;
+            border-radius: 10px !important;
+        }
+        #data-explanation-page:hover::-webkit-scrollbar-thumb {
+            background-color: rgba(113, 113, 122, 1) !important;
+        }
+        .data-table-scroll::-webkit-scrollbar {
+            -webkit-appearance: none !important;
+            display: block !important;
+            height: 8px !important;
+            width: 8px !important;
+        }
+        .data-table-scroll::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.08) !important;
+            border-radius: 10px !important;
+        }
+        .data-table-scroll::-webkit-scrollbar-thumb {
+            background-color: rgba(82, 82, 91, 0.9) !important;
+            border-radius: 10px !important;
+        }
+        .data-table-scroll:hover::-webkit-scrollbar-thumb {
+            background-color: rgba(113, 113, 122, 1) !important;
         }
       `}</style>
     </div>

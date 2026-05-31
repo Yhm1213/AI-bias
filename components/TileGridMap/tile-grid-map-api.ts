@@ -113,8 +113,13 @@ export class TileGridMapAPI {
             }
         });
 
-        // 背景点击不再自动清除面板，保持直到用户手动关闭
-        this.chartInstance.getZr().on('click', () => { });
+        // 点击空白处清除所有弹窗面板
+        this.chartInstance.getZr().on('click', (e) => {
+            // 仅在点击非数据区域时清除（ECharts 数据点击会触发 series click，不会走这里）
+            if (!e.target) {
+                this.clearBubbles();
+            }
+        });
 
         window.addEventListener('resize', () => {
             if (this.chartInstance) {

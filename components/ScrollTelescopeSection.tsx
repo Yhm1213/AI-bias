@@ -220,18 +220,20 @@ const ScrollTelescopeSection: React.FC<ScrollTelescopeSectionProps> = ({
                             >
                                 <div className="space-y-6 text-zinc-900 font-medium text-left flex flex-col min-h-0 h-full">
                                     {/* Title Swapper */}
-                                    <div key={`title-${subPage}`} className="text-center mb-4 animate-fadeIn">
+                                    <div key={`title-${subPage}`} className="text-center mb-4 animate-fadeIn font-quan">
                                         <div className="inline-block bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 border border-black/5 shadow-sm">
                                             {slides[subPage]?.titleLeft}
                                         </div>
                                     </div>
-
                                     {/* Body Swapper */}
-                                    <div
-                                        key={`content-${subPage}`}
-                                        className="min-h-0 max-h-[34vh] overflow-y-auto pr-3 space-y-4 text-xs md:text-[13px] leading-[1.7] text-zinc-800/90 animate-fadeInSlideUp [scrollbar-width:thin] [scrollbar-color:rgba(0,0,0,0.16)_transparent] [&::-webkit-scrollbar]:w-[3px] [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-black/15"
-                                    >
-                                        {slides[subPage]?.content}
+                                    <div className="relative flex-1 min-h-0 flex flex-col justify-center">
+                                        <div
+                                            key={`content-${subPage}`}
+                                            id="telescope-scroll-box"
+                                            className="max-h-[34vh] overflow-y-scroll pr-3 space-y-4 text-left text-xs md:text-[13px] leading-[1.7] text-zinc-800/90 animate-fadeInSlideUp"
+                                        >
+                                            {slides[subPage]?.content}
+                                        </div>
                                     </div>
 
                                     <div className="pt-2 border-t border-black/10 mt-3 shrink-0" />
@@ -288,6 +290,24 @@ const ScrollTelescopeSection: React.FC<ScrollTelescopeSectionProps> = ({
                     );
                 })
             }
+            <style>{`
+                #telescope-scroll-box::-webkit-scrollbar {
+                    -webkit-appearance: none !important;
+                    display: block !important;
+                    width: 6px !important;
+                }
+                #telescope-scroll-box::-webkit-scrollbar-track {
+                    background: rgba(0, 0, 0, 0.06) !important;
+                    border-radius: 10px !important;
+                }
+                #telescope-scroll-box::-webkit-scrollbar-thumb {
+                    background-color: rgba(0, 0, 0, 0.25) !important;
+                    border-radius: 10px !important;
+                }
+                #telescope-scroll-box:hover::-webkit-scrollbar-thumb {
+                    background-color: rgba(0, 0, 0, 0.45) !important;
+                }
+            `}</style>
         </section >
     );
 };

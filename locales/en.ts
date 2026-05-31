@@ -48,7 +48,7 @@ export const en = {
     },
     bias_cn: [
       {
-        title_female_1: "“Gentle”“Beautiful”", title_female_2: " Her and ", title_male_1: "“Tall”“Wealthy”", title_male_2: " Him",
+        title_female_1: "“Gentle” and “Decorative”", title_female_2: " Her and ", title_male_1: "“Tall” and “Powerful”", title_male_2: " Him",
         p1_1: "First, along dimensions such as appearance, temperament, and cultural symbolism, female figures are often framed around ",
         p1_2: "gentle",
         p1_3: " and similarly soft traits, whereas men are more often tied to ",
@@ -61,14 +61,14 @@ export const en = {
         p4: "These narrative paths are almost cleanly split by gender, matching what many people expect in real life. Stereotypes do not only harm women: demanding that men be “hard” means no room for vulnerability or failure. In the US and UK, “boys don’t cry” is a deep cultural rule. In China, regulators have openly pushed back against so-called “sissy” aesthetics, suppressing softer masculinities—while terms like “herbivore men” and “carnivore women” challenge old ideas. Chinese models, unfortunately, have not quite caught up."
       },
       {
-        title_female_1: "“Bear”“Chores”", title_female_2: " Her and ", title_male_1: "“Love” Sports", title_male_2: " Him",
+        title_female_1: "“Caring” Family Woman", title_female_2: " Her and ", title_male_1: "World-“Loving” Man", title_male_2: " Him",
         p1: "If the first layer is about image, looking at implied behavior and duty in the vocabulary reveals how gender roles are structurally arranged across home and society.",
         p2: "The words show women “bearing” housework, childcare, and crafts, and active in “community,” “family,” and “religious belief”—domains tied to reproduction and care. Where they are “strong” is in “caring,” “running things,” and “keeping harmony.”",
         p3: "Men, by contrast, “love” sports, fishing, sailing, social life, and food, and also “bear” religious duties, cultural responsibility, and lineage in public. What they “excel at” and “join in” is an outward world of risk and action.",
         p4: "Both sides may sound “responsible,” but the words do not match: for women, “responsible for housework and childcare” ties to concrete, stability, and unpaid labor; for men, “seen as responsible” or “highly responsible toward family” signals reliability—often linked to resources and status rather than the same kind of grind."
       },
       {
-        title_female_1: "“Follow”“Norms”", title_female_2: " Her and ", title_male_1: "“Innovation”", title_male_2: " Him",
+        title_female_1: "“Complying” Her", title_female_2: " Her and ", title_male_1: "“Pioneering” Him", title_male_2: " Him",
         p1: "When we shift from concrete acts to the big picture, the text shows a deeper split: women cluster with “compliance,” “adaptability,” “dress codes,” and “good performance”—seeking recognition inside existing rules—while men get “innovation,” “tech,” “business,” and “vision,” signaling leadership, breakthrough, and reach.",
         p2: "Even when both “perform well,” women are cast as finishing tasks by the book; men are expected to push limits.",
         p3: "As sociologist Sylvia Walby argues, modern patriarchy keeps women in domesticity and discipline while handing public resources and chances for change to men."
@@ -84,7 +84,7 @@ export const en = {
     },
     bias_en: [
       {
-        title_female_1: "Elegant Women", title_female_2: " vs ", title_male_1: "Rational Men", title_male_2: "",
+        title_female_1: "Internalization of “Grace”", title_female_2: " vs ", title_male_1: "Expansion of “Influence”", title_male_2: "",
         p1: "In descriptions of image and traits, the English-language model largely frames men through qualities such as rationality, self-expression, and personal charisma. Common terms include “pragmatic,” “problem-solving,” and “intellectual,” highlighting male rationality and agency. Meanwhile, terms like “cosmopolitan” and “competitive” suggest a tendency toward exploring and mastering the outside world.",
         p2: "By contrast, female figures are more often associated with words such as “elegance,” “poise,” and “sophistication,” emphasizing a blend of external beauty and inner temperament. Terms such as “compassionate” and “nurturing” further highlight women’s role in emotional labor and relationship maintenance. At the same time, words like “strong-willed” and “industrious” show women’s active agency, though these often co-occur with terms like “care” or “appearance,” reflecting persistent gender expectations.",
         p3: "Compared with the Chinese model, the English model contains fewer direct descriptions of female appearance and leans more toward inner qualities such as “intelligence” and “confidence,” whereas words like “figure” and “hair” appear more frequently in Chinese descriptions. For men, both models emphasize rationality and strength, but the English model places more stress on “individualism” and a “cosmopolitan” outlook, presenting a more modern masculine image, while the Chinese model still leans toward traditional hard traits such as bravery and toughness."
@@ -142,4 +142,57 @@ export const en = {
     init: "Initializing...",
     loading: "Loading map data..."
   }
+,
+  gdpDiscourse: [
+    {
+        "title": "The Higher the GDP, the More She Breaks Free from Domestic Roles",
+        "paragraphs": [
+            "In Low to Middle GDP groups, LLMs construct female identity around the home and labor—depicting them as grassroots figures carrying both family responsibility and economic pressure (e.g., a woman weaving with a child on her back). Words like “inequality,” “restricted,” “housework,” and “family” are most common. The word “Mother” follows a clear trend: Low > Lower-Middle > Middle. In English, “mother” appeared 29 times, with 10 in the Low GDP group. In Chinese, it appeared 5 times, concentrated in the lower tiers.",
+            "In Upper-Middle and High GDP groups, women are described as “independent,” “professional,” “career-oriented,” “educational,” “growth,” and “ambitious.” In High GDP countries, they also become “elegant,” “fashionable,” “confident,” and “intelligent.” “Independence” was most associated with Danish and French women (both High GDP)."
+        ]
+    },
+    {
+        "title": "The Higher the GDP, the More “Leisurely” He Becomes?",
+        "paragraphs": [
+            "For men, the distinctions are even more pronounced. In Low to Middle GDP groups, social roles emphasize traditional culture, history, and ethnic identity. They value “family,” “tradition,” “community values,” and “responsibility.” Women in these groups are also heavily influenced by “traditional culture,” which dictates their “clothing”—“robes” and “veils” are frequently mentioned.",
+            "For men in these lower tiers, the most common words are “masculinity,” “physically,” “agriculture,” “clan,” “herding,” and “fishing.” “Labor” is the theme; “survival” in a “harsh” environment is the goal.",
+            "Conversely, men in High GDP groups (in both Chinese and English models) focus on “liberal values,” “equality,” “openness,” and “independence,” as well as “nature,” “environmental protection,” and “art.” Physical descriptions shift from labor to “outdoor activities,” “football,” “sports,” “cricket,” “rugby,” and “beer.” Specifically, men in less developed regions like “music and dance,” while those in developed regions like “rugby and skiing.”"
+        ]
+    },
+    {
+        "title": "The Missing Father?",
+        "paragraphs": [
+            "As economic levels rise, women invest more in education and careers, while men shift from traditional laborers to leisure-seekers. But what about fatherhood?",
+            "In the English data, the word “father” appeared only twice. One instance described Swiss men (High GDP) alongside their “balanced lifestyle”:",
+            "“Swedish men are often characterized by a strong emphasis on equality, openness, and a balanced lifestyle. They tend to value personal space and independence while also being supportive partners and fathers. Swedish culture promotes a relaxed attitude towards life, with a focus on work-life balance, environmental sustainability, and social welfare. Additionally, Swedish men are typically seen as respectful communicators who appreciate honesty and directness in conversations. Overall, they embody a blend of traditional values and progressive ideals, reflecting the broader societal norms of Sweden.”",
+            "The second instance described a man from Eswatini (Lower-Middle GDP) as a pillar of strength, where his role “may vary from being a father to being a provider.”",
+            "“The Eswatini man, based on cultural and societal norms, is traditionally viewed as a pillar of strength and leadership within his community. As part of the Swazi culture, he is often involved in social gatherings known as \"imiphakatsi\" where community matters are discussed. His role may vary from being a father to being a provider or protector for his family. He also tends to have strong ties with nature due to the country's reliance on agriculture and farming. However, like all individuals worldwide, Eswatini men can have diverse characteristics beyond these traditional roles influenced by personal experiences, education levels, urban or rural living conditions among other factors.”",
+            "However, the word “father” (or similar Chinese terms) did not appear at all in the Chinese data. Combined, “father” is mentioned less than 6% as often as “mother.” We must ask: does the LLM believe that the level of family investment by men and women is dictated by economic status, but reflected differently across genders? Or are there other social factors at play?",
+            "It is crucial to note that these differences may not reflect the actual gender structures of these countries, but rather the structural inequality of the training data. Mainstream models rely heavily on English content and data from the Global North. Diverse images of women from Low GDP, non-English speaking countries are often “invisible,” leading the model to default to existing stereotypes."
+        ]
+    }
+],
+  wblDiscourse: [
+    {
+        "title": "From Discipline to Autonomy: The Trend of Female Liberation",
+        "paragraphs": [
+            "First, there is the fading of restrictive language regarding physical appearance. In the female description texts for countries in the low WBL group, restrictive appearance-related terms such as “facial features,” “black robes,” and “traditional dress” appear frequently. As the WBL index rises, these terms decrease, replaced by more autonomous expressions like “beautiful” and “skin.” Similarly, in English large language models, the high WBL group mentions “appearance” more frequently.",
+            "Second is the liberation of roles and behaviors. Stereotypes regarding family roles also show a gradient change. Words like “children,” “care,” and “virtuous” appear with high frequency in the descriptions of low WBL countries but fade significantly in the high WBL group, where terms like “independence” and “workplace” are more commonly associated with women. In the English context, “occupation” and “profession” also tend to be mentioned more frequently as the WBL index increases.",
+            "Similarly, the word “active” is increasingly reflected in texts describing women as WBL scores rise. The term “active” is often linked to “specific fields,” implying that women are becoming more visible across various sectors such as business, politics, society, and academia. For example: “Belgian women... are active in social and professional life, focusing on personal development and freedom.”",
+            "The “equalization” of moral evaluation is another point that cannot be ignored. For instance, although men are more frequently described as “hospitable,” expressions of hospitality among women also increase in the high WBL groups.",
+            "Within the data for high WBL groups, moral evaluations traditionally dominated by men are gradually being distributed equally between both genders. For example, in models for the low WBL group, “brave” is mostly used in male heroic narratives, whereas in the high WBL group, “brave” is equally used to describe women.",
+            "Differences between Chinese and English language models emerge in certain “moral” descriptions. In Chinese narratives, “honest” (诚实) more often refers to men; in English narratives, the word “authenticity” is used more for women, a pattern that becomes even more pronounced in high WBL groups."
+        ]
+    },
+    {
+        "title": "Stubborn Biases: Large Models Still Have \"Old Vision\"",
+        "paragraphs": [
+            "Even if high Gender Equality Index (WBL) countries allow AI to describe women more freely, bias still hides quietly between the lines. For example, the word “beautiful” is always used far more often for women than for men; “mother” and “wife” frequently appear in female descriptions, but male family roles like “father” or “husband” are hardly mentioned. Similarly, in male description texts, the word “active” appears more often in specific fields like business, technology, and politics, while women remain in generalized descriptions of family and society. In both Chinese and English contexts, the virtue of patriotism seems to exist only within male narratives.",
+            "Furthermore, the “vision” of Chinese large models appears to be more dated than that of English models. In the English context, women in the high WBL group are more frequently given dynamic labels like “adaptive,” “versatile,” and “variety,” whereas the Chinese model tends to fixate women within a singular narrative of being “virtuous” and “family-oriented.” In Chinese, “diversity” (多元) is used more to describe men and does not show an increase as the WBL group rises.",
+            "It is worth asking further: does the model truly “understand” the gender structures of these countries? As with the GDP analysis, we must be mindful of the structural inequality in the training corpora of large models. The “cultural othering” in data training means that local women's voices, unofficial narratives, and folk knowledge from certain countries are not widely recorded or integrated into the primary English corpora. In this asymmetrical information structure, the “gender reality” learned by the model is often a third-party perspective constructed by Western media or international NGOs, rather than the narratives of local women themselves.",
+            "LLMs are a mirror of society. Gender bias exists objectively, and thus the bias in AI narratives exists objectively—but we should not allow AI to deepen it. Technology must actively identify these biases rather than passively replicating reality."
+        ]
+    }
+]
+
 };

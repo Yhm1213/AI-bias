@@ -3,6 +3,7 @@ import PixelBackground from './PixelBackground';
 import ScrollTelescopeSection from './ScrollTelescopeSection';
 import { GdpVisualization } from './GdpVisualization';
 import { GdpGenderDiscourseSlide } from './GdpGenderDiscourseSlide';
+import { ComplexTypewriter } from './ComplexTypewriter';
 import { WblGenderDiscourseSlide } from './WblGenderDiscourseSlide';
 import FallingBlocksChart from './FallingBlocksChart';
 import NetworkScrolly from './NetworkScrolly';
@@ -176,95 +177,96 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
   const GENDER_BIAS_DATA_EN = [
     {
       titleLeft: <>
-        <span className="font-bold text-pink-700 mx-1">“温柔”与“装饰”</span>
-        <span className="text-xs text-zinc-600">的她，对比</span>
-        <span className="font-bold text-green-800 mx-1">“高大”与“力量”</span>
-        <span className="text-xs text-zinc-600">的他</span>
+        <span className="font-bold text-pink-700 mx-1">"Gentle" & "Decorative"</span>
+        <span className="text-xs text-zinc-600">Her vs.</span>
+        <span className="font-bold text-green-800 mx-1">"Tall" & "Powerful"</span>
+        <span className="text-xs text-zinc-600">Him</span>
       </>,
       content: (
         <>
           <p>
-            从<strong>外貌、气质与文化符号</strong>的表征来看，DeepSeek 展现出的性别画像极其保守。
+            From the representation of <strong>appearance, temperament, and cultural symbols</strong>, the gender portrait presented by DeepSeek is extremely conservative.
           </p>
           <p>
-            在气质词频上，女性被牢牢锁定在
-            <span className="font-bold text-pink-800">“温柔（33次）”“优雅（47次）”</span>
-            等柔性特质中；而男性则由
-            <span className="font-bold text-green-900">“坚韧（185次）”“勇敢（87次）”“强（137次）”</span>
-            定义。这种对比在身体刻画上近乎极端：女性的描写往往指向视觉细节与服饰，如
-            <span className="font-bold text-pink-800">“头巾（87次）”“长袍（81次）”“时尚（63次）”</span>
-            ；而男性则被简化为纯粹的生理力量，如
-            <span className="font-bold text-green-900">“高大（26次）”</span>
-            与
-            <span className="font-bold text-green-900">“强壮（67次）”</span>
-            。
+            In terms of temperament word frequency, women are firmly locked into soft traits such as
+            <span className="font-bold text-pink-800">"gentle" (33 times) and "elegant" (47 times)</span>
+            , while men are defined by
+            <span className="font-bold text-green-900">"resilient" (185 times), "brave" (87 times), and "strong" (137 times)</span>
+            . This contrast is almost extreme in physical depictions: descriptions of women often point to visual details and clothing, such as
+            <span className="font-bold text-pink-800">"headscarf" (87 times), "robe" (81 times), and "fashion" (63 times)</span>
+            ; whereas men are simplified into pure physiological power, such as
+            <span className="font-bold text-green-900">"tall" (26 times)</span>
+            and
+            <span className="font-bold text-green-900">"strong" (67 times)</span>
+            .
           </p>
           <p>
-            这种叙事路径泾渭分明：女性被<strong>“客体化”</strong>为一种视觉存在，而男性则被<strong>“功能化”</strong>为一种力量符号。正如英美文化中的“Boys don't cry”，这种刻板印象在中文模型中依然稳固，甚至对近年来涌现的“中性化”或“角色倒置”新认知反应迟钝，模型似乎仍在一个“发胶与肌肉”、“丝绸与温柔”的传统世界里徘徊。
+            This narrative path is distinct: women are <strong>"objectified"</strong> as a visual presence, while men are <strong>"functionalized"</strong> as a symbol of power. Much like the "Boys don't cry" trope in Anglo-American culture, this stereotype remains solid in Chinese models, showing a slow reaction to recent trends of "androgyny" or "role reversal." The model seems to linger in a traditional world of "hair gel and muscles" vs. "silk and tenderness."
           </p>
         </>
       )
     },
     {
       titleLeft: <>
-        <span className="font-bold text-pink-700 mx-1">“照顾”家庭</span>
-        <span className="text-xs text-zinc-600">的她，对比</span>
-        <span className="font-bold text-green-800 mx-1">“热爱”世界</span>
-        <span className="text-xs text-zinc-600">的他</span>
+        <span className="font-bold text-pink-700 mx-1">"Caring"</span>
+        <span className="text-xs text-zinc-600">Family Woman vs.</span>
+        <span className="font-bold text-green-800 mx-1">"Loving"</span>
+        <span className="text-xs text-zinc-600">the World Man</span>
       </>,
       content: (
         <>
           <p>
-            如果说第一层是形象的塑造，那么<strong>行为与职责指向</strong>的数据则揭示了深层的不平等。
+            If the first layer is the shaping of image, the data regarding <strong>behavior and responsibility</strong> reveals deeper inequality.
           </p>
           <p>
-            在统计中，“家庭”是双方共同的高频词，但语境完全不同。女性的关键词是<strong className="text-pink-800">“照顾（56次）”、“核心（44次）”、“和谐（62次）”</strong>。她们是家庭的润滑剂，负责具体的、重复的、维系性的事务。
+            In our statistics, "family" is a high-frequency word for both sides, but the context is entirely different. For women, the keywords are <strong className="text-pink-800">"care" (56 times), "core" (44 times), and "harmony" (62 times)</strong>. They are the lubricants of the family, responsible for specific, repetitive, and maintenance-oriented tasks.
           </p>
           <p>
-            相比之下，男性的行为动词充满了<strong className="text-green-900">外部探索性</strong>：他们<span className="font-bold text-green-900">“热爱（147次）”、“喜欢（297次）”</span>的对象是<span className="font-bold text-green-900">“足球（100次）”、“体育（48次）”</span>或<span className="font-bold text-green-900">“户外活动（118次）”</span>。
+            In contrast, men’s behavioral verbs are full of <strong className="text-green-900">external exploration</strong>: the objects they <span className="font-bold text-green-900">"love" (147 times) or "like" (297 times)</span> are <span className="font-bold text-green-900">"football" (100 times), "sports" (48 times), or "outdoor activities" (118 times)</span>.
           </p>
           <p>
-            同样是谈论“责任”，女性的<span className="font-bold text-pink-800">“责任感（85次）”</span>往往与家务琐事捆绑，是具体的<strong>无偿劳动</strong>；而男性的<span className="font-bold text-green-900">“责任感（218次）”</span>频次是女性的 2.5 倍，通常指向一种宏大的抽象品质。这意味着在模型的逻辑里，男性的责任是一种“社会光环”，而女性的责任则是一种“生存定式”。
+            When discussing "responsibility," a woman’s <span className="font-bold text-pink-800">"sense of responsibility" (85 times)</span> is often tied to household chores—specific, <strong>unpaid labor</strong>. However, the frequency of a man’s <span className="font-bold text-green-900">"sense of responsibility" (218 times)</span> is 2.5 times higher and usually points to a grand, abstract quality. This implies that in the model's logic, male responsibility is a "social halo," while female responsibility is a "survival routine."
           </p>
         </>
       )
     },
     {
       titleLeft: <>
-        <span className="font-bold text-pink-700 mx-1">“遵守”规范</span>
-        <span className="text-xs text-zinc-600">的她，对比</span>
-        <span className="font-bold text-green-800 mx-1">“开拓”疆域</span>
-        <span className="text-xs text-zinc-600">的他</span>
+        <span className="font-bold text-pink-700 mx-1">"Complying"</span>
+        <span className="text-xs text-zinc-600">Her vs.</span>
+        <span className="font-bold text-green-800 mx-1">"Pioneering"</span>
+        <span className="text-xs text-zinc-600">Him</span>
       </>,
       content: (
         <>
           <p>
-            当我们将目光从生活琐事转向<strong>社会参与</strong>，数据呈现出一种“规训”与“扩张”的对立。
+            When shifting focus from daily life to <strong>social participation</strong>, the data presents an opposition between "discipline" and "expansion."
           </p>
           <p>
-            在女性的文本中，高频词包括
-            <span className="font-bold text-pink-800">“遵守”</span>、
-            <span className="font-bold text-pink-800">“扮演着（307次）”</span>、
-            <span className="font-bold text-pink-800">“传统（785次）”</span>
-            ，强调她们在既定社会框架内的<strong>适应与服从</strong>。而男性的高频词则更多涉及
-            <span className="font-bold text-green-900">“职业（25次）”</span>、
-            <span className="font-bold text-green-900">“商业（30次）”</span>
-            以及
-            <span className="font-bold text-green-900">“社会（109次）”</span>
-            地位。
+            In texts about women, high-frequency words include
+            <span className="font-bold text-pink-800">"comply,"</span>
+            <span className="font-bold text-pink-800">"playing a role" (307 times),</span>
+            and
+            <span className="font-bold text-pink-800">"traditional" (785 times)</span>
+            , emphasizing their <strong>adaptation and obedience</strong> within established social frameworks. Men's high-frequency words involve
+            <span className="font-bold text-green-900">"profession" (25 times),</span>
+            <span className="font-bold text-green-900">"business" (30 times),</span>
+            and
+            <span className="font-bold text-green-900">"social" (109 times)</span>
+            status.
           </p>
           <p>
-            即便在同样追求
-            <span className="font-bold text-pink-800">“平等（48次 vs 43次）”</span>
-            的语境下，女性更多是在争取
-            <span className="font-bold text-pink-800">“教育（306次）”</span>
-            和
-            <span className="font-bold text-pink-800">“独立（269次）”</span>
-            的权利，而男性则早已在
-            <span className="font-bold text-green-900">“经济（41次）”</span>
-            与
-            <span className="font-bold text-green-900">“文化传承（225次）”</span>
-            中占据主导。这种差异印证了社会学家西尔维娅·沃尔比的观点：现代叙事依然倾向于将女性置于“规范的追随者”地位，而将公共资源的控制权与变革的“创新者”角色留给男性。
+            Even in the shared context of pursuing
+            <span className="font-bold text-pink-800">"equality" (48 vs. 43 times)</span>
+            , women are more often striving for the right to
+            <span className="font-bold text-pink-800">"education" (306 times)</span>
+            and
+            <span className="font-bold text-pink-800">"independence" (269 times)</span>
+            , while men are already dominant in
+            <span className="font-bold text-green-900">"economy" (41 times)</span>
+            and
+            <span className="font-bold text-green-900">"cultural inheritance" (225 times)</span>
+            . This confirms sociologist Sylvia Walby’s view: modern narratives still tend to place women as "followers of norms" while reserving control of public resources and the role of "innovator" for men.
           </p>
         </>
       )
@@ -370,93 +372,95 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
   const EN_GENDER_BIAS_DATA_EN = [
     {
       titleLeft: <>
-        <span className="font-bold text-pink-700 mx-1">“优雅（Grace）”</span>
-        <span className="text-xs text-zinc-600">的内在化，对比</span>
-        <span className="font-bold text-green-800 mx-1">“影响力（Influence）”</span>
-        <span className="text-xs text-zinc-600">的扩张</span>
+        <span className="font-bold text-pink-700 mx-1">Internalization</span>
+        <span className="text-xs text-zinc-600">of "Grace" vs.</span>
+        <span className="font-bold text-green-800 mx-1">Expansion</span>
+        <span className="text-xs text-zinc-600">of "Influence"</span>
       </>,
       content: (
         <>
           <p>
-            在形象描述上，英文模型完成了一次从“外在修饰”向“内在特质”的转移，但性别边界依然清晰。
+            In physical descriptions, the English models shift from "external decoration" to "internal traits," but gender boundaries remain clear.
           </p>
           <p>
-            女性的形象在 ChatGPT 笔下显得更为立体，关键词从简单的外貌转向了
-            <span className="font-bold text-pink-800">“优雅（Grace，478次）”</span>
-            与
-            <span className="font-bold text-pink-800">“韧性（Resilience，1309次）”</span>
-            。相比中文模型对“身材”的关注，英文模型更强调女性的
-            <span className="font-bold text-pink-800">“风度（Poise）”</span>
-            与
-            <span className="font-bold text-pink-800">“自信（Confidence）”</span>
-            。
+            Women’s images appear more three-dimensional in ChatGPT’s writing, with keywords moving from simple appearance to
+            <span className="font-bold text-pink-800">"Grace" (478 times)</span>
+            and
+            <span className="font-bold text-pink-800">"Resilience" (1,309 times)</span>
+            . Compared to the Chinese model's focus on "body shape," the English model emphasizes a woman's
+            <span className="font-bold text-pink-800">"Poise"</span>
+            and
+            <span className="font-bold text-pink-800">"Confidence."</span>
           </p>
           <p>
-            然而，男性的关键词则直接指向社会权力。
-            <span className="font-bold text-green-900">“影响力（Influence，1089次）”</span>、
-            <span className="font-bold text-green-900">“个体（Individual，847次）”</span>
-            以及
-            <span className="font-bold text-green-900">“智力特质（Intellectual）”</span>
-            构成了男性的核心。虽然英文模型赋予了男性“现代感”，但这种“现代感”本质上仍是<strong>“理性与掌控力”</strong>的代名词。总体看下来，中文模型是在描述长相，而英文模型是在描述人格。但这种人格分配依然遵循：女性负责美与情感，男性负责逻辑与世界。
+            However, male keywords point directly to social power.
+            <span className="font-bold text-green-900">"Influence" (1,089 times),</span>
+            <span className="font-bold text-green-900">"Individual" (847 times),</span>
+            and
+            <span className="font-bold text-green-900">"Intellectual"</span>
+            traits form the core of the male persona. While the English model grants men a sense of "modernity," this modernity is essentially a synonym for <strong>"rationality and control."</strong> Overall, the Chinese model describes looks, while the English model describes personality—yet the distribution still dictates that women manage beauty and emotion, while men manage logic and the world.
           </p>
         </>
       )
     },
     {
       titleLeft: <>
-        <span className="font-bold text-pink-700 mx-1">“关怀（Care）”</span>
-        <span className="text-xs text-zinc-600">的多重重担，对比</span>
-        <span className="font-bold text-green-800 mx-1">“探索（Explore）”</span>
-        <span className="text-xs text-zinc-600">的无界参与</span>
+        <span className="font-bold text-pink-700 mx-1">Multiple Burdens</span>
+        <span className="text-xs text-zinc-600">of "Care" vs.</span>
+        <span className="font-bold text-green-800 mx-1">Boundless</span>
+        <span className="text-xs text-zinc-600">Participation of "Explore"</span>
       </>,
       content: (
         <>
           <p>
-            在行为逻辑中，英文模型展现了一个非常显著的“空间差”：女性被留在社区，男性走向世界。
+            In behavioral logic, the English model shows a significant "spatial gap": women are kept in the community, while men head into the world.
           </p>
           <p>
-            数据显示，女性与
-            <span className="font-bold text-pink-800">“社区（Community，1474次）”</span>、
-            <span className="font-bold text-pink-800">“平衡（Balance，676次）”</span>、
-            <span className="font-bold text-pink-800">“教育（Education，837次）”</span>
-            高度关联。高频词如“Juggle”和“Manage”揭示了现代女性的困境：她们不仅要作为“Caregiver（照顾者）”，还要在“Professional（职业的）”领域证明自己。
+            Data shows women are highly associated with
+            <span className="font-bold text-pink-800">"Community" (1,474 times),</span>
+            <span className="font-bold text-pink-800">"Balance" (676 times),</span>
+            and
+            <span className="font-bold text-pink-800">"Education" (837 times)</span>
+            . High-frequency words like "Juggle" and "Manage" reveal the plight of modern women: they must act as a "Caregiver" while proving themselves in the "Professional" sphere.
           </p>
           <p>
-            反观男性，他们的行为充满了<strong>公共性与流动性</strong>。关键词如
-            <span className="font-bold text-green-900">“探索（Explore）”</span>、
-            <span className="font-bold text-green-900">“外交（Diplomacy）”</span>、
-            <span className="font-bold text-green-900">“科技（Technology）”</span>
-            将男性定位为全球公民。不同于中文模型中“捕鱼/运动”这种具体体力活动，英文模型中的男性行为更具“脑力资本”色彩。但不变的是，女性依然是“家庭与关系的维系者（Homemaker）”，她们的勤奋往往带有<strong>牺牲与奉献</strong>的色彩，而男性的勤奋则指向<strong>职业成就</strong>。
+            Conversely, male behavior is full of <strong>publicness and fluidity</strong>. Keywords like
+            <span className="font-bold text-green-900">"Explore,"</span>
+            <span className="font-bold text-green-900">"Diplomacy,"</span>
+            and
+            <span className="font-bold text-green-900">"Technology"</span>
+            position men as global citizens. Unlike the specific physical activities like "fishing/sports" in the Chinese model, male behavior in the English model carries more "intellectual capital." Yet, the constant remains: women are the "Homemakers" and maintainers of relationships, their diligence flavored with <strong>sacrifice and devotion</strong>, while male diligence points toward <strong>professional achievement</strong>.
           </p>
         </>
       )
     },
     {
       titleLeft: <>
-        <span className="font-bold text-pink-700 mx-1">“抗争（Advocacy）”</span>
-        <span className="text-xs text-zinc-600">的补偿，对比</span>
-        <span className="font-bold text-green-800 mx-1">“策略（Strategy）”</span>
-        <span className="text-xs text-zinc-600">的主导</span>
+        <span className="font-bold text-pink-700 mx-1">Compensation</span>
+        <span className="text-xs text-zinc-600">of "Advocacy" vs.</span>
+        <span className="font-bold text-green-800 mx-1">Dominance</span>
+        <span className="text-xs text-zinc-600">of "Strategy"</span>
       </>,
       content: (
         <>
           <p>
-            在社会角色的期待上，英文模型引入了大量关于<strong>性别正义</strong>的现代词汇，这与中文模型形成了鲜明对比。
+            Regarding social expectations, the English model introduces modern vocabulary about <strong>gender justice</strong>, creating a sharp contrast with the Chinese model.
           </p>
           <p>
-            在女性的词簇中，出现了大量
-            <span className="font-bold text-pink-800">“平等（Equality，495次）”</span>、
-            <span className="font-bold text-pink-800">“赋权（Empowerment，321次）”</span>
-            和
-            <span className="font-bold text-pink-800">“倡议（Advocate，319次）”</span>
-            。这反映出英文语境下，女性的身份往往与<strong>“挑战障碍（Challenge / Barrier）”</strong>捆绑在一起。换句话说，模型认为女性的“力量”体现在对现状的“突破”上。
+            In female word clusters, there is a high frequency of
+            <span className="font-bold text-pink-800">"Equality" (495 times),</span>
+            <span className="font-bold text-pink-800">"Empowerment" (321 times),</span>
+            and
+            <span className="font-bold text-pink-800">"Advocate" (319 times)</span>
+            . This reflects that in an English context, female identity is often tied to <strong>"Challenging barriers."</strong> In other words, the model believes a woman’s "strength" is manifested in "breaking through" the status quo.
           </p>
           <p>
-            而男性的关键词则显得“顺风顺水”：
-            <span className="font-bold text-green-900">“策略（Strategic）”</span>、
-            <span className="font-bold text-green-900">“地缘政治（Geopolitical）”</span>、
-            <span className="font-bold text-green-900">“视野（Perspective，160次）”</span>
-            。男性被预设为规则的制定者和体系的操盘手。这揭示了一个残酷的真相，在英文模型的逻辑里，女性的“进步”是需要<strong>“Strive（奋斗/争取）”</strong>的补偿性叙事，而男性的“成功”则是<strong>“Nature（天生/自然）”</strong>的战略延展。模型虽然学会了“政治正确”的词汇，但在潜意识里，它依然认为世界是由男性的战略构建的，而女性则负责在其中呼吁公平。
+            Male keywords, however, appear "smooth sailing":
+            <span className="font-bold text-green-900">"Strategic,"</span>
+            <span className="font-bold text-green-900">"Geopolitical,"</span>
+            and
+            <span className="font-bold text-green-900">"Perspective" (160 times)</span>
+            . Men are preset as the rule-makers and system operators. This reveals a harsh truth: in the English model’s logic, female "progress" is a compensatory narrative requiring <strong>"Striving,"</strong> whereas male "success" is a natural, strategic extension of <strong>"Nature."</strong> The model has learned "politically correct" vocabulary, but subconsciously, it still believes the world is constructed by male strategy, while women are responsible for calling for fairness within it.
           </p>
         </>
       )
@@ -467,13 +471,19 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
     <>
       <div className="w-full max-w-3xl px-6 text-center">
         <div className="text-zinc-300 text-sm md:text-[15px] leading-[2.4] font-light tracking-widest text-left">
-          <p className="mb-4">
-            {t('discovery.page3_exit.p1_1')}<br />
-            {t('discovery.page3_exit.p1_2_before')}<span
-              id="citation-3"
-              onClick={() => onGoToData(3)}
-              className="inline-flex items-center justify-center bg-[#22c55e] text-[#121212] rounded-full w-4 h-4 text-[10px] font-bold ml-1 transform -translate-y-1 cursor-pointer hover:scale-125 transition-transform"
-            >3</span>{t('discovery.page3_exit.p1_2_after')}{t('discovery.page3_exit.p1_3')}
+          <p className="mb-4 whitespace-pre-wrap">
+            <ComplexTypewriter items={[
+              t('discovery.page3_exit.p1_1'),
+              <br key="br1" />,
+              t('discovery.page3_exit.p1_2_before'),
+              <span
+                key="citation-3"
+                id="citation-3"
+                onClick={() => onGoToData(3)}
+                className="inline-flex items-center justify-center bg-[#22c55e] text-[#121212] rounded-full w-4 h-4 text-[10px] font-bold mx-1 transform -translate-y-1 cursor-pointer hover:scale-125 transition-transform"
+              >3</span>,
+              t('discovery.page3_exit.p1_2_after') + t('discovery.page3_exit.p1_3')
+            ]} />
           </p>
         </div>
       </div>
@@ -531,8 +541,8 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
         </div>
       </div>
 
-      {/* 右侧：文字说明 - Scrollable with hidden scrollbar */}
-      <div className="w-full md:w-1/2 max-w-md text-left h-[400px] overflow-y-auto pr-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+      {/* 右侧：文字说明 - Scrollable with visible scrollbar */}
+      <div id="page4-exit-scroll" className="w-full md:w-1/2 max-w-md text-left h-[400px] overflow-y-scroll pr-2">
         <p className="text-zinc-700 text-sm md:text-[15px] leading-[2.2] font-light tracking-wide mb-6">
           {t('discovery.page4_exit.p1_1')}<span className="font-bold text-zinc-900">{t('discovery.page4_exit.p1_2')}</span><span
             id="citation-4"
@@ -563,6 +573,7 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
   );
 
   return (
+    <>
     <div
       ref={containerRef}
       className="h-screen overflow-y-auto snap-y snap-mandatory bg-[#121212] selection:bg-[#ff4d94]/30 relative scroll-smooth"
@@ -601,20 +612,23 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
       </div>
 
       {/* 第一屏：首屏内容 */}
-      <section className="h-screen w-full snap-start snap-always relative flex flex-col items-center justify-center p-6 text-center z-20 bg-transparent">
+      <section className="min-h-screen w-full snap-start snap-always relative flex flex-col items-center justify-center px-6 py-20 z-20 bg-transparent text-left">
         {/* 注意：bg-transparent 让它透出下面的 PixelBackground */}
-        <div className="w-full max-w-2xl z-10 flex flex-col items-center">
+        <div className="w-full max-w-2xl z-10 flex flex-col justify-center">
           <div className="text-zinc-300 text-sm md:text-[15px] leading-[2.4] font-light tracking-widest max-w-xl">
-            <p className="mb-4 text-left">
-              {t('discovery.slide1.p1_before')}
-              <span
-                id="citation-2"
-                onClick={() => onGoToData(2)}
-                className="inline-flex items-center justify-center bg-[#22c55e] text-[#121212] rounded-full w-4 h-4 text-[10px] font-bold ml-1 transform -translate-y-1 cursor-pointer hover:scale-125 transition-transform"
-              >
-                2
-              </span>
-              {t('discovery.slide1.p1_after')}
+            <p className="mb-4 text-left whitespace-pre-wrap">
+              <ComplexTypewriter items={[
+                t('discovery.slide1.p1_before'),
+                <span
+                  key="citation-2"
+                  id="citation-2"
+                  onClick={() => onGoToData(2)}
+                  className="inline-flex items-center justify-center bg-[#22c55e] text-[#121212] rounded-full w-4 h-4 text-[10px] font-bold mx-1 transform -translate-y-1 cursor-pointer hover:scale-125 transition-transform"
+                >
+                  2
+                </span>,
+                t('discovery.slide1.p1_after')
+              ]} />
             </p>
           </div>
         </div>
@@ -652,9 +666,9 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
       />
 
       {/* 第六屏：过渡屏 (Page 6) */}
-      <section className="h-screen w-full snap-start snap-always relative flex flex-col items-center justify-center p-6 text-center z-20 bg-transparent">
-        <div className="w-full max-w-2xl z-10 flex flex-col items-center">
-          <h2 className="text-[#22c55e] text-xl md:text-2xl font-bold tracking-[0.3em] mb-12 leading-relaxed">
+      <section className="min-h-screen w-full snap-start snap-always relative flex flex-col items-center justify-center px-6 py-20 z-20 bg-transparent text-left">
+        <div className="w-full max-w-2xl z-10 flex flex-col justify-center">
+          <h2 className="text-[#22c55e] text-xl md:text-2xl font-bold tracking-[0.3em] mb-12 leading-relaxed whitespace-pre-wrap">
             {t('discovery.slide6.title')}
           </h2>
           <div className="text-zinc-300 text-sm md:text-[15px] leading-[2.4] font-light tracking-widest max-w-xl">
@@ -694,9 +708,9 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
       </section>
 
       {/* 补充过渡屏：放在两个数据洞察页面之间 */}
-      <section className="h-screen w-full snap-start snap-always relative flex flex-col items-center justify-center p-6 text-center z-20 bg-transparent">
-        <div className="w-full max-w-2xl z-10 flex flex-col items-center">
-          <h2 className="text-[#22c55e] text-xl md:text-2xl font-bold tracking-[0.3em] mb-12 leading-relaxed">
+      <section className="min-h-screen w-full snap-start snap-always relative flex flex-col items-center justify-center px-6 py-20 z-20 bg-transparent text-left">
+        <div className="w-full max-w-2xl z-10 flex flex-col justify-center">
+          <h2 className="text-[#22c55e] text-xl md:text-2xl font-bold tracking-[0.3em] mb-12 leading-relaxed whitespace-pre-wrap">
             {t('discovery.slide_interstitial.title')}
           </h2>
           <div className="text-zinc-300 text-sm md:text-[15px] leading-[2.4] font-light tracking-widest max-w-xl">
@@ -758,6 +772,26 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
       </section>
 
     </div>
+
+      <style>{`
+        #page4-exit-scroll::-webkit-scrollbar {
+            -webkit-appearance: none !important;
+            display: block !important;
+            width: 6px !important;
+        }
+        #page4-exit-scroll::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.06) !important;
+            border-radius: 10px !important;
+        }
+        #page4-exit-scroll::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.25) !important;
+            border-radius: 10px !important;
+        }
+        #page4-exit-scroll:hover::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.45) !important;
+        }
+      `}</style>
+    </>
   );
 };
 

@@ -323,34 +323,36 @@ export const WordGraph: React.FC<WordGraphProps> = ({ data, activeGroup, onSelec
                             className="pointer-events-none opacity-80"
                         />
 
-                        {/* Female Label - positioned exactly below the center stack aligned left */}
+                        {/* Female "F" - hidden behind left arc */}
                         <text
-                            x={-70}
-                            y={Math.min(140, (dimensions.height / 9) * 2) + 110}
+                            x={-outerRadius * 0.55}
+                            y={0}
                             textAnchor="middle"
-                            alignmentBaseline="middle"
+                            dominantBaseline="central"
                             fill="#F68CB2"
-                            fontSize={14}
-                            fontWeight="500"
-                            letterSpacing="0.1em"
-                            className="select-none pointer-events-none drop-shadow-lg"
+                            fontSize={outerRadius * 0.65}
+                            fontWeight="bold"
+                            fontFamily="QuanFont"
+                            opacity={0.12}
+                            className="select-none pointer-events-none"
                         >
-                            {lang === 'CN' ? '女性描述' : 'Female'}
+                            F
                         </text>
 
-                        {/* Male Label - positioned exactly below the center stack aligned right */}
+                        {/* Male "M" - hidden behind right arc */}
                         <text
-                            x={70}
-                            y={Math.min(140, (dimensions.height / 9) * 2) + 110}
+                            x={outerRadius * 0.55}
+                            y={0}
                             textAnchor="middle"
-                            alignmentBaseline="middle"
+                            dominantBaseline="central"
                             fill="#2ABB3A"
-                            fontSize={14}
-                            fontWeight="500"
-                            letterSpacing="0.1em"
-                            className="select-none pointer-events-none drop-shadow-lg"
+                            fontSize={outerRadius * 0.65}
+                            fontWeight="bold"
+                            fontFamily="QuanFont"
+                            opacity={0.12}
+                            className="select-none pointer-events-none"
                         >
-                            {lang === 'CN' ? '男性描述' : 'Male'}
+                            M
                         </text>
                     </g>
                 )}
