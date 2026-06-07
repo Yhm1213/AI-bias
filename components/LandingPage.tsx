@@ -47,8 +47,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
               {i < displayText.split('\n').length - 1 && <br />}
             </React.Fragment>
           ))}
-          {isFinished && <br />}
-          <span className={`inline-block w-3 h-1 bg-green-500 animate-cursor align-middle ${isFinished ? 'mt-8' : 'ml-2 -translate-y-1'}`}></span>
+          <span className={`inline-block w-3 h-[2px] bg-green-500 animate-cursor align-baseline ml-1`}></span>
         </div>
 
         {isFinished && (

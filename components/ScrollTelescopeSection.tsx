@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef, ReactNode } from 'react';
 import pixelBackground from './PixelBackground'; // We don't need this inside, but we need the image import
+import { useTranslation } from '../contexts/LanguageContext';
 import wangYuanJing from '../public/pic/wangyuanjing.png';
 
 interface SlideContent {
@@ -22,6 +23,7 @@ const ScrollTelescopeSection: React.FC<ScrollTelescopeSectionProps> = ({
     mode = 'default',
     renderVisualZone
 }) => {
+    const { language } = useTranslation();
     const [isVisible, setIsVisible] = useState(false);
     const [subPage, setSubPage] = useState(0);
     const [showExitHint, setShowExitHint] = useState(false);
@@ -210,33 +212,33 @@ const ScrollTelescopeSection: React.FC<ScrollTelescopeSectionProps> = ({
                     {/* Overlay Content */}
                     <div className="absolute inset-0 flex">
                         {/* Left Content (50%) */}
-                        <div className="w-1/2 h-full flex items-center justify-center p-[6%] pt-[12%] pl-[10%]">
+                        <div className="w-[60%] h-full flex items-start justify-center p-[4%] pt-[6%] pl-[8%] pr-[3%]">
                             <div
                                 className={`
-                    w-full h-full max-h-full overflow-hidden pr-1 flex flex-col
+                    w-full h-full max-h-full pr-1 flex flex-col
                     ${isVisible ? 'opacity-100' : 'opacity-0'}
                     transition-opacity duration-1000 delay-500
                   `}
                             >
-                                <div className="space-y-6 text-zinc-900 font-medium text-left flex flex-col min-h-0 h-full">
+                                <div className="w-[96%] space-y-6 text-zinc-900 font-medium text-left flex flex-col min-h-0 h-full">
                                     {/* Title Swapper */}
-                                    <div key={`title-${subPage}`} className="text-center mb-4 animate-fadeIn font-quan">
-                                        <div className="inline-block bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 border border-black/5 shadow-sm">
+                                    <div key={`title-${subPage}`} className="text-center mb-2 animate-fadeIn font-quan text-lg">
+                                        <div className="inline-block px-3 py-2">
                                             {slides[subPage]?.titleLeft}
                                         </div>
                                     </div>
                                     {/* Body Swapper */}
-                                    <div className="relative flex-1 min-h-0 flex flex-col justify-center">
+                                    <div className="relative flex-1 min-h-0 flex flex-col justify-start">
                                         <div
                                             key={`content-${subPage}`}
                                             id="telescope-scroll-box"
-                                            className="max-h-[34vh] overflow-y-scroll pr-3 space-y-4 text-left text-xs md:text-[13px] leading-[1.7] text-zinc-800/90 animate-fadeInSlideUp"
+                                            className={`${language === 'EN' ? 'max-h-[50vh] overflow-y-scroll' : ''} pr-3 space-y-4 text-left text-xs md:text-[13px] leading-[1.7] text-zinc-800/90 animate-fadeInSlideUp`}
                                         >
                                             {slides[subPage]?.content}
                                         </div>
                                     </div>
 
-                                    <div className="pt-2 border-t border-black/10 mt-3 shrink-0" />
+
 
                                 </div>
                             </div>

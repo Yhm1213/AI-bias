@@ -28,6 +28,13 @@
             font-style: normal;
         }
 
+        @font-face {
+            font-family: 'Lemi';
+            src: url('./Font/Lemi.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         html,
         body,
         #root {
@@ -48,8 +55,12 @@
             font-family: 'Cubic11', 'Unifont', sans-serif;
         }
 
-        /* 强制所有标题使用 quan.ttf */
-        h1, h2, h3, h4, h5, h6 {
+        /* 中文标题使用 Lemi，英文标题使用 quan.ttf */
+        html[lang="zh-CN"] h1, html[lang="zh-CN"] h2, html[lang="zh-CN"] h3, html[lang="zh-CN"] h4, html[lang="zh-CN"] h5, html[lang="zh-CN"] h6 {
+            font-family: 'Lemi', sans-serif !important;
+        }
+
+        html[lang="en"] h1, html[lang="en"] h2, html[lang="en"] h3, html[lang="en"] h4, html[lang="en"] h5, html[lang="en"] h6 {
             font-family: 'QuanFont', sans-serif !important;
         }
 
@@ -57,7 +68,12 @@
             font-family: 'Unifont', monospace;
         }
 
-        .font-quan {
+        /* 动态标题字体类：中文使用Lemi，英文使用QuanFont */
+        html[lang="zh-CN"] .font-quan {
+            font-family: 'Lemi', sans-serif;
+        }
+
+        html[lang="en"] .font-quan {
             font-family: 'QuanFont', sans-serif;
         }
 

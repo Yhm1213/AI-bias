@@ -111,7 +111,7 @@
 /* 气泡文本容器样式 */
 .bubble-container {
     position: absolute;
-    background: rgba(18, 18, 18, 0.95);
+    background: #2A2A2A;
     border: 2px solid #F68CB2;
     border-radius: 12px;
     box-shadow: 0 3px 15px rgba(246, 140, 178, 0.2);
@@ -126,7 +126,7 @@
 /* 新：可拖拽面板样式（替代气泡） */
 .panel-container {
     position: absolute;
-    background: rgba(18, 18, 18, 0.95);
+    background: #2A2A2A;
     border: none;
     border-radius: 10px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);

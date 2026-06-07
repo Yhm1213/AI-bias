@@ -5,7 +5,7 @@ interface ComplexTypewriterProps {
   speed?: number;
 }
 
-export function ComplexTypewriter({ items, speed = 30 }: ComplexTypewriterProps) {
+export function ComplexTypewriter({ items, speed = 120 }: ComplexTypewriterProps) {
   const [visibleChars, setVisibleChars] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
@@ -61,11 +61,8 @@ export function ComplexTypewriter({ items, speed = 30 }: ComplexTypewriterProps)
           return <React.Fragment key={idx}>{item}</React.Fragment>;
         }
       })}
-      {isFinished && <br />}
       <span
-        className={`inline-block w-3 h-1 bg-green-500 animate-cursor align-middle ${
-          isFinished ? 'mt-8' : 'ml-2 -translate-y-1'
-        }`}
+        className={`inline-block w-3 h-[2px] bg-green-500 animate-cursor align-baseline ml-1`}
       ></span>
     </div>
   );
