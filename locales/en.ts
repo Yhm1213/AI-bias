@@ -3,12 +3,12 @@ export const en = {
     scroll_to_reveal: "SCROLL TO REVEAL",
     our_intention: "OUR INTENTION",
     intro_1:
-      "Philosopher Ludwig Wittgenstein believed, the limits of my language mean the limits of my world. In the AI era, large models are quietly entering search engines, social feeds, and various daily scenes. Their language will, to a large extent, influence human thought. While we might not grasp the full impact in the short term, we can borrow the lens of these models to understand how gender is viewed and commented on by massive historical corpora and meticulously designed algorithmic structures.",
-    intro_2: "And as you gaze at this work on your screen, it is actually the present you looking back at humanity's past. At this moment, what do you see? And what are you thinking?",
-    intro_3: "We've abstracted this mutual gaze into the visual mapping of 'eyes', hoping to help people review and rethink the reality and imagination around gender. How do large models describe men and women? What similarities and differences will this text data reveal across economic levels, languages, and genders? And what 'stereotypes' are hidden behind them?",
-    method_title: "METHODOLOGY",
-    method_1: "We targeted two large language models, ChatGPT and DeepSeek, systematically collecting their completions for the prompts 'Men are...' and 'Women are...' across 196 countries. For each country, gender, and language, we gathered 10 generated text segments, totaling nearly 8,000 responses.",
-    method_2: "Perhaps this phrasing already carries an essentialist bias, but it acts like a 'stress test,' maximizing the exposure of the models' inherent bias structures and the slant of their training corpora.",
+      "The philosopher Ludwig Wittgenstein once said, \"The limits of my language mean the limits of my world.\" In the age of AI, large language models (LLMs) have permeated every scenario of human life. Their language will, to a great extent, influence human thought. While we may not be able to judge the depth and breadth of this influence in the short term, we can follow the \"eyes\" of the model to observe how gender is deconstructed, defined, and scrutinized within the vast corpus of human history and precise algorithmic structures.",
+    intro_2: "Driven by an interest in gender topics, we systematically collected nearly 8,000 completion responses from ChatGPT and DeepSeek for \"A man/woman is...\" across 196 countries. In the process of transforming these texts into visual interactions, we discovered an intriguing closed loop: we as observers, the LLM as the medium, and the human corpus as the background are in a state of synchronic mutual gaze.",
+    intro_3: "Thus, we abstracted this gaze into the visual metaphor of the \"eye,\" attempting to dissect the reality and imagination of gender: What commonalities and rifts appear in the narratives of LLMs across different economic levels, languages, and regions? What deep-rooted stereotypes lie hidden beneath?",
+    method_title: "",
+    method_1: "",
+    method_2: "Perhaps the sentence structure \"A man/woman is...\" itself carries an essentialist color, but it acts more like a \"stress test,\" directly stripping away the internal bias structures of the models and exposing the hidden imbalances in the training data.",
     buttons: {
       discovery: "What Did We Discover?",
       explore: "Explore 8000 Answers",

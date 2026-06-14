@@ -34,9 +34,10 @@ interface NetworkScrollyProps {
     data: Record<string, RawLink[]>;
     activePage: number;
     isVisible: boolean;
+    externalHoveredId?: string | null;
 }
 
-const NetworkScrolly: React.FC<NetworkScrollyProps> = ({ data, activePage, isVisible }) => {
+const NetworkScrolly: React.FC<NetworkScrollyProps> = ({ data, activePage, isVisible, externalHoveredId }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const svgRef = useRef<SVGSVGElement>(null);
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
@@ -323,6 +324,60 @@ const NetworkScrolly: React.FC<NetworkScrollyProps> = ({ data, activePage, isVis
             }
         };
     }, [data, dimensions, activePage, sheetNames, isVisible]);
+
+    // External hover effect handler
+    useEffect(() => {
+        if (!svgRef.current || !isVisible) return;
+        const svg = d3.select(svgRef.current);
+        const nodeGroups = svg.selectAll<SVGGElement, NetworkNode>('.node');
+        const linkElements = svg.selectAll<SVGLineElement, ProcessedLink>('.link');
+        
+        if (externalHoveredId) {
+            let hoveredNode: NetworkNode | undefined;
+            nodeGroups.each(function(d) {
+                if (d.id === externalHoveredId) hoveredNode = d;
+            });
+            
+            if (!hoveredNode) return;
+
+            const adjacentNodeIds = new Set<string>();
+            adjacentNodeIds.add(hoveredNode.id);
+
+            linkElements.each(function(d) {
+                const sId = typeof d.source === 'string' ? d.source : (d.source as NetworkNode).id;
+                const tId = typeof d.target === 'string' ? d.target : (d.target as NetworkNode).id;
+                if (sId === hoveredNode.id) adjacentNodeIds.add(tId);
+                else if (tId === hoveredNode.id) adjacentNodeIds.add(sId);
+            });
+
+            nodeGroups.selectAll('circle').transition().duration(200).ease(d3.easeQuadOut)
+                .attr('opacity', (d: any) => adjacentNodeIds.has(d.id) ? 0.4 : 0.05);
+
+            nodeGroups.selectAll('text').transition().duration(200)
+                .style('opacity', (d: any) => adjacentNodeIds.has(d.id) ? 1 : 0);
+
+            linkElements.transition().duration(200).ease(d3.easeQuadOut)
+                .style('stroke-opacity', (d: any) => {
+                    const sId = typeof d.source === 'string' ? d.source : (d.source as NetworkNode).id;
+                    const tId = typeof d.target === 'string' ? d.target : (d.target as NetworkNode).id;
+                    return (sId === hoveredNode.id || tId === hoveredNode.id) ? 0.8 : 0.05;
+                })
+                .attr('stroke-width', (d: any) => {
+                    const sId = typeof d.source === 'string' ? d.source : (d.source as NetworkNode).id;
+                    const tId = typeof d.target === 'string' ? d.target : (d.target as NetworkNode).id;
+                    return (sId === hoveredNode.id || tId === hoveredNode.id) ? 2 : 1;
+                });
+        } else {
+            // Restore
+            nodeGroups.selectAll('circle').transition().duration(200).ease(d3.easeQuadOut)
+                .attr('opacity', 0.2);
+            nodeGroups.selectAll('text').transition().duration(200)
+                .style('opacity', (d: any) => d.degree >= 3 ? 1 : 0);
+            linkElements.transition().duration(200).ease(d3.easeQuadOut)
+                .style('stroke-opacity', 0.15)
+                .attr('stroke-width', 1);
+        }
+    }, [externalHoveredId, isVisible]);
 
     return (
         <div ref={containerRef} className="w-full h-full relative">
