@@ -35,6 +35,13 @@
             font-style: normal;
         }
 
+        @font-face {
+            font-family: 'DianDian';
+            src: url('./Font/点点.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         html,
         body,
         #root {
@@ -55,9 +62,9 @@
             font-family: 'Cubic11', 'Unifont', sans-serif;
         }
 
-        /* 中文标题使用 Lemi，英文标题使用 quan.ttf */
+        /* 中文标题使用 点点.ttf，英文标题使用 quan.ttf */
         html[lang="zh-CN"] h1, html[lang="zh-CN"] h2, html[lang="zh-CN"] h3, html[lang="zh-CN"] h4, html[lang="zh-CN"] h5, html[lang="zh-CN"] h6 {
-            font-family: 'Lemi', sans-serif !important;
+            font-family: 'DianDian', sans-serif !important;
         }
 
         html[lang="en"] h1, html[lang="en"] h2, html[lang="en"] h3, html[lang="en"] h4, html[lang="en"] h5, html[lang="en"] h6 {
@@ -68,13 +75,9 @@
             font-family: 'Unifont', monospace;
         }
 
-        /* 动态标题字体类：中文使用Lemi，英文使用QuanFont */
-        html[lang="zh-CN"] .font-quan {
-            font-family: 'Lemi', sans-serif;
-        }
-
-        html[lang="en"] .font-quan {
-            font-family: 'QuanFont', sans-serif;
+        /* 动态标题字体类：中英文都使用 QuanFont (针对 enter 和 homepage) */
+        .font-quan {
+            font-family: 'QuanFont', sans-serif !important;
         }
 
         @keyframes blink {
@@ -172,7 +175,7 @@
         }
 
     </style>
-  <script type="module" crossorigin src="/AI-bias/assets/index-DnfMYzCE.js"></script>
+  <script type="module" crossorigin src="/AI-bias/assets/index-Bcso9mP1.js"></script>
   <link rel="stylesheet" crossorigin href="/AI-bias/assets/index-WyaFadYs.css">
 </head>
 
