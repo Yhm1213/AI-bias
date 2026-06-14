@@ -142,7 +142,7 @@ const App: React.FC = () => {
 
           {/* 我们的初衷 */}
           <div className="w-full space-y-12">
-            <h2 className="text-[#22c55e] font-bold text-center text-xl tracking-[0.5em]">{t('home.our_intention')}</h2>
+            <h2 className="text-[#22c55e] font-quan font-bold text-center text-xl tracking-[0.5em]">{t('home.our_intention')}</h2>
             <div className="text-zinc-300 text-[15px] leading-[2.05] space-y-6 font-light tracking-wide text-left">
               <p>
                 {t('home.intro_1')}
@@ -166,7 +166,7 @@ const App: React.FC = () => {
 
           {/* 方法 */}
           <div className="w-full space-y-12">
-            <h2 className="text-[#22c55e] font-bold text-center text-xl tracking-[0.5em]">{t('home.method_title')}</h2>
+            <h2 className="text-[#22c55e] font-quan font-bold text-center text-xl tracking-[0.5em]">{t('home.method_title')}</h2>
             <div className="text-zinc-300 text-[15px] leading-[2.2] text-left font-light tracking-wide">
               <p className="mb-8">
                 {t('home.method_1')}
