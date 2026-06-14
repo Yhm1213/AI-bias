@@ -16,6 +16,21 @@ const App: React.FC = () => {
 
   const { language, toggleLanguage, t } = useTranslation();
 
+  useEffect(() => {
+    const handleResize = () => {
+      const designWidth = 1440;
+      const currentWidth = window.innerWidth;
+      const scale = currentWidth / designWidth;
+      
+      // @ts-ignore
+      document.body.style.zoom = scale;
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const handleEnter = () => {
     setCurrentView('main');
     window.scrollTo(0, 0);
