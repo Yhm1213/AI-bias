@@ -24,24 +24,46 @@ interface DiscoverySlidesProps {
   onClearHighlight?: () => void;
 }
 
+const DiscoveryContext = React.createContext<{
+  language: 'CN' | 'EN';
+  setHoveredKeyword: (payload: { id: string, contextGender?: 'female' | 'male' } | null) => void;
+}>({
+  language: 'CN',
+  setHoveredKeyword: () => {},
+});
+
+const Keyword = ({ id, enId, color, children }: { id: string, enId?: string, color: string, children: React.ReactNode }) => {
+  const { language, setHoveredKeyword } = React.useContext(DiscoveryContext);
+  const targetId = language === 'EN' ? (enId || id) : id;
+  const [isLocalHovered, setIsLocalHovered] = React.useState(false);
+  
+  return (
+    <span 
+      className={`cursor-pointer transition-colors duration-200 mx-[0.25em] px-[0.15em] border-b border-dashed ${isLocalHovered ? 'border-transparent' : 'border-current'}`}
+      style={{ 
+        backgroundColor: isLocalHovered ? color : 'transparent',
+        color: isLocalHovered ? '#ffffff' : 'inherit',
+      }}
+      onMouseEnter={() => {
+        setIsLocalHovered(true);
+        const contextGender = (color || '').toLowerCase().includes('f68cb2') ? 'female' : (color || '').toLowerCase().includes('2abb3a') ? 'male' : undefined;
+        setHoveredKeyword({ id: targetId, contextGender });
+      }}
+      onMouseLeave={() => {
+        setIsLocalHovered(false);
+        setHoveredKeyword(null);
+      }}
+    >
+      {children}
+    </span>
+  );
+};
+
 const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, language, toggleLanguage, highlightId, pendingScrollAction, onClearHighlight }) => {
   const { t } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoveredData, setHoveredData] = React.useState<'CN' | 'EN' | null>(null);
-  const [hoveredKeyword, setHoveredKeyword] = React.useState<string | null>(null);
-
-  const Keyword = ({ id, enId, color, children }: { id: string, enId?: string, color: string, children: React.ReactNode }) => {
-    return (
-      <span 
-        className="font-bold cursor-pointer transition-all hover:scale-110 inline-block mx-0.5"
-        style={{ color: color, textShadow: `0 0 8px ${color}40` }}
-        onMouseEnter={() => setHoveredKeyword(language === 'EN' ? (enId || id) : id)}
-        onMouseLeave={() => setHoveredKeyword(null)}
-      >
-        {children}
-      </span>
-    );
-  };
+  const [hoveredKeyword, setHoveredKeyword] = React.useState<{ id: string, contextGender?: 'female' | 'male' } | null>(null);
 
   React.useLayoutEffect(() => {
     if (pendingScrollAction?.current === 'highlight') {
@@ -95,9 +117,9 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
     {
       titleLeft: <>
         <span className="mx-1">“<Keyword id="温柔" color="#F68CB2">温柔</Keyword>”与“<Keyword id="装饰" color="#F68CB2">装饰</Keyword>”</span>
-        <span className="text-zinc-600">的她，对比</span>
+        <span>的她，对比</span>
         <span className="mx-1">“<Keyword id="高大" color="#2ABB3A">高大</Keyword>”与“<Keyword id="力量" color="#2ABB3A">力量</Keyword>”</span>
-        <span className="text-zinc-600">的他</span>
+        <span>的他</span>
       </>,
       content: (
         <>
@@ -126,9 +148,9 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
     {
       titleLeft: <>
         <span className="mx-1">“<Keyword id="照顾" color="#F68CB2">照顾</Keyword>”家庭</span>
-        <span className="text-zinc-600">的她，对比</span>
+        <span>的她，对比</span>
         <span className="mx-1">“<Keyword id="热爱" color="#2ABB3A">热爱</Keyword>”世界</span>
-        <span className="text-zinc-600">的他</span>
+        <span>的他</span>
       </>,
       content: (
         <>
@@ -139,7 +161,7 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
             在统计中，“家庭”是双方共同的高频词，但语境完全不同。女性的关键词是“<Keyword id="照顾" color="#F68CB2">照顾（56次）</Keyword>”、“<Keyword id="核心" color="#F68CB2">核心（44次）</Keyword>”、“<Keyword id="和谐" color="#F68CB2">和谐（62次）</Keyword>”。她们是家庭的润滑剂，负责具体的、重复的、维系性的事务。
           </p>
           <p>
-            相比之下，男性的行为动词充满了<strong className="text-[#2ABB3A]">外部探索性</strong>：他们“<Keyword id="热爱" color="#2ABB3A">热爱（147次）</Keyword>”、“<Keyword id="喜欢" color="#2ABB3A">喜欢（297次）</Keyword>”的对象是“<Keyword id="足球" color="#2ABB3A">足球（100次）</Keyword>”、“<Keyword id="体育" color="#2ABB3A">体育（48次）</Keyword>”或“<Keyword id="户外活动" color="#2ABB3A">户外活动（118次）</Keyword>”。
+            相比之下，男性的行为动词充满了<strong>外部探索性</strong>：他们“<Keyword id="热爱" color="#2ABB3A">热爱（147次）</Keyword>”、“<Keyword id="喜欢" color="#2ABB3A">喜欢（297次）</Keyword>”的对象是“<Keyword id="足球" color="#2ABB3A">足球（100次）</Keyword>”、“<Keyword id="体育" color="#2ABB3A">体育（48次）</Keyword>”或“<Keyword id="户外活动" color="#2ABB3A">户外活动（118次）</Keyword>”。
           </p>
           <p>
             同样是谈论“责任”，女性的“<Keyword id="责任感" color="#F68CB2">责任感（85次）</Keyword>”往往与家务琐事捆绑，是具体的<strong>无偿劳动</strong>；而男性的“<Keyword id="责任感" color="#2ABB3A">责任感（218次）</Keyword>”频次是女性的 2.5 倍，通常指向一种宏大的抽象品质。这意味着在模型的逻辑里，男性的责任是一种“社会光环”，而女性的责任则是一种“生存定式”。
@@ -150,9 +172,9 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
     {
       titleLeft: <>
         <span className="mx-1">“<Keyword id="遵守" color="#F68CB2">遵守</Keyword>”规范</span>
-        <span className="text-zinc-600">的她，对比</span>
+        <span>的她，对比</span>
         <span className="mx-1">“<Keyword id="开拓" color="#2ABB3A">开拓</Keyword>”疆域</span>
-        <span className="text-zinc-600">的他</span>
+        <span>的他</span>
       </>,
       content: (
         <>
@@ -192,10 +214,10 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
   const GENDER_BIAS_DATA_EN = [
     {
       titleLeft: <>
-        <span className="mx-1">"<Keyword id="温柔" enId="gentle" color="#F68CB2">Gentle</Keyword>" & "<Keyword id="装饰" enId="decorative" color="#F68CB2">Decorative</Keyword>"</span>
-        <span className="text-zinc-600">Her vs.</span>
-        <span className="mx-1">"<Keyword id="高大" enId="tall" color="#2ABB3A">Tall</Keyword>" & "<Keyword id="力量" enId="powerful" color="#2ABB3A">Powerful</Keyword>"</span>
-        <span className="text-zinc-600">Him</span>
+        <span className="mx-1">"<Keyword id="温柔" color="#F68CB2">Gentle</Keyword>" & "<Keyword id="装饰" color="#F68CB2">Decorative</Keyword>"</span>
+        <span>Her vs.</span>
+        <span className="mx-1">"<Keyword id="高大" color="#2ABB3A">Tall</Keyword>" & "<Keyword id="力量" color="#2ABB3A">Powerful</Keyword>"</span>
+        <span>Him</span>
       </>,
       content: (
         <>
@@ -204,15 +226,15 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
           </p>
           <p>
             In terms of temperament word frequency, women are firmly locked into soft traits such as
-            "<Keyword id="温柔" enId="gentle" color="#F68CB2">gentle (33 times)</Keyword>" and "<Keyword id="优雅" enId="elegant" color="#F68CB2">elegant (47 times)</Keyword>"
+            "<Keyword id="温柔" color="#F68CB2">gentle (33 times)</Keyword>" and "<Keyword id="优雅" color="#F68CB2">elegant (47 times)</Keyword>"
             , while men are defined by
-            "<Keyword id="坚韧" enId="resilient" color="#2ABB3A">resilient (185 times)</Keyword>", "<Keyword id="勇敢" enId="brave" color="#2ABB3A">brave (87 times)</Keyword>", and "<Keyword id="强" enId="strong" color="#2ABB3A">strong (137 times)</Keyword>"
+            "<Keyword id="坚韧" color="#2ABB3A">resilient (185 times)</Keyword>", "<Keyword id="勇敢" color="#2ABB3A">brave (87 times)</Keyword>", and "<Keyword id="强" color="#2ABB3A">strong (137 times)</Keyword>"
             . This contrast is almost extreme in physical depictions: descriptions of women often point to visual details and clothing, such as
-            "<Keyword id="头巾" enId="headscarf" color="#F68CB2">headscarf (87 times)</Keyword>", "<Keyword id="长袍" enId="robe" color="#F68CB2">robe (81 times)</Keyword>", and "<Keyword id="时尚" enId="fashion" color="#F68CB2">fashion (63 times)</Keyword>"
+            "<Keyword id="头巾" color="#F68CB2">headscarf (87 times)</Keyword>", "<Keyword id="长袍" color="#F68CB2">robe (81 times)</Keyword>", and "<Keyword id="时尚" color="#F68CB2">fashion (63 times)</Keyword>"
             ; whereas men are simplified into pure physiological power, such as
-            "<Keyword id="高大" enId="tall" color="#2ABB3A">tall (26 times)</Keyword>"
+            "<Keyword id="高大" color="#2ABB3A">tall (26 times)</Keyword>"
             and
-            "<Keyword id="强壮" enId="strong" color="#2ABB3A">strong (67 times)</Keyword>"
+            "<Keyword id="强壮" color="#2ABB3A">strong (67 times)</Keyword>"
             .
           </p>
           <p>
@@ -223,10 +245,10 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
     },
     {
       titleLeft: <>
-        <span className="mx-1">"<Keyword id="照顾" enId="care" color="#F68CB2">Caring</Keyword>"</span>
-        <span className="text-zinc-600">Family Woman vs.</span>
-        <span className="mx-1">"<Keyword id="热爱" enId="love" color="#2ABB3A">Loving</Keyword>"</span>
-        <span className="text-zinc-600">the World Man</span>
+        <span className="mx-1">"<Keyword id="照顾" color="#F68CB2">Caring</Keyword>"</span>
+        <span>Family Woman vs.</span>
+        <span className="mx-1">"<Keyword id="热爱" color="#2ABB3A">Loving</Keyword>"</span>
+        <span>the World Man</span>
       </>,
       content: (
         <>
@@ -234,23 +256,23 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
             If the first layer is the shaping of image, the data regarding <strong>behavior and responsibility</strong> reveals deeper inequality.
           </p>
           <p>
-            In our statistics, "family" is a high-frequency word for both sides, but the context is entirely different. For women, the keywords are <strong className="text-[#F68CB2]">"<Keyword id="照顾" enId="care" color="#F68CB2">care (56 times)</Keyword>", "<Keyword id="核心" enId="core" color="#F68CB2">core (44 times)</Keyword>", and "<Keyword id="和谐" enId="harmony" color="#F68CB2">harmony (62 times)</Keyword>"</strong>. They are the lubricants of the family, responsible for specific, repetitive, and maintenance-oriented tasks.
+            In our statistics, "family" is a high-frequency word for both sides, but the context is entirely different. For women, the keywords are <strong>"<Keyword id="照顾" color="#F68CB2">care (56 times)</Keyword>", "<Keyword id="核心" color="#F68CB2">core (44 times)</Keyword>", and "<Keyword id="和谐" color="#F68CB2">harmony (62 times)</Keyword>"</strong>. They are the lubricants of the family, responsible for specific, repetitive, and maintenance-oriented tasks.
           </p>
           <p>
-            In contrast, men’s behavioral verbs are full of <strong className="text-[#2ABB3A]">external exploration</strong>: the objects they "<Keyword id="热爱" enId="love" color="#2ABB3A">love (147 times)</Keyword>" or "<Keyword id="喜欢" enId="like" color="#2ABB3A">like (297 times)</Keyword>" are "<Keyword id="足球" enId="football" color="#2ABB3A">football (100 times)</Keyword>", "<Keyword id="体育" enId="sports" color="#2ABB3A">sports (48 times)</Keyword>", or "<Keyword id="户外活动" enId="outdoor activities" color="#2ABB3A">outdoor activities (118 times)</Keyword>".
+            In contrast, men’s behavioral verbs are full of <strong>external exploration</strong>: the objects they "<Keyword id="热爱" color="#2ABB3A">love (147 times)</Keyword>" or "<Keyword id="喜欢" color="#2ABB3A">like (297 times)</Keyword>" are "<Keyword id="足球" color="#2ABB3A">football (100 times)</Keyword>", "<Keyword id="体育" color="#2ABB3A">sports (48 times)</Keyword>", or "<Keyword id="户外活动" color="#2ABB3A">outdoor activities (118 times)</Keyword>".
           </p>
           <p>
-            When discussing "responsibility," a woman’s "<Keyword id="责任感" enId="sense of responsibility" color="#F68CB2">sense of responsibility (85 times)</Keyword>" is often tied to household chores—specific, <strong>unpaid labor</strong>. However, the frequency of a man’s "<Keyword id="责任感" enId="sense of responsibility" color="#2ABB3A">sense of responsibility (218 times)</Keyword>" is 2.5 times higher and usually points to a grand, abstract quality. This implies that in the model's logic, male responsibility is a "social halo," while female responsibility is a "survival routine."
+            When discussing "responsibility," a woman’s "<Keyword id="责任感" color="#F68CB2">sense of responsibility (85 times)</Keyword>" is often tied to household chores—specific, <strong>unpaid labor</strong>. However, the frequency of a man’s "<Keyword id="责任感" color="#2ABB3A">sense of responsibility (218 times)</Keyword>" is 2.5 times higher and usually points to a grand, abstract quality. This implies that in the model's logic, male responsibility is a "social halo," while female responsibility is a "survival routine."
           </p>
         </>
       )
     },
     {
       titleLeft: <>
-        <span className="mx-1">"<Keyword id="遵守" enId="comply" color="#F68CB2">Complying</Keyword>"</span>
-        <span className="text-zinc-600">Her vs.</span>
-        <span className="mx-1">"<Keyword id="开拓" enId="pioneering" color="#2ABB3A">Pioneering</Keyword>"</span>
-        <span className="text-zinc-600">Him</span>
+        <span className="mx-1">"<Keyword id="遵守" color="#F68CB2">Complying</Keyword>"</span>
+        <span>Her vs.</span>
+        <span className="mx-1">"<Keyword id="开拓" color="#2ABB3A">Pioneering</Keyword>"</span>
+        <span>Him</span>
       </>,
       content: (
         <>
@@ -259,28 +281,28 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
           </p>
           <p>
             In texts about women, high-frequency words include
-            "<Keyword id="遵守" enId="comply" color="#F68CB2">comply</Keyword>,"
-            "<Keyword id="扮演" enId="playing a role" color="#F68CB2">playing a role (307 times)</Keyword>,"
+            "<Keyword id="遵守" color="#F68CB2">comply</Keyword>,"
+            "<Keyword id="扮演" color="#F68CB2">playing a role (307 times)</Keyword>,"
             and
-            "<Keyword id="传统" enId="traditional" color="#F68CB2">traditional (785 times)</Keyword>"
+            "<Keyword id="传统" color="#F68CB2">traditional (785 times)</Keyword>"
             , emphasizing their <strong>adaptation and obedience</strong> within established social frameworks. Men's high-frequency words involve
-            "<Keyword id="职业" enId="profession" color="#2ABB3A">profession (25 times)</Keyword>,"
-            "<Keyword id="商业" enId="business" color="#2ABB3A">business (30 times)</Keyword>,"
+            "<Keyword id="职业" color="#2ABB3A">profession (25 times)</Keyword>,"
+            "<Keyword id="商业" color="#2ABB3A">business (30 times)</Keyword>,"
             and
-            "<Keyword id="社会" enId="social" color="#2ABB3A">social (109 times)</Keyword>"
+            "<Keyword id="社会" color="#2ABB3A">social (109 times)</Keyword>"
             status.
           </p>
           <p>
             Even in the shared context of pursuing
-            "<Keyword id="平等" enId="equality" color="#F68CB2">equality (48 vs. 43 times)</Keyword>"
+            "<Keyword id="平等" color="#F68CB2">equality (48 vs. 43 times)</Keyword>"
             , women are more often striving for the right to
-            "<Keyword id="教育" enId="education" color="#F68CB2">education (306 times)</Keyword>"
+            "<Keyword id="教育" color="#F68CB2">education (306 times)</Keyword>"
             and
-            "<Keyword id="独立" enId="independence" color="#F68CB2">independence (269 times)</Keyword>"
+            "<Keyword id="独立" color="#F68CB2">independence (269 times)</Keyword>"
             , while men are already dominant in
-            "<Keyword id="经济" enId="economy" color="#2ABB3A">economy (41 times)</Keyword>"
+            "<Keyword id="经济" color="#2ABB3A">economy (41 times)</Keyword>"
             and
-            "<Keyword id="传承" enId="cultural inheritance" color="#2ABB3A">cultural inheritance (225 times)</Keyword>"
+            "<Keyword id="传承" color="#2ABB3A">cultural inheritance (225 times)</Keyword>"
             . This confirms sociologist Sylvia Walby’s view: modern narratives still tend to place women as "followers of norms" while reserving control of public resources and the role of "innovator" for men.
           </p>
         </>
@@ -563,29 +585,29 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
 
       {/* 右侧：文字说明 - Scrollable with visible scrollbar */}
       <div id="page4-exit-scroll" className="w-full md:w-1/2 max-w-md text-left h-[400px] overflow-y-scroll pr-2">
-        <p className="text-zinc-700 text-sm md:text-[15px] leading-[2.2] font-light tracking-wide mb-6">
+        <p className="text-zinc-800 text-sm md:text-[15px] leading-[2.2] font-light tracking-wide mb-6">
           {t('discovery.page4_exit.p1_1')}<span className="font-bold text-zinc-900">{t('discovery.page4_exit.p1_2')}</span><span
             id="citation-4"
             onClick={() => onGoToData(4)}
             className="inline-flex items-center justify-center bg-[#22c55e] text-[#121212] rounded-full w-4 h-4 text-[10px] font-bold ml-1 transform -translate-y-1 cursor-pointer hover:scale-125 transition-transform"
           >4</span>{t('discovery.page4_exit.p1_3')}
         </p>
-        <p className="text-zinc-700 text-sm md:text-[15px] leading-[2.2] font-light tracking-wide mb-6">
+        <p className="text-zinc-800 text-sm md:text-[15px] leading-[2.2] font-light tracking-wide mb-6">
           {t('discovery.page4_exit.p2')}
         </p>
-        <p className="text-zinc-700 text-sm md:text-[15px] leading-[2.2] font-light tracking-wide mb-6">
+        <p className="text-zinc-800 text-sm md:text-[15px] leading-[2.2] font-light tracking-wide mb-6">
           {t('discovery.page4_exit.p3')}
         </p>
-        <p className="text-zinc-700 text-sm md:text-[15px] leading-[2.2] font-light tracking-wide mb-6">
+        <p className="text-zinc-800 text-sm md:text-[15px] leading-[2.2] font-light tracking-wide mb-6">
           {t('discovery.page4_exit.p4')}
         </p>
-        <p className="text-zinc-700 text-sm md:text-[15px] leading-[2.2] font-light tracking-wide mb-6">
+        <p className="text-zinc-800 text-sm md:text-[15px] leading-[2.2] font-light tracking-wide mb-6">
           {t('discovery.page4_exit.p5')}
         </p>
-        <p className="text-zinc-700 text-sm md:text-[15px] leading-[2.2] font-light tracking-wide mb-6">
+        <p className="text-zinc-800 text-sm md:text-[15px] leading-[2.2] font-light tracking-wide mb-6">
           {t('discovery.page4_exit.p6')}
         </p>
-        <p className="text-zinc-700 text-sm md:text-[15px] leading-[2.2] font-light tracking-wide mb-6">
+        <p className="text-zinc-800 text-sm md:text-[15px] leading-[2.2] font-light tracking-wide mb-6">
           {t('discovery.page4_exit.p7')}
         </p>
       </div>
@@ -593,7 +615,7 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
   );
 
   return (
-    <>
+    <DiscoveryContext.Provider value={{ language, setHoveredKeyword }}>
     <div
       ref={containerRef}
       className="h-screen overflow-y-auto snap-y snap-mandatory bg-[#121212] selection:bg-[#ff4d94]/30 relative scroll-smooth"
@@ -668,7 +690,7 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
         exitContent={PAGE_3_EXIT_CONTENT}
         renderVisualZone={(subPage, isVisible) => (
           <div className="w-full h-[80%] my-auto relative">
-            <NetworkScrolly data={cnNetworkData} activePage={subPage} isVisible={isVisible} externalHoveredId={hoveredKeyword} />
+            <NetworkScrolly data={cnNetworkData} activePage={subPage} isVisible={isVisible} externalHovered={hoveredKeyword} />
           </div>
         )}
       />
@@ -680,7 +702,7 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
         exitContent={PAGE_4_EXIT_CONTENT_LIGHT}
         renderVisualZone={(subPage, isVisible) => (
           <div className="w-full h-[80%] my-auto relative">
-            <NetworkScrolly data={enNetworkData as any} activePage={subPage} isVisible={isVisible} externalHoveredId={hoveredKeyword} />
+            <NetworkScrolly data={enNetworkData as any} activePage={subPage} isVisible={isVisible} externalHovered={hoveredKeyword} />
           </div>
         )}
       />
@@ -791,21 +813,21 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
         #page4-exit-scroll::-webkit-scrollbar {
             -webkit-appearance: none !important;
             display: block !important;
-            width: 6px !important;
+            width: 4px !important;
         }
         #page4-exit-scroll::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.06) !important;
-            border-radius: 10px !important;
+            background: transparent !important;
+            margin: 15px 0 !important;
         }
         #page4-exit-scroll::-webkit-scrollbar-thumb {
-            background-color: rgba(0, 0, 0, 0.25) !important;
-            border-radius: 10px !important;
+            background-color: rgba(0, 0, 0, 0.12) !important;
+            border-radius: 4px !important;
         }
         #page4-exit-scroll:hover::-webkit-scrollbar-thumb {
-            background-color: rgba(0, 0, 0, 0.45) !important;
+            background-color: rgba(0, 0, 0, 0.25) !important;
         }
       `}</style>
-    </>
+    </DiscoveryContext.Provider>
   );
 };
 

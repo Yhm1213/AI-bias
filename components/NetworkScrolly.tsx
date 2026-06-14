@@ -14,6 +14,8 @@ interface RawLink {
 interface NetworkNode extends d3.SimulationNodeDatum {
     id: string;
     radius: number;
+    femaleRadius: number;
+    maleRadius: number;
     degree: number;
     x?: number;
     y?: number;
@@ -21,13 +23,14 @@ interface NetworkNode extends d3.SimulationNodeDatum {
     vy?: number;
     fx?: number | null;
     fy?: number | null;
-    gender?: 'female' | 'male';
+    gender?: 'female' | 'male' | 'both';
 }
 
 interface ProcessedLink {
-    source: string;
-    target: string;
+    source: string | NetworkNode;
+    target: string | NetworkNode;
     weight: number;
+    gender?: 'female' | 'male';
 }
 
 interface NetworkScrollyProps {
@@ -37,7 +40,7 @@ interface NetworkScrollyProps {
     externalHoveredId?: string | null;
 }
 
-const NetworkScrolly: React.FC<NetworkScrollyProps> = ({ data, activePage, isVisible, externalHoveredId }) => {
+const NetworkScrolly: React.FC<NetworkScrollyProps> = ({ data, activePage, isVisible, externalHovered }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const svgRef = useRef<SVGSVGElement>(null);
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
@@ -81,38 +84,58 @@ const NetworkScrolly: React.FC<NetworkScrollyProps> = ({ data, activePage, isVis
             );
 
             // Process into nodes and links
-            const nodeMap = new Map<string, { id: string; degree: number; totalWeight: number; gender?: 'female' | 'male' }>();
+            const nodeMap = new Map<string, { id: string; degree: number; femaleDegree: number; maleDegree: number; totalWeight: number; gender?: 'female' | 'male' | 'both' }>();
             const processedLinks: ProcessedLink[] = [];
 
             filteredLinks.forEach(l => {
-                if (!nodeMap.has(l.V1)) nodeMap.set(l.V1, { id: l.V1, degree: 0, totalWeight: 0, gender: l.gender });
-                if (!nodeMap.has(l.V2)) nodeMap.set(l.V2, { id: l.V2, degree: 0, totalWeight: 0, gender: l.gender });
+                if (!nodeMap.has(l.V1)) nodeMap.set(l.V1, { id: l.V1, degree: 0, femaleDegree: 0, maleDegree: 0, totalWeight: 0, gender: l.gender as any });
+                if (!nodeMap.has(l.V2)) nodeMap.set(l.V2, { id: l.V2, degree: 0, femaleDegree: 0, maleDegree: 0, totalWeight: 0, gender: l.gender as any });
 
-                // Update gender if it was somehow missing
+                const updateGender = (nodeId: string, newGender: string) => {
+                    const node = nodeMap.get(nodeId)!;
+                    if (!node.gender) {
+                        node.gender = newGender as any;
+                    } else if (node.gender !== newGender && node.gender !== 'both') {
+                        node.gender = 'both';
+                    }
+                };
+
                 if (l.gender) {
-                    nodeMap.get(l.V1)!.gender = l.gender;
-                    nodeMap.get(l.V2)!.gender = l.gender;
+                    updateGender(l.V1, l.gender);
+                    updateGender(l.V2, l.gender);
                 }
 
-                nodeMap.get(l.V1)!.degree += 1;
-                nodeMap.get(l.V1)!.totalWeight += l.Weight;
-                nodeMap.get(l.V2)!.degree += 1;
-                nodeMap.get(l.V2)!.totalWeight += l.Weight;
+                const n1 = nodeMap.get(l.V1)!;
+                const n2 = nodeMap.get(l.V2)!;
+                n1.degree += 1;
+                n2.degree += 1;
+                if (l.gender === 'female') {
+                    n1.femaleDegree += 1;
+                    n2.femaleDegree += 1;
+                } else if (l.gender === 'male') {
+                    n1.maleDegree += 1;
+                    n2.maleDegree += 1;
+                }
+                n1.totalWeight += l.Weight;
+                n2.totalWeight += l.Weight;
 
                 processedLinks.push({
                     source: l.V1,
                     target: l.V2,
-                    weight: l.Weight
+                    weight: l.Weight,
+                    gender: l.gender as any
                 });
             });
 
             // Create scale for node radius based on degree
             const maxDegree = d3.max(Array.from(nodeMap.values()), d => d.degree) || 1;
-            const radiusScale = d3.scaleSqrt().domain([1, maxDegree]).range([4, 20]);
+            const radiusScale = d3.scaleSqrt().domain([1, maxDegree]).range([4, 20]).clamp(true);
 
             const nodes: NetworkNode[] = Array.from(nodeMap.values()).map(n => ({
                 id: n.id,
                 radius: radiusScale(n.degree),
+                femaleRadius: radiusScale(n.femaleDegree),
+                maleRadius: radiusScale(n.maleDegree),
                 degree: n.degree,
                 gender: n.gender
             }));
@@ -134,6 +157,19 @@ const NetworkScrolly: React.FC<NetworkScrollyProps> = ({ data, activePage, isVis
             // D3 setup
             const svg = d3.select(svgRef.current);
             svg.selectAll('*').remove();
+            
+            // Define gradients
+            const defs = svg.append('defs');
+            const gradient = defs.append('linearGradient')
+                .attr('id', 'gender-gradient')
+                .attr('x1', '0%')
+                .attr('y1', '0%')
+                .attr('x2', '100%')
+                .attr('y2', '100%');
+            gradient.append('stop').attr('offset', '0%').attr('stop-color', '#F68CB2');
+            gradient.append('stop').attr('offset', '49.5%').attr('stop-color', '#F68CB2');
+            gradient.append('stop').attr('offset', '50.5%').attr('stop-color', '#2ABB3A');
+            gradient.append('stop').attr('offset', '100%').attr('stop-color', '#2ABB3A');
 
             const canvas = svg.append('g').attr('class', 'MainCanvas');
 
@@ -141,6 +177,7 @@ const NetworkScrolly: React.FC<NetworkScrollyProps> = ({ data, activePage, isVis
             const colorScale = (gender?: string) => {
                 if (gender === 'female') return '#F68CB2'; // Pink
                 if (gender === 'male') return '#2ABB3A';   // Green
+                if (gender === 'both') return 'url(#gender-gradient)'; // Mixed
                 return '#d4d4d8'; // Default Greige
             };
 
@@ -204,13 +241,48 @@ const NetworkScrolly: React.FC<NetworkScrollyProps> = ({ data, activePage, isVis
                     .on('drag', dragged)
                     .on('end', dragended));
 
-            // Circle
-            nodeGroups.append('circle')
-                .attr('r', d => d.radius)
-                .attr('fill', d => colorScale(d.gender))
-                .attr('stroke', '#ffffff')
-                .attr('stroke-width', 0.8)
-                .attr('opacity', 0.2); // Default opacity 20%
+            // Shape
+            const arcGenerator = d3.arc();
+            nodeGroups.each(function(d) {
+                const group = d3.select(this);
+                if (d.gender === 'both') {
+                    // Left half (Female)
+                    group.append('path')
+                        .attr('class', 'node-shape female-shape')
+                        .attr('d', arcGenerator({
+                            innerRadius: 0,
+                            outerRadius: d.femaleRadius,
+                            startAngle: Math.PI,
+                            endAngle: 2 * Math.PI
+                        }) as string)
+                        .attr('fill', '#F68CB2')
+                        .attr('stroke', '#ffffff')
+                        .attr('stroke-width', 0.8)
+                        .attr('opacity', 0.2);
+
+                    // Right half (Male)
+                    group.append('path')
+                        .attr('class', 'node-shape male-shape')
+                        .attr('d', arcGenerator({
+                            innerRadius: 0,
+                            outerRadius: d.maleRadius,
+                            startAngle: 0,
+                            endAngle: Math.PI
+                        }) as string)
+                        .attr('fill', '#2ABB3A')
+                        .attr('stroke', '#ffffff')
+                        .attr('stroke-width', 0.8)
+                        .attr('opacity', 0.2);
+                } else {
+                    group.append('circle')
+                        .attr('class', 'node-shape')
+                        .attr('r', d.radius)
+                        .attr('fill', colorScale(d.gender))
+                        .attr('stroke', '#ffffff')
+                        .attr('stroke-width', 0.8)
+                        .attr('opacity', 0.2);
+                }
+            });
 
             // Label
             nodeGroups
@@ -238,7 +310,7 @@ const NetworkScrolly: React.FC<NetworkScrollyProps> = ({ data, activePage, isVis
                 });
 
                 // Dim other nodes, keep hovered and adjacent nodes at 40% (0.4) opacity
-                nodeGroups.selectAll('circle').transition().duration(200).ease(d3.easeQuadOut)
+                nodeGroups.selectAll('.node-shape').transition().duration(200).ease(d3.easeQuadOut)
                     .attr('opacity', (d: any) => adjacentNodeIds.has(d.id) ? 0.4 : 0.05);
 
                 nodeGroups.selectAll('text').transition().duration(200)
@@ -259,7 +331,7 @@ const NetworkScrolly: React.FC<NetworkScrollyProps> = ({ data, activePage, isVis
 
             nodeGroups.on('mouseout', function () {
                 // Restore circle opacity to 20% (0.2)
-                nodeGroups.selectAll('circle').transition().duration(200).ease(d3.easeQuadOut)
+                nodeGroups.selectAll('.node-shape').transition().duration(200).ease(d3.easeQuadOut)
                     .attr('opacity', 0.2);
                 nodeGroups.selectAll('text').transition().duration(200)
                     .style('opacity', (d: any) => d.degree >= 3 ? 1 : 0);
@@ -332,10 +404,10 @@ const NetworkScrolly: React.FC<NetworkScrollyProps> = ({ data, activePage, isVis
         const nodeGroups = svg.selectAll<SVGGElement, NetworkNode>('.node');
         const linkElements = svg.selectAll<SVGLineElement, ProcessedLink>('.link');
         
-        if (externalHoveredId) {
+        if (externalHovered && externalHovered.id) {
             let hoveredNode: NetworkNode | undefined;
             nodeGroups.each(function(d) {
-                if (d.id === externalHoveredId) hoveredNode = d;
+                if (d.id === externalHovered.id) hoveredNode = d;
             });
             
             if (!hoveredNode) return;
@@ -344,32 +416,46 @@ const NetworkScrolly: React.FC<NetworkScrollyProps> = ({ data, activePage, isVis
             adjacentNodeIds.add(hoveredNode.id);
 
             linkElements.each(function(d) {
+                if (externalHovered.contextGender && d.gender !== externalHovered.contextGender) return;
+                
                 const sId = typeof d.source === 'string' ? d.source : (d.source as NetworkNode).id;
                 const tId = typeof d.target === 'string' ? d.target : (d.target as NetworkNode).id;
                 if (sId === hoveredNode.id) adjacentNodeIds.add(tId);
                 else if (tId === hoveredNode.id) adjacentNodeIds.add(sId);
             });
 
-            nodeGroups.selectAll('circle').transition().duration(200).ease(d3.easeQuadOut)
-                .attr('opacity', (d: any) => adjacentNodeIds.has(d.id) ? 0.4 : 0.05);
+            nodeGroups.selectAll('.node-shape').transition().duration(200).ease(d3.easeQuadOut)
+                .attr('opacity', function(this: any, d: any) {
+                    if (!adjacentNodeIds.has(d.id)) return 0.05;
+                    
+                    if (externalHovered && externalHovered.contextGender) {
+                        const className = d3.select(this).attr('class') || '';
+                        const classes = className.split(' ');
+                        if (externalHovered.contextGender === 'female' && classes.includes('male-shape')) return 0.05;
+                        if (externalHovered.contextGender === 'male' && classes.includes('female-shape')) return 0.05;
+                    }
+                    return 0.4;
+                });
 
             nodeGroups.selectAll('text').transition().duration(200)
                 .style('opacity', (d: any) => adjacentNodeIds.has(d.id) ? 1 : 0);
 
             linkElements.transition().duration(200).ease(d3.easeQuadOut)
                 .style('stroke-opacity', (d: any) => {
+                    if (externalHovered.contextGender && d.gender !== externalHovered.contextGender) return 0.05;
                     const sId = typeof d.source === 'string' ? d.source : (d.source as NetworkNode).id;
                     const tId = typeof d.target === 'string' ? d.target : (d.target as NetworkNode).id;
                     return (sId === hoveredNode.id || tId === hoveredNode.id) ? 0.8 : 0.05;
                 })
                 .attr('stroke-width', (d: any) => {
+                    if (externalHovered.contextGender && d.gender !== externalHovered.contextGender) return 1;
                     const sId = typeof d.source === 'string' ? d.source : (d.source as NetworkNode).id;
                     const tId = typeof d.target === 'string' ? d.target : (d.target as NetworkNode).id;
                     return (sId === hoveredNode.id || tId === hoveredNode.id) ? 2 : 1;
                 });
         } else {
             // Restore
-            nodeGroups.selectAll('circle').transition().duration(200).ease(d3.easeQuadOut)
+            nodeGroups.selectAll('.node-shape').transition().duration(200).ease(d3.easeQuadOut)
                 .attr('opacity', 0.2);
             nodeGroups.selectAll('text').transition().duration(200)
                 .style('opacity', (d: any) => d.degree >= 3 ? 1 : 0);
@@ -377,7 +463,7 @@ const NetworkScrolly: React.FC<NetworkScrollyProps> = ({ data, activePage, isVis
                 .style('stroke-opacity', 0.15)
                 .attr('stroke-width', 1);
         }
-    }, [externalHoveredId, isVisible]);
+    }, [externalHovered, isVisible]);
 
     return (
         <div ref={containerRef} className="w-full h-full relative">
