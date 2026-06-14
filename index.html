@@ -75,7 +75,10 @@
             font-family: 'Unifont', monospace;
         }
 
-        /* 动态标题字体类：中英文都使用 QuanFont (针对 enter 和 homepage) */
+        /* 动态标题字体类：中英文都使用 QuanFont (针对 enter 和 homepage) 
+           增加选择器权重，确保能覆盖掉上面的 html[lang="zh-CN"] h2 规则 */
+        html[lang="zh-CN"] .font-quan,
+        html[lang="en"] .font-quan,
         .font-quan {
             font-family: 'QuanFont', sans-serif !important;
         }
