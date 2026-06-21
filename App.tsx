@@ -19,11 +19,15 @@ const App: React.FC = () => {
   useEffect(() => {
     const handleResize = () => {
       const designWidth = 1440;
-      const currentWidth = window.innerWidth;
+      const currentWidth = document.documentElement.clientWidth;
       const scale = currentWidth / designWidth;
       
       // @ts-ignore
       document.body.style.zoom = scale;
+      
+      // Calculate real viewport height relative to the scaled body
+      const realVh = window.innerHeight / scale;
+      document.documentElement.style.setProperty('--real-vh', `${realVh}px`);
     };
 
     handleResize();

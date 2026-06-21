@@ -804,6 +804,17 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
           <div className="inline-block max-w-full bg-[#6d2741]/88 px-3 py-2">
             {t('discovery.conclusion.p4')}
           </div>
+
+          {/* 项目成员介绍 - 图片版本 */}
+          <div className="w-full flex justify-center pt-24 pb-12 animate-fade-in relative z-50">
+            <div className="flex justify-center w-full max-w-[500px]">
+              <img 
+                src={import.meta.env.BASE_URL + (language === 'CN' ? "pic/stafflist_zh.png" : "pic/stafflist_en.png")} 
+                alt="Project Members" 
+                className="w-full h-auto object-contain drop-shadow-2xl opacity-90 hover:opacity-100 transition-opacity"
+              />
+            </div>
+          </div>
         </div>
       </section>
 

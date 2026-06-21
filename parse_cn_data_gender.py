@@ -1,7 +1,7 @@
 import pandas as pd
 import json
 
-file_path = "ref/cn_data_20260414.xlsx"
+file_path = "ref/cn_data_20260618.xlsx"
 
 df_woman = pd.read_excel(file_path, sheet_name="2. 女性共现表")
 df_woman['gender'] = 'female'
