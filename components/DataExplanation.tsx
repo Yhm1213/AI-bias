@@ -129,7 +129,7 @@ Don't worry if it looks complicated. You just need to know: The index ranges fro
                   {item.id}
                 </span>
                 {/* Content */}
-                <div className="whitespace-pre-line">
+                <div className="whitespace-pre-line flex-1 min-w-0">
                   <span>
                     {item.content}
                     {hoveredIndex === index && (
