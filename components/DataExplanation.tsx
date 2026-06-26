@@ -174,20 +174,21 @@ Don't worry if it looks complicated. You just need to know: The index ranges fro
               {/* BACK button appearing on hover, positioned absolute relative to item or fixed */}
             </div>
           ))}
-
-        {/* 语言切换按钮 - 放在内容的最底部右侧，随内容滚动 */}
-        <div className="flex justify-end mt-12 pointer-events-auto">
-          <div
-            onClick={toggleLanguage}
-            className="w-[146px] h-[25px] cursor-pointer drop-shadow-md hover:scale-105 transition-transform"
-          >
-            <img
-              src={language === 'CN' ? (import.meta.env.BASE_URL + "ICON/language_zh.png") : (import.meta.env.BASE_URL + "ICON/language_en.png")}
-              alt="Language Switch"
-              className="w-full h-full object-contain"
-            />
-          </div>
         </div>
+      </div>
+
+
+      {/* 语言切换按钮 - 绝对定位在容器最右下角，跟随页面内容整体滚动 */}
+      <div className="absolute bottom-8 right-8 z-50 pointer-events-auto">
+        <div
+          onClick={toggleLanguage}
+          className="w-[146px] h-[25px] cursor-pointer drop-shadow-md hover:scale-105 transition-transform"
+        >
+          <img
+            src={language === 'CN' ? (import.meta.env.BASE_URL + "ICON/language_zh.png") : (import.meta.env.BASE_URL + "ICON/language_en.png")}
+            alt="Language Switch"
+            className="w-full h-full object-contain"
+          />
         </div>
       </div>
 
