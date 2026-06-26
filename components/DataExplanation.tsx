@@ -178,19 +178,19 @@ Don't worry if it looks complicated. You just need to know: The index ranges fro
       </div>
 
 
-      {/* 语言切换按钮 - 绝对定位在容器最右下角，跟随页面内容整体滚动 */}
-      <div className="absolute bottom-8 right-8 z-50 pointer-events-auto">
-        <div
-          onClick={toggleLanguage}
-          className="w-[146px] h-[25px] cursor-pointer drop-shadow-md hover:scale-105 transition-transform"
-        >
-          <img
-            src={language === 'CN' ? (import.meta.env.BASE_URL + "ICON/language_zh.png") : (import.meta.env.BASE_URL + "ICON/language_en.png")}
-            alt="Language Switch"
-            className="w-full h-full object-contain"
-          />
+        {/* 语言切换按钮 - 在文档流最后，通过负边距抵消容器的 padding，使得在 md 以上屏幕距右边缘和底边缘刚好 2rem (对齐首页的 right-8 bottom-8) */}
+        <div className="w-full flex justify-end mt-12 mr-[-1rem] mb-[-1rem] md:mr-[-2rem] md:mb-[-2rem] z-50 pointer-events-auto">
+          <div
+            onClick={toggleLanguage}
+            className="w-[146px] h-[25px] cursor-pointer drop-shadow-md hover:scale-105 transition-transform"
+          >
+            <img
+              src={language === 'CN' ? (import.meta.env.BASE_URL + "ICON/language_zh.png") : (import.meta.env.BASE_URL + "ICON/language_en.png")}
+              alt="Language Switch"
+              className="w-full h-full object-contain"
+            />
+          </div>
         </div>
-      </div>
 
       <style>{`
         #data-explanation-page::-webkit-scrollbar {
