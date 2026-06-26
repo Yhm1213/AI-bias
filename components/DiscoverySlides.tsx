@@ -116,9 +116,9 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
   const GENDER_BIAS_DATA_CN = [
     {
       titleLeft: <>
-        <span className="mx-1">“<Keyword id="温柔" color="#F68CB2">温柔</Keyword>”与“<Keyword id="装饰" color="#F68CB2">装饰</Keyword>”</span>
+        <span className="mx-1"><Keyword id="温柔" color="#F68CB2">温柔</Keyword>与<Keyword id="装饰" color="#F68CB2">装饰</Keyword></span>
         <span>的她，对比</span>
-        <span className="mx-1">“<Keyword id="高大" color="#2ABB3A">高大</Keyword>”与“<Keyword id="力量" color="#2ABB3A">力量</Keyword>”</span>
+        <span className="mx-1"><Keyword id="高大" color="#2ABB3A">高大</Keyword>与<Keyword id="力量" color="#2ABB3A">力量</Keyword></span>
         <span>的他</span>
       </>,
       content: (
@@ -128,15 +128,15 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
           </p>
           <p>
             在气质词频上，女性被牢牢锁定在
-            “<Keyword id="温柔" color="#F68CB2">温柔（33次）</Keyword>”“<Keyword id="优雅" color="#F68CB2">优雅（47次）</Keyword>”
+            <Keyword id="温柔" color="#F68CB2">温柔（33次）</Keyword><Keyword id="优雅" color="#F68CB2">优雅（47次）</Keyword>
             等柔性特质中；而男性则由
-            “<Keyword id="坚韧" color="#2ABB3A">坚韧（185次）</Keyword>”“<Keyword id="勇敢" color="#2ABB3A">勇敢（87次）</Keyword>”“<Keyword id="强" color="#2ABB3A">强（137次）</Keyword>”
+            <Keyword id="坚韧" color="#2ABB3A">坚韧（185次）</Keyword><Keyword id="勇敢" color="#2ABB3A">勇敢（87次）</Keyword><Keyword id="强" color="#2ABB3A">强（137次）</Keyword>
             定义。这种对比在身体刻画上近乎极端：女性的描写往往指向视觉细节与服饰，如
-            “<Keyword id="头巾" color="#F68CB2">头巾（87次）</Keyword>”“<Keyword id="长袍" color="#F68CB2">长袍（81次）</Keyword>”“<Keyword id="时尚" color="#F68CB2">时尚（63次）</Keyword>”
+            <Keyword id="头巾" color="#F68CB2">头巾（87次）</Keyword><Keyword id="长袍" color="#F68CB2">长袍（81次）</Keyword><Keyword id="时尚" color="#F68CB2">时尚（63次）</Keyword>
             ；而男性则被简化为纯粹的生理力量，如
-            “<Keyword id="高大" color="#2ABB3A">高大（26次）</Keyword>”
+            <Keyword id="高大" color="#2ABB3A">高大（26次）</Keyword>
             与
-            “<Keyword id="强壮" color="#2ABB3A">强壮（67次）</Keyword>”
+            <Keyword id="强壮" color="#2ABB3A">强壮（67次）</Keyword>
             。
           </p>
           <p>
@@ -147,9 +147,9 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
     },
     {
       titleLeft: <>
-        <span className="mx-1">“<Keyword id="照顾" color="#F68CB2">照顾</Keyword>”家庭</span>
+        <span className="mx-1"><Keyword id="照顾" color="#F68CB2">照顾</Keyword>家庭</span>
         <span>的她，对比</span>
-        <span className="mx-1">“<Keyword id="热爱" color="#2ABB3A">热爱</Keyword>”世界</span>
+        <span className="mx-1"><Keyword id="热爱" color="#2ABB3A">热爱</Keyword>世界</span>
         <span>的他</span>
       </>,
       content: (
@@ -158,22 +158,22 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
             如果说第一层是形象的塑造，那么<strong>行为与职责指向</strong>的数据则揭示了深层的不平等。
           </p>
           <p>
-            在统计中，“家庭”是双方共同的高频词，但语境完全不同。女性的关键词是“<Keyword id="照顾" color="#F68CB2">照顾（56次）</Keyword>”、“<Keyword id="核心" color="#F68CB2">核心（44次）</Keyword>”、“<Keyword id="和谐" color="#F68CB2">和谐（62次）</Keyword>”。她们是家庭的润滑剂，负责具体的、重复的、维系性的事务。
+            在统计中，“家庭”是双方共同的高频词，但语境完全不同。女性的关键词是<Keyword id="照顾" color="#F68CB2">照顾（56次）</Keyword>、<Keyword id="核心" color="#F68CB2">核心（44次）</Keyword>、<Keyword id="和谐" color="#F68CB2">和谐（62次）</Keyword>。她们是家庭的润滑剂，负责具体的、重复的、维系性的事务。
           </p>
           <p>
-            相比之下，男性的行为动词充满了<strong>外部探索性</strong>：他们“<Keyword id="热爱" color="#2ABB3A">热爱（147次）</Keyword>”、“<Keyword id="喜欢" color="#2ABB3A">喜欢（297次）</Keyword>”的对象是“<Keyword id="足球" color="#2ABB3A">足球（100次）</Keyword>”、“<Keyword id="体育" color="#2ABB3A">体育（48次）</Keyword>”或“<Keyword id="户外活动" color="#2ABB3A">户外活动（118次）</Keyword>”。
+            相比之下，男性的行为动词充满了<strong>外部探索性</strong>：他们<Keyword id="热爱" color="#2ABB3A">热爱（147次）</Keyword>、<Keyword id="喜欢" color="#2ABB3A">喜欢（297次）</Keyword>的对象是<Keyword id="足球" color="#2ABB3A">足球（100次）</Keyword>、<Keyword id="体育" color="#2ABB3A">体育（48次）</Keyword>或<Keyword id="户外活动" color="#2ABB3A">户外活动（118次）</Keyword>。
           </p>
           <p>
-            同样是谈论“责任”，女性的“<Keyword id="责任感" color="#F68CB2">责任感（85次）</Keyword>”往往与家务琐事捆绑，是具体的<strong>无偿劳动</strong>；而男性的“<Keyword id="责任感" color="#2ABB3A">责任感（218次）</Keyword>”频次是女性的 2.5 倍，通常指向一种宏大的抽象品质。这意味着在模型的逻辑里，男性的责任是一种“社会光环”，而女性的责任则是一种“生存定式”。
+            同样是谈论“责任”，女性的<Keyword id="责任感" color="#F68CB2">责任感（85次）</Keyword>往往与家务琐事捆绑，是具体的<strong>无偿劳动</strong>；而男性的<Keyword id="责任感" color="#2ABB3A">责任感（218次）</Keyword>频次是女性的 2.5 倍，通常指向一种宏大的抽象品质。这意味着在模型的逻辑里，男性的责任是一种“社会光环”，而女性的责任则是一种“生存定式”。
           </p>
         </>
       )
     },
     {
       titleLeft: <>
-        <span className="mx-1">“<Keyword id="遵守" color="#F68CB2">遵守</Keyword>”规范</span>
+        <span className="mx-1"><Keyword id="遵守" color="#F68CB2">遵守</Keyword>规范</span>
         <span>的她，对比</span>
-        <span className="mx-1">“<Keyword id="开拓" color="#2ABB3A">开拓</Keyword>”疆域</span>
+        <span className="mx-1"><Keyword id="开拓" color="#2ABB3A">开拓</Keyword>疆域</span>
         <span>的他</span>
       </>,
       content: (
@@ -183,27 +183,27 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
           </p>
           <p>
             在女性的文本中，高频词包括
-            “<Keyword id="遵守" color="#F68CB2">遵守</Keyword>”、
-            “<Keyword id="扮演" color="#F68CB2">扮演着（307次）</Keyword>”、
-            “<Keyword id="传统" color="#F68CB2">传统（785次）</Keyword>”
+            <Keyword id="遵守" color="#F68CB2">遵守</Keyword>、
+            <Keyword id="扮演" color="#F68CB2">扮演着（307次）</Keyword>、
+            <Keyword id="传统" color="#F68CB2">传统（785次）</Keyword>
             ，强调她们在既定社会框架内的<strong>适应与服从</strong>。而男性的高频词则更多涉及
-            “<Keyword id="职业" color="#2ABB3A">职业（25次）</Keyword>”、
-            “<Keyword id="商业" color="#2ABB3A">商业（30次）</Keyword>”
+            <Keyword id="职业" color="#2ABB3A">职业（25次）</Keyword>、
+            <Keyword id="商业" color="#2ABB3A">商业（30次）</Keyword>
             以及
-            “<Keyword id="社会" color="#2ABB3A">社会（109次）</Keyword>”
+            <Keyword id="社会" color="#2ABB3A">社会（109次）</Keyword>
             地位。
           </p>
           <p>
             即便在同样追求
-            “<Keyword id="平等" color="#F68CB2">平等（48次 vs 43次）</Keyword>”
+            <Keyword id="平等" color="#F68CB2">平等（48次 vs 43次）</Keyword>
             的语境下，女性更多是在争取
-            “<Keyword id="教育" color="#F68CB2">教育（306次）</Keyword>”
+            <Keyword id="教育" color="#F68CB2">教育（306次）</Keyword>
             和
-            “<Keyword id="独立" color="#F68CB2">独立（269次）</Keyword>”
+            <Keyword id="独立" color="#F68CB2">独立（269次）</Keyword>
             的权利，而男性则早已在
-            “<Keyword id="经济" color="#2ABB3A">经济（41次）</Keyword>”
+            <Keyword id="经济" color="#2ABB3A">经济（41次）</Keyword>
             与
-            “<Keyword id="传承" color="#2ABB3A">文化传承（225次）</Keyword>”
+            <Keyword id="传承" color="#2ABB3A">文化传承（225次）</Keyword>
             中占据主导。这种差异印证了社会学家西尔维娅·沃尔比的观点：现代叙事依然倾向于将女性置于“规范的追随者”地位，而将公共资源的控制权与变革的“创新者”角色留给男性。
           </p>
         </>
@@ -214,9 +214,9 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
   const GENDER_BIAS_DATA_EN = [
     {
       titleLeft: <>
-        <span className="mx-1">"<Keyword id="温柔" color="#F68CB2">Gentle</Keyword>" & "<Keyword id="装饰" color="#F68CB2">Decorative</Keyword>"</span>
+        <span className="mx-1"><Keyword id="温柔" color="#F68CB2">Gentle</Keyword> & <Keyword id="装饰" color="#F68CB2">Decorative</Keyword></span>
         <span>Her vs.</span>
-        <span className="mx-1">"<Keyword id="高大" color="#2ABB3A">Tall</Keyword>" & "<Keyword id="力量" color="#2ABB3A">Powerful</Keyword>"</span>
+        <span className="mx-1"><Keyword id="高大" color="#2ABB3A">Tall</Keyword> & <Keyword id="力量" color="#2ABB3A">Powerful</Keyword></span>
         <span>Him</span>
       </>,
       content: (
@@ -226,15 +226,15 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
           </p>
           <p>
             In terms of temperament word frequency, women are firmly locked into soft traits such as
-            "<Keyword id="温柔" color="#F68CB2">gentle (33 times)</Keyword>" and "<Keyword id="优雅" color="#F68CB2">elegant (47 times)</Keyword>"
+            <Keyword id="温柔" color="#F68CB2">gentle (33 times)</Keyword> and <Keyword id="优雅" color="#F68CB2">elegant (47 times)</Keyword>
             , while men are defined by
-            "<Keyword id="坚韧" color="#2ABB3A">resilient (185 times)</Keyword>", "<Keyword id="勇敢" color="#2ABB3A">brave (87 times)</Keyword>", and "<Keyword id="强" color="#2ABB3A">strong (137 times)</Keyword>"
+            <Keyword id="坚韧" color="#2ABB3A">resilient (185 times)</Keyword>, <Keyword id="勇敢" color="#2ABB3A">brave (87 times)</Keyword>, and <Keyword id="强" color="#2ABB3A">strong (137 times)</Keyword>
             . This contrast is almost extreme in physical depictions: descriptions of women often point to visual details and clothing, such as
-            "<Keyword id="头巾" color="#F68CB2">headscarf (87 times)</Keyword>", "<Keyword id="长袍" color="#F68CB2">robe (81 times)</Keyword>", and "<Keyword id="时尚" color="#F68CB2">fashion (63 times)</Keyword>"
+            <Keyword id="头巾" color="#F68CB2">headscarf (87 times)</Keyword>, <Keyword id="长袍" color="#F68CB2">robe (81 times)</Keyword>, and <Keyword id="时尚" color="#F68CB2">fashion (63 times)</Keyword>
             ; whereas men are simplified into pure physiological power, such as
-            "<Keyword id="高大" color="#2ABB3A">tall (26 times)</Keyword>"
+            <Keyword id="高大" color="#2ABB3A">tall (26 times)</Keyword>
             and
-            "<Keyword id="强壮" color="#2ABB3A">strong (67 times)</Keyword>"
+            <Keyword id="强壮" color="#2ABB3A">strong (67 times)</Keyword>
             .
           </p>
           <p>
@@ -245,9 +245,9 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
     },
     {
       titleLeft: <>
-        <span className="mx-1">"<Keyword id="照顾" color="#F68CB2">Caring</Keyword>"</span>
+        <span className="mx-1"><Keyword id="照顾" color="#F68CB2">Caring</Keyword></span>
         <span>Family Woman vs.</span>
-        <span className="mx-1">"<Keyword id="热爱" color="#2ABB3A">Loving</Keyword>"</span>
+        <span className="mx-1"><Keyword id="热爱" color="#2ABB3A">Loving</Keyword></span>
         <span>the World Man</span>
       </>,
       content: (
@@ -256,22 +256,22 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
             If the first layer is the shaping of image, the data regarding <strong>behavior and responsibility</strong> reveals deeper inequality.
           </p>
           <p>
-            In our statistics, "family" is a high-frequency word for both sides, but the context is entirely different. For women, the keywords are <strong>"<Keyword id="照顾" color="#F68CB2">care (56 times)</Keyword>", "<Keyword id="核心" color="#F68CB2">core (44 times)</Keyword>", and "<Keyword id="和谐" color="#F68CB2">harmony (62 times)</Keyword>"</strong>. They are the lubricants of the family, responsible for specific, repetitive, and maintenance-oriented tasks.
+            In our statistics, "family" is a high-frequency word for both sides, but the context is entirely different. For women, the keywords are <strong><Keyword id="照顾" color="#F68CB2">care (56 times)</Keyword>, <Keyword id="核心" color="#F68CB2">core (44 times)</Keyword>, and <Keyword id="和谐" color="#F68CB2">harmony (62 times)</Keyword></strong>. They are the lubricants of the family, responsible for specific, repetitive, and maintenance-oriented tasks.
           </p>
           <p>
-            In contrast, men’s behavioral verbs are full of <strong>external exploration</strong>: the objects they "<Keyword id="热爱" color="#2ABB3A">love (147 times)</Keyword>" or "<Keyword id="喜欢" color="#2ABB3A">like (297 times)</Keyword>" are "<Keyword id="足球" color="#2ABB3A">football (100 times)</Keyword>", "<Keyword id="体育" color="#2ABB3A">sports (48 times)</Keyword>", or "<Keyword id="户外活动" color="#2ABB3A">outdoor activities (118 times)</Keyword>".
+            In contrast, men’s behavioral verbs are full of <strong>external exploration</strong>: the objects they <Keyword id="热爱" color="#2ABB3A">love (147 times)</Keyword> or <Keyword id="喜欢" color="#2ABB3A">like (297 times)</Keyword> are <Keyword id="足球" color="#2ABB3A">football (100 times)</Keyword>, <Keyword id="体育" color="#2ABB3A">sports (48 times)</Keyword>, or <Keyword id="户外活动" color="#2ABB3A">outdoor activities (118 times)</Keyword>.
           </p>
           <p>
-            When discussing "responsibility," a woman’s "<Keyword id="责任感" color="#F68CB2">sense of responsibility (85 times)</Keyword>" is often tied to household chores—specific, <strong>unpaid labor</strong>. However, the frequency of a man’s "<Keyword id="责任感" color="#2ABB3A">sense of responsibility (218 times)</Keyword>" is 2.5 times higher and usually points to a grand, abstract quality. This implies that in the model's logic, male responsibility is a "social halo," while female responsibility is a "survival routine."
+            When discussing "responsibility," a woman’s <Keyword id="责任感" color="#F68CB2">sense of responsibility (85 times)</Keyword> is often tied to household chores—specific, <strong>unpaid labor</strong>. However, the frequency of a man’s <Keyword id="责任感" color="#2ABB3A">sense of responsibility (218 times)</Keyword> is 2.5 times higher and usually points to a grand, abstract quality. This implies that in the model's logic, male responsibility is a "social halo," while female responsibility is a "survival routine."
           </p>
         </>
       )
     },
     {
       titleLeft: <>
-        <span className="mx-1">"<Keyword id="遵守" color="#F68CB2">Complying</Keyword>"</span>
+        <span className="mx-1"><Keyword id="遵守" color="#F68CB2">Complying</Keyword></span>
         <span>Her vs.</span>
-        <span className="mx-1">"<Keyword id="开拓" color="#2ABB3A">Pioneering</Keyword>"</span>
+        <span className="mx-1"><Keyword id="开拓" color="#2ABB3A">Pioneering</Keyword></span>
         <span>Him</span>
       </>,
       content: (
@@ -281,28 +281,28 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
           </p>
           <p>
             In texts about women, high-frequency words include
-            "<Keyword id="遵守" color="#F68CB2">comply</Keyword>,"
-            "<Keyword id="扮演" color="#F68CB2">playing a role (307 times)</Keyword>,"
+            <Keyword id="遵守" color="#F68CB2">comply</Keyword>,
+            <Keyword id="扮演" color="#F68CB2">playing a role (307 times)</Keyword>,
             and
-            "<Keyword id="传统" color="#F68CB2">traditional (785 times)</Keyword>"
+            <Keyword id="传统" color="#F68CB2">traditional (785 times)</Keyword>
             , emphasizing their <strong>adaptation and obedience</strong> within established social frameworks. Men's high-frequency words involve
-            "<Keyword id="职业" color="#2ABB3A">profession (25 times)</Keyword>,"
-            "<Keyword id="商业" color="#2ABB3A">business (30 times)</Keyword>,"
+            <Keyword id="职业" color="#2ABB3A">profession (25 times)</Keyword>,
+            <Keyword id="商业" color="#2ABB3A">business (30 times)</Keyword>,
             and
-            "<Keyword id="社会" color="#2ABB3A">social (109 times)</Keyword>"
+            <Keyword id="社会" color="#2ABB3A">social (109 times)</Keyword>
             status.
           </p>
           <p>
             Even in the shared context of pursuing
-            "<Keyword id="平等" color="#F68CB2">equality (48 vs. 43 times)</Keyword>"
+            <Keyword id="平等" color="#F68CB2">equality (48 vs. 43 times)</Keyword>
             , women are more often striving for the right to
-            "<Keyword id="教育" color="#F68CB2">education (306 times)</Keyword>"
+            <Keyword id="教育" color="#F68CB2">education (306 times)</Keyword>
             and
-            "<Keyword id="独立" color="#F68CB2">independence (269 times)</Keyword>"
+            <Keyword id="独立" color="#F68CB2">independence (269 times)</Keyword>
             , while men are already dominant in
-            "<Keyword id="经济" color="#2ABB3A">economy (41 times)</Keyword>"
+            <Keyword id="经济" color="#2ABB3A">economy (41 times)</Keyword>
             and
-            "<Keyword id="传承" color="#2ABB3A">cultural inheritance (225 times)</Keyword>"
+            <Keyword id="传承" color="#2ABB3A">cultural inheritance (225 times)</Keyword>
             . This confirms sociologist Sylvia Walby’s view: modern narratives still tend to place women as "followers of norms" while reserving control of public resources and the role of "innovator" for men.
           </p>
         </>
@@ -313,9 +313,9 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
   const EN_GENDER_BIAS_DATA_CN = [
     {
       titleLeft: <>
-        <span className="mx-1">“<Keyword id="grace" color="#F68CB2">优雅（Grace）</Keyword>”</span>
+        <span className="mx-1"><Keyword id="grace" color="#F68CB2">优雅（Grace）</Keyword></span>
         <span className="text-zinc-600">的内在化，对比</span>
-        <span className="mx-1">“<Keyword id="influence" color="#2ABB3A">影响力（Influence）</Keyword>”</span>
+        <span className="mx-1"><Keyword id="influence" color="#2ABB3A">影响力（Influence）</Keyword></span>
         <span className="text-zinc-600">的扩张</span>
       </>,
       content: (
@@ -325,21 +325,21 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
           </p>
           <p>
             女性的形象在 ChatGPT 笔下显得更为立体，关键词从简单的外貌转向了
-            “<Keyword id="grace" color="#F68CB2">优雅（Grace，478次）</Keyword>”
+            <Keyword id="grace" color="#F68CB2">优雅（Grace，478次）</Keyword>
             与
-            “<Keyword id="resilience" color="#F68CB2">韧性（Resilience，1309次）</Keyword>”
+            <Keyword id="resilience" color="#F68CB2">韧性（Resilience，1309次）</Keyword>
             。相比中文模型对“身材”的关注，英文模型更强调女性的
-            “<Keyword id="poise" color="#F68CB2">风度（Poise）</Keyword>”
+            <Keyword id="poise" color="#F68CB2">风度（Poise）</Keyword>
             与
-            “<Keyword id="confidence" color="#F68CB2">自信（Confidence）</Keyword>”
+            <Keyword id="confidence" color="#F68CB2">自信（Confidence）</Keyword>
             。
           </p>
           <p>
             然而，男性的关键词则直接指向社会权力。
-            “<Keyword id="influence" color="#2ABB3A">影响力（Influence，1089次）</Keyword>”、
-            “<Keyword id="individual" color="#2ABB3A">个体（Individual，847次）</Keyword>”
+            <Keyword id="influence" color="#2ABB3A">影响力（Influence，1089次）</Keyword>、
+            <Keyword id="individual" color="#2ABB3A">个体（Individual，847次）</Keyword>
             以及
-            “<Keyword id="intellectual" color="#2ABB3A">智力特质（Intellectual）</Keyword>”
+            <Keyword id="intellectual" color="#2ABB3A">智力特质（Intellectual）</Keyword>
             构成了男性的核心。虽然英文模型赋予了男性“现代感”，但这种“现代感”本质上仍是<strong>“理性与掌控力”</strong>的代名词。总体看下来，中文模型是在描述长相，而英文模型是在描述人格。但这种人格分配依然遵循：女性负责美与情感，男性负责逻辑与世界。
           </p>
         </>
@@ -347,9 +347,9 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
     },
     {
       titleLeft: <>
-        <span className="mx-1">“<Keyword id="care" color="#F68CB2">关怀（Care）</Keyword>”</span>
+        <span className="mx-1"><Keyword id="care" color="#F68CB2">关怀（Care）</Keyword></span>
         <span className="text-zinc-600">的多重重担，对比</span>
-        <span className="mx-1">“<Keyword id="explore" color="#2ABB3A">探索（Explore）</Keyword>”</span>
+        <span className="mx-1"><Keyword id="explore" color="#2ABB3A">探索（Explore）</Keyword></span>
         <span className="text-zinc-600">的无界参与</span>
       </>,
       content: (
@@ -359,16 +359,16 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
           </p>
           <p>
             数据显示，女性与
-            “<Keyword id="community" color="#F68CB2">社区（Community，1474次）</Keyword>”、
-            “<Keyword id="balance" color="#F68CB2">平衡（Balance，676次）</Keyword>”、
-            “<Keyword id="education" color="#F68CB2">教育（Education，837次）</Keyword>”
+            <Keyword id="community" color="#F68CB2">社区（Community，1474次）</Keyword>、
+            <Keyword id="balance" color="#F68CB2">平衡（Balance，676次）</Keyword>、
+            <Keyword id="education" color="#F68CB2">教育（Education，837次）</Keyword>
             高度关联。高频词如“Juggle”和“Manage”揭示了现代女性的困境：她们不仅要作为“Caregiver（照顾者）”，还要在“Professional（职业的）”领域证明自己。
           </p>
           <p>
             反观男性，他们的行为充满了<strong>公共性与流动性</strong>。关键词如
-            “<Keyword id="explore" color="#2ABB3A">探索（Explore）</Keyword>”、
-            “<Keyword id="diplomacy" color="#2ABB3A">外交（Diplomacy）</Keyword>”、
-            “<Keyword id="technology" color="#2ABB3A">科技（Technology）</Keyword>”
+            <Keyword id="explore" color="#2ABB3A">探索（Explore）</Keyword>、
+            <Keyword id="diplomacy" color="#2ABB3A">外交（Diplomacy）</Keyword>、
+            <Keyword id="technology" color="#2ABB3A">科技（Technology）</Keyword>
             将男性定位为全球公民。不同于中文模型中“捕鱼/运动”这种具体体力活动，英文模型中的男性行为更具“脑力资本”色彩。但不变的是，女性依然是“家庭与关系的维系者（Homemaker）”，她们的勤奋往往带有<strong>牺牲与奉献</strong>的色彩，而男性的勤奋则指向<strong>职业成就</strong>。
           </p>
         </>
@@ -376,9 +376,9 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
     },
     {
       titleLeft: <>
-        <span className="mx-1">“<Keyword id="advocacy" color="#F68CB2">抗争（Advocacy）</Keyword>”</span>
+        <span className="mx-1"><Keyword id="advocacy" color="#F68CB2">抗争（Advocacy）</Keyword></span>
         <span className="text-zinc-600">的补偿，对比</span>
-        <span className="mx-1">“<Keyword id="strategy" color="#2ABB3A">策略（Strategy）</Keyword>”</span>
+        <span className="mx-1"><Keyword id="strategy" color="#2ABB3A">策略（Strategy）</Keyword></span>
         <span className="text-zinc-600">的主导</span>
       </>,
       content: (
@@ -388,17 +388,17 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
           </p>
           <p>
             在女性的词簇中，出现了大量
-            “<Keyword id="equality" color="#F68CB2">平等（Equality，495次）</Keyword>”、
-            “<Keyword id="empowerment" color="#F68CB2">赋权（Empowerment，321次）</Keyword>”
+            <Keyword id="equality" color="#F68CB2">平等（Equality，495次）</Keyword>、
+            <Keyword id="empowerment" color="#F68CB2">赋权（Empowerment，321次）</Keyword>
             和
-            “<Keyword id="advocate" color="#F68CB2">倡议（Advocate，319次）</Keyword>”
+            <Keyword id="advocate" color="#F68CB2">倡议（Advocate，319次）</Keyword>
             。这反映出英文语境下，女性的身份往往与<strong>“挑战障碍（Challenge / Barrier）”</strong>捆绑在一起。换句话说，模型认为女性的“力量”体现在对现状的“突破”上。
           </p>
           <p>
             而男性的关键词则显得“顺风顺水”：
-            “<Keyword id="strategic" color="#2ABB3A">策略（Strategic）</Keyword>”、
-            “<Keyword id="geopolitical" color="#2ABB3A">地缘政治（Geopolitical）</Keyword>”、
-            “<Keyword id="perspective" color="#2ABB3A">视野（Perspective，160次）</Keyword>”
+            <Keyword id="strategic" color="#2ABB3A">策略（Strategic）</Keyword>、
+            <Keyword id="geopolitical" color="#2ABB3A">地缘政治（Geopolitical）</Keyword>、
+            <Keyword id="perspective" color="#2ABB3A">视野（Perspective，160次）</Keyword>
             。男性被预设为规则的制定者和体系的操盘手。这揭示了一个残酷的真相，在英文模型的逻辑里，女性的“进步”是需要<strong>“Strive（奋斗/争取）”</strong>的补偿性叙事，而男性的“成功”则是<strong>“Nature（天生/自然）”</strong>的战略延展。模型虽然学会了“政治正确”的词汇，但在潜意识里，它依然认为世界是由男性的战略构建的，而女性则负责在其中呼吁公平。
           </p>
         </>
@@ -409,8 +409,8 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
   const EN_GENDER_BIAS_DATA_EN = [
     {
       titleLeft: <>
-        <span className="mx-1">Internalization of "<Keyword id="grace" color="#F68CB2">Grace</Keyword>" vs.</span>
-        <span className="mx-1">Expansion of "<Keyword id="influence" color="#2ABB3A">Influence</Keyword>"</span>
+        <span className="mx-1">Internalization of <Keyword id="grace" color="#F68CB2">Grace</Keyword> vs.</span>
+        <span className="mx-1">Expansion of <Keyword id="influence" color="#2ABB3A">Influence</Keyword></span>
       </>,
       content: (
         <>
@@ -419,20 +419,20 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
           </p>
           <p>
             Women’s images appear more three-dimensional in ChatGPT’s writing, with keywords moving from simple appearance to
-            "<Keyword id="grace" color="#F68CB2">Grace (478 times)</Keyword>"
+            <Keyword id="grace" color="#F68CB2">Grace (478 times)</Keyword>
             and
-            "<Keyword id="resilience" color="#F68CB2">Resilience (1,309 times)</Keyword>"
+            <Keyword id="resilience" color="#F68CB2">Resilience (1,309 times)</Keyword>
             . Compared to the Chinese model's focus on "body shape," the English model emphasizes a woman's
-            "<Keyword id="poise" color="#F68CB2">Poise</Keyword>"
+            <Keyword id="poise" color="#F68CB2">Poise</Keyword>
             and
-            "<Keyword id="confidence" color="#F68CB2">Confidence</Keyword>."
+            <Keyword id="confidence" color="#F68CB2">Confidence</Keyword>.
           </p>
           <p>
             However, male keywords point directly to social power.
-            "<Keyword id="influence" color="#2ABB3A">Influence (1,089 times)</Keyword>,"
-            "<Keyword id="individual" color="#2ABB3A">Individual (847 times)</Keyword>,"
+            <Keyword id="influence" color="#2ABB3A">Influence (1,089 times)</Keyword>,
+            <Keyword id="individual" color="#2ABB3A">Individual (847 times)</Keyword>,
             and
-            "<Keyword id="intellectual" color="#2ABB3A">Intellectual</Keyword>"
+            <Keyword id="intellectual" color="#2ABB3A">Intellectual</Keyword>
             traits form the core of the male persona. While the English model grants men a sense of "modernity," this modernity is essentially a synonym for <strong>"rationality and control."</strong> Overall, the Chinese model describes looks, while the English model describes personality—yet the distribution still dictates that women manage beauty and emotion, while men manage logic and the world.
           </p>
         </>
@@ -440,8 +440,8 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
     },
     {
       titleLeft: <>
-        <span className="mx-1">Multiple Burdens of "<Keyword id="care" color="#F68CB2">Care</Keyword>" vs.</span>
-        <span className="mx-1">Boundless Participation of "<Keyword id="explore" color="#2ABB3A">Explore</Keyword>"</span>
+        <span className="mx-1">Multiple Burdens of <Keyword id="care" color="#F68CB2">Care</Keyword> vs.</span>
+        <span className="mx-1">Boundless Participation of <Keyword id="explore" color="#2ABB3A">Explore</Keyword></span>
       </>,
       content: (
         <>
@@ -450,18 +450,18 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
           </p>
           <p>
             Data shows women are highly associated with
-            "<Keyword id="community" color="#F68CB2">Community (1,474 times)</Keyword>,"
-            "<Keyword id="balance" color="#F68CB2">Balance (676 times)</Keyword>,"
+            <Keyword id="community" color="#F68CB2">Community (1,474 times)</Keyword>,
+            <Keyword id="balance" color="#F68CB2">Balance (676 times)</Keyword>,
             and
-            "<Keyword id="education" color="#F68CB2">Education (837 times)</Keyword>"
+            <Keyword id="education" color="#F68CB2">Education (837 times)</Keyword>
             . High-frequency words like "Juggle" and "Manage" reveal the plight of modern women: they must act as a "Caregiver" while proving themselves in the "Professional" sphere.
           </p>
           <p>
             Conversely, male behavior is full of <strong>publicness and fluidity</strong>. Keywords like
-            "<Keyword id="explore" color="#2ABB3A">Explore</Keyword>,"
-            "<Keyword id="diplomacy" color="#2ABB3A">Diplomacy</Keyword>,"
+            <Keyword id="explore" color="#2ABB3A">Explore</Keyword>,
+            <Keyword id="diplomacy" color="#2ABB3A">Diplomacy</Keyword>,
             and
-            "<Keyword id="technology" color="#2ABB3A">Technology</Keyword>"
+            <Keyword id="technology" color="#2ABB3A">Technology</Keyword>
             position men as global citizens. Unlike the specific physical activities like "fishing/sports" in the Chinese model, male behavior in the English model carries more "intellectual capital." Yet, the constant remains: women are the "Homemakers" and maintainers of relationships, their diligence flavored with <strong>sacrifice and devotion</strong>, while male diligence points toward <strong>professional achievement</strong>.
           </p>
         </>
@@ -469,8 +469,8 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
     },
     {
       titleLeft: <>
-        <span className="mx-1">Compensation of "<Keyword id="advocacy" color="#F68CB2">Advocacy</Keyword>" vs.</span>
-        <span className="mx-1">Dominance of "<Keyword id="strategy" color="#2ABB3A">Strategy</Keyword>"</span>
+        <span className="mx-1">Compensation of <Keyword id="advocacy" color="#F68CB2">Advocacy</Keyword> vs.</span>
+        <span className="mx-1">Dominance of <Keyword id="strategy" color="#2ABB3A">Strategy</Keyword></span>
       </>,
       content: (
         <>
@@ -479,18 +479,18 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
           </p>
           <p>
             In female word clusters, there is a high frequency of
-            "<Keyword id="equality" color="#F68CB2">Equality (495 times)</Keyword>,"
-            "<Keyword id="empowerment" color="#F68CB2">Empowerment (321 times)</Keyword>,"
+            <Keyword id="equality" color="#F68CB2">Equality (495 times)</Keyword>,
+            <Keyword id="empowerment" color="#F68CB2">Empowerment (321 times)</Keyword>,
             and
-            "<Keyword id="advocate" color="#F68CB2">Advocate (319 times)</Keyword>"
+            <Keyword id="advocate" color="#F68CB2">Advocate (319 times)</Keyword>
             . This reflects that in an English context, female identity is often tied to <strong>"Challenging barriers."</strong> In other words, the model believes a woman’s "strength" is manifested in "breaking through" the status quo.
           </p>
           <p>
             Male keywords, however, appear "smooth sailing":
-            "<Keyword id="strategic" color="#2ABB3A">Strategic</Keyword>,"
-            "<Keyword id="geopolitical" color="#2ABB3A">Geopolitical</Keyword>,"
+            <Keyword id="strategic" color="#2ABB3A">Strategic</Keyword>,
+            <Keyword id="geopolitical" color="#2ABB3A">Geopolitical</Keyword>,
             and
-            "<Keyword id="perspective" color="#2ABB3A">Perspective (160 times)</Keyword>"
+            <Keyword id="perspective" color="#2ABB3A">Perspective (160 times)</Keyword>
             . Men are preset as the rule-makers and system operators. This reveals a harsh truth: in the English model’s logic, female "progress" is a compensatory narrative requiring <strong>"Striving,"</strong> whereas male "success" is a natural, strategic extension of <strong>"Nature."</strong> The model has learned "politically correct" vocabulary, but subconsciously, it still believes the world is constructed by male strategy, while women are responsible for calling for fairness within it.
           </p>
         </>
