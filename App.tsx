@@ -114,7 +114,7 @@ const App: React.FC = () => {
 
 
   if (currentView === 'data') {
-    return <DataExplanation onBack={handleBackFromData} highlightId={highlightDataId} />;
+    return <DataExplanation onBack={handleBackFromData} highlightId={highlightDataId} language={language} toggleLanguage={toggleLanguage} />;
   }
 
   if (currentView === 'explore') {
