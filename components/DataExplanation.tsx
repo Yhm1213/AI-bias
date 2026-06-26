@@ -227,24 +227,22 @@ Don't worry if it looks complicated. You just need to know: The index ranges fro
         />
       </button>
     </div>
-    {/* Language Toggle Button - Fixed at top right */}
-    <div className="fixed top-8 right-8 md:top-16 md:right-16 z-50 pointer-events-auto">
-      <div 
-        className="w-16 h-8 md:w-20 md:h-10 border border-zinc-700/50 rounded-full flex items-center px-1 cursor-pointer hover:border-zinc-500 transition-colors bg-[#121212]/80 backdrop-blur-sm"
+
+
+
+    {/* 语言切换按钮 - 固定在右下角 */}
+    <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-50 pointer-events-auto">
+      <div
         onClick={toggleLanguage}
+        className="w-[146px] h-[25px] cursor-pointer drop-shadow-md"
       >
-        <div 
-          className={`w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#22c55e] flex items-center justify-center transition-transform duration-300 ${
-            language === 'EN' ? 'translate-x-8 md:translate-x-10' : 'translate-x-0'
-          }`}
-        >
-          <span className="text-[#121212] text-xs md:text-sm font-bold">
-            {language === 'EN' ? 'EN' : '中'}
-          </span>
-        </div>
+        <img
+          src={language === 'CN' ? (import.meta.env.BASE_URL + "ICON/language_zh.png") : (import.meta.env.BASE_URL + "ICON/language_en.png")}
+          alt="Language Switch"
+          className="w-full h-full object-contain"
+        />
       </div>
     </div>
-
     </>
   );
 };
