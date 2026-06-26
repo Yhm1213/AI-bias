@@ -80,7 +80,7 @@ const NetworkScrolly: React.FC<NetworkScrollyProps> = ({ data, activePage, isVis
 
             // Filter: only use links that belong to the active theme AND are not deleted
             const filteredLinks = allLinksRaw.filter(l =>
-                l[activeSheetName] === true && !l.V1_deleted && !l.V2_deleted
+                l[activeSheetName] === true
             );
 
             // Process into nodes and links
