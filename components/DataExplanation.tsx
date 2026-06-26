@@ -130,7 +130,20 @@ Don't worry if it looks complicated. You just need to know: The index ranges fro
                 </span>
                 {/* Content */}
                 <div className="whitespace-pre-line">
-                  <div>{item.content}</div>
+                  <span>
+                    {item.content}
+                    {hoveredIndex === index && (
+                    <span
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onBack();
+                      }}
+                      className="inline-block ml-3 px-1.5 py-0.5 border border-[#22c55e]/50 text-[#22c55e] text-[10px] cursor-pointer hover:bg-[#22c55e] hover:text-[#121212] font-mono uppercase tracking-widest align-middle transition-all select-none"
+                    >
+                      BACK
+                    </span>
+                  )}
+                  </span>
                   {item.tableHeaders && item.tableRows && (
                     <div id={`data-table-scroll-${item.id}`} className="mt-4 overflow-x-scroll data-table-scroll">
                       <table className="min-w-[720px] border-collapse text-left">
@@ -156,17 +169,6 @@ Don't worry if it looks complicated. You just need to know: The index ranges fro
                         </tbody>
                       </table>
                     </div>
-                  )}
-                  {hoveredIndex === index && (
-                    <span
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onBack();
-                      }}
-                      className="inline-block ml-3 px-1.5 py-0.5 border border-[#22c55e]/50 text-[#22c55e] text-[10px] cursor-pointer hover:bg-[#22c55e] hover:text-[#121212] font-mono uppercase tracking-widest align-middle transition-all select-none"
-                    >
-                      BACK
-                    </span>
                   )}
                 </div>
               </div>
