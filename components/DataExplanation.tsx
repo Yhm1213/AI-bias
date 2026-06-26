@@ -146,7 +146,7 @@ Don't worry if it looks complicated. You just need to know: The index ranges fro
                   </span>
                   {item.tableHeaders && item.tableRows && (
                     <div id={`data-table-scroll-${item.id}`} className="mt-4 overflow-x-scroll data-table-scroll">
-                      <table className="min-w-[720px] border-collapse text-left">
+                      <table className="w-full min-w-full border-collapse text-left break-words">
                         <thead>
                           <tr className="border-b border-[#22c55e]/30">
                             {item.tableHeaders.map((header) => (
