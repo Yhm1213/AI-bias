@@ -313,9 +313,9 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
   const EN_GENDER_BIAS_DATA_CN = [
     {
       titleLeft: <>
-        <span className="mx-1"><Keyword id="grace" color="#F68CB2">优雅（Grace）</Keyword>（Grace）</span>
+        <span className="mx-1"><Keyword id="grace" color="#F68CB2">优雅（Grace）</Keyword></span>
         <span className="text-zinc-600">的内在化，对比</span>
-        <span className="mx-1"><Keyword id="influence" color="#2ABB3A">影响力（Influence）</Keyword>（Influence）</span>
+        <span className="mx-1"><Keyword id="influence" color="#2ABB3A">影响力（Influence）</Keyword></span>
         <span className="text-zinc-600">的扩张</span>
       </>,
       content: (
@@ -329,9 +329,9 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
             与
             <Keyword id="resilience" color="#F68CB2">韧性（Resilience）</Keyword>（Resilience，1309次）
             。相比中文模型对“身材”的关注，英文模型更强调女性的
-            <Keyword id="poise" color="#F68CB2">风度（Poise）</Keyword>（Poise）
+            <Keyword id="poise" color="#F68CB2">风度（Poise）</Keyword>
             与
-            <Keyword id="confidence" color="#F68CB2">自信（Confidence）</Keyword>（Confidence）
+            <Keyword id="confidence" color="#F68CB2">自信（Confidence）</Keyword>
             。
           </p>
           <p>
@@ -339,7 +339,7 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
             <Keyword id="influence" color="#2ABB3A">影响力（Influence）</Keyword>（Influence，1089次）、
             <Keyword id="individual" color="#2ABB3A">个体（Individual）</Keyword>（Individual，847次）
             以及
-            <Keyword id="intellectual" color="#2ABB3A">智力特质（Intellectual）</Keyword>（Intellectual）
+            <Keyword id="intellectual" color="#2ABB3A">智力特质（Intellectual）</Keyword>
             构成了男性的核心。虽然英文模型赋予了男性“现代感”，但这种“现代感”本质上仍是<strong>“理性与掌控力”</strong>的代名词。总体看下来，中文模型是在描述长相，而英文模型是在描述人格。但这种人格分配依然遵循：女性负责美与情感，男性负责逻辑与世界。
           </p>
         </>
@@ -347,9 +347,9 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
     },
     {
       titleLeft: <>
-        <span className="mx-1"><Keyword id="care" color="#F68CB2">关怀（Care）</Keyword>（Care）</span>
+        <span className="mx-1"><Keyword id="care" color="#F68CB2">关怀（Care）</Keyword></span>
         <span className="text-zinc-600">的多重重担，对比</span>
-        <span className="mx-1"><Keyword id="explore" color="#2ABB3A">探索（Explore）</Keyword>（Explore）</span>
+        <span className="mx-1"><Keyword id="explore" color="#2ABB3A">探索（Explore）</Keyword></span>
         <span className="text-zinc-600">的无界参与</span>
       </>,
       content: (
@@ -366,9 +366,9 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
           </p>
           <p>
             反观男性，他们的行为充满了<strong>公共性与流动性</strong>。关键词如
-            <Keyword id="explore" color="#2ABB3A">探索（Explore）</Keyword>（Explore）、
-            <Keyword id="diplomacy" color="#2ABB3A">外交（Diplomacy）</Keyword>（Diplomacy）、
-            <Keyword id="technology" color="#2ABB3A">科技（Technology）</Keyword>（Technology）
+            <Keyword id="explore" color="#2ABB3A">探索（Explore）</Keyword>、
+            <Keyword id="diplomacy" color="#2ABB3A">外交（Diplomacy）</Keyword>、
+            <Keyword id="technology" color="#2ABB3A">科技（Technology）</Keyword>
             将男性定位为全球公民。不同于中文模型中“捕鱼/运动”这种具体体力活动，英文模型中的男性行为更具“脑力资本”色彩。但不变的是，女性依然是“家庭与关系的维系者（Homemaker）”，她们的勤奋往往带有<strong>牺牲与奉献</strong>的色彩，而男性的勤奋则指向<strong>职业成就</strong>。
           </p>
         </>
@@ -378,7 +378,7 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
       titleLeft: <>
         <span className="mx-1"><Keyword id="advocacy" color="#F68CB2">抗争（Advocacy）</Keyword></span>
         <span className="text-zinc-600">的补偿，对比</span>
-        <span className="mx-1"><Keyword id="strategy" color="#2ABB3A">策略（Strategy）</Keyword>（Strategy）</span>
+        <span className="mx-1"><Keyword id="strategy" color="#2ABB3A">策略（Strategy）</Keyword></span>
         <span className="text-zinc-600">的主导</span>
       </>,
       content: (
@@ -396,8 +396,8 @@ const DiscoverySlides: React.FC<DiscoverySlidesProps> = ({ onBack, onGoToData, l
           </p>
           <p>
             而男性的关键词则显得“顺风顺水”：
-            <Keyword id="strategic" color="#2ABB3A">策略（Strategic）</Keyword>（Strategic）、
-            <Keyword id="geopolitical" color="#2ABB3A">地缘政治（Geopolitical）</Keyword>（Geopolitical）、
+            <Keyword id="strategic" color="#2ABB3A">策略（Strategic）</Keyword>、
+            <Keyword id="geopolitical" color="#2ABB3A">地缘政治（Geopolitical）</Keyword>、
             <Keyword id="perspective" color="#2ABB3A">视野（Perspective）</Keyword>（Perspective，160次）
             。男性被预设为规则的制定者和体系的操盘手。这揭示了一个残酷的真相，在英文模型的逻辑里，女性的“进步”是需要<strong>“Strive（奋斗/争取）”</strong>的补偿性叙事，而男性的“成功”则是<strong>“Nature（天生/自然）”</strong>的战略延展。模型虽然学会了“政治正确”的词汇，但在潜意识里，它依然认为世界是由男性的战略构建的，而女性则负责在其中呼吁公平。
           </p>
